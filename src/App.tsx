@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { CssBaseline, Box, Toolbar } from '@mui/material';
+import { CssBaseline, Box } from '@mui/material';
 import NavBar from './components/NavBar';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -18,9 +18,14 @@ const App: React.FC = () => {
         <NavBar />
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+          sx={{
+            flexGrow: 1,
+            bgcolor: 'background.default',
+            p: { xs: 2, sm: 3 }, // Responsive padding
+            marginLeft: { xs: 0, sm: '250px' }, // Collapse sidebar on small screens
+            transition: 'margin-left 0.3s ease' // Smooth transition for sidebar collapse
+          }}
         >
-          <Toolbar />
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/experience" element={<Experience />} />

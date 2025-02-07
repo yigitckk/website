@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, List, ListItem, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import frontMatter from 'front-matter';
 
 const Blog: React.FC = () => {
-  const posts: { title: string, slug: string }[] = [
+  const posts = [
     { title: 'Understanding Streams in Programming', slug: 'sample-post' },
     { title: 'Lambda Expressions in Java', slug: 'lambda' },
     // Add more posts here
@@ -33,7 +33,24 @@ const Blog: React.FC = () => {
   }, [posts]);
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box
+      sx={{
+        padding: { xs: 2, sm: 3 }, // Responsive padding
+        maxWidth: { xs: '100%', sm: '800px' }, // Limit width on larger screens
+        margin: '0 auto', // Center the content
+      }}
+    >
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
+          textAlign: 'center',
+          mb: 4,
+        }}
+      >
+        Blog Posts
+      </Typography>
       <List>
         {posts.map((post) => (
           <ListItem
@@ -41,29 +58,43 @@ const Blog: React.FC = () => {
             component={RouterLink}
             to={`/blog/${post.slug}`}
             sx={{
-              padding: '10px 20px',
+              padding: { xs: '8px 16px', sm: '10px 20px' }, // Responsive padding
               borderRadius: '8px',
+              marginBottom: '8px', // Add spacing between items
+              transition: 'background-color 0.3s ease', // Smooth hover effect
               '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                backgroundColor: 'rgba(0, 0, 0, 0.08)', // Light background on hover
               },
             }}
           >
             <ListItemText
               primary={
                 <>
-                  {post.title}
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontSize: { xs: '0.9rem', sm: '1rem' }, // Responsive font size
+                      fontWeight: 'bold',
+                      color: 'black',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {post.title}
+                  </Typography>
                   {metadata[post.slug] && (
-                    <span style={{ marginLeft: '10px', fontSize: '0.8em', color: 'gray' }}>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        marginLeft: '10px',
+                        fontSize: { xs: '0.7rem', sm: '0.8rem' }, // Responsive font size
+                        color: 'gray',
+                      }}
+                    >
                       (Uploaded: {new Date(metadata[post.slug].uploadDate).toLocaleDateString()})
-                    </span>
+                    </Typography>
                   )}
                 </>
               }
-              primaryTypographyProps={{
-                color: 'black',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-              }}
             />
           </ListItem>
         ))}
