@@ -23,7 +23,7 @@ const About: React.FC = () => {
         <Button
           variant="contained"
           color="primary"
-          href="https://github.com/yigitckk/aboutMe/blob/main/yigitcelikCV.pdf"
+          href="https://github.com/yigitckk/aboutMe/blob/main/Yiğit%20çelik.pdf"
           target="_blank"
           rel="noopener"
         >
