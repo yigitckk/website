@@ -66,7 +66,7 @@ const NavBar: React.FC = () => {
           {/* Profile Image and Name in Mobile Drawer */}
           <Box
             component="img"
-            src="https://media.licdn.com/dms/image/v2/D4D03AQGxhiie3LlbfA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698944242542?e=1744243200&v=beta&t=XMTEViUHZh-hfVRqzc9VFlxLZQVIiPvQEhtUcvDr_jE"
+            src="https://github.com/yigitckk/aboutMe/blob/main/ChatGPT%20Image%2012%20Tem%202025%2000_02_17.png"
             alt="Yiğit Çelik"
             sx={{
               width: 100,
