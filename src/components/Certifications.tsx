@@ -1,7 +1,11 @@
+// src/components/Certifications.tsx
 import React from 'react';
 import { Box, Typography, Card, CardContent, CardMedia, Link } from '@mui/material';
+import { useTheme } from '@mui/material/styles'; // Import useTheme hook
 
 const Certifications: React.FC = () => {
+  const theme = useTheme(); // Access the current theme object
+
   const certifications = [
     {
       title: 'Youth Can Stop Radicalization',
@@ -21,7 +25,7 @@ const Certifications: React.FC = () => {
       description:
         'Participating in the Model United Nations (MUN) Training at Marmara Teknokent, supported by TÜBİTAK, provided me with invaluable skills in diplomacy, negotiation, and global problem-solving. Through simulating real-world UN scenarios, I honed my public speaking, critical thinking, and teamwork abilities while gaining a deeper understanding of international relations and global challenges.',
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/T%C3%BCrkiye_Bilimsel_ve_Teknolojik_Ara%C5%9Ft%C4%B1rma_Kurumu_logo.svg/220px-T%C3%BCrkiye_Bilimsel_ve_Teknolojik_Ara%C5%9Ft%C4%B1rma_Kurumu_logo.svg.png',
-      
+
     },
     {
       title: 'Democracy; A Journey From Ancient Times to Present',
@@ -91,10 +95,13 @@ const Certifications: React.FC = () => {
   return (
     <Box
       sx={{
-        p: { xs: 2, sm: 3 }, // Responsive padding
+        // Apply themed background and text colors to the main container
+        backgroundColor: theme.palette.background.default, // Use default background for the overall page content area
+        color: theme.palette.text.primary, // Primary text color from theme
+        p: { xs: theme.spacing(2), sm: theme.spacing(3) }, // Responsive padding using theme spacing
         maxWidth: { xs: '100%', sm: '800px' }, // Limit width on larger screens
-        margin: '0 auto', // Center the content
-        mt: { xs: '60px', sm: '80px' }, // Add margin top to account for the fixed header
+        margin: '0 auto', // Center the content horizontally
+        my: theme.spacing(4), // Margin top and bottom using theme spacing
       }}
     >
       <Typography
@@ -103,7 +110,8 @@ const Certifications: React.FC = () => {
         sx={{
           fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
           textAlign: 'center',
-          mb: 4,
+          mb: theme.spacing(4), // Margin bottom using theme spacing
+          color: theme.palette.text.primary, // Themed text color
         }}
       >
         Certifications
@@ -112,24 +120,37 @@ const Certifications: React.FC = () => {
         <Card
           key={index}
           sx={{
-            mb: 3,
-            transition: 'transform 0.3s ease', // Smooth hover effect
+            mb: theme.spacing(3), // Margin bottom using theme spacing
+            transition: 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease', // Smooth transition for hover effects
+            backgroundColor: theme.palette.background.paper, // Themed background for the card
+            boxShadow: theme.shadows[3], // Themed shadow for the card
+            borderRadius: theme.shape.borderRadius, // Themed border radius
             '&:hover': {
               transform: 'scale(1.02)', // Slightly enlarge on hover
+              boxShadow: theme.shadows[6], // Stronger shadow on hover
             },
           }}
         >
-          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary }}>
             <CardMedia
               component="img"
               sx={{
                 width: { xs: 100, sm: 151 }, // Responsive width for images
                 height: { xs: 100, sm: 151 }, // Responsive height
                 objectFit: 'contain', // Ensure the image fits within the container
-                mr: { xs: 2, sm: 3 }, // Margin right for spacing
+                mr: { xs: theme.spacing(2), sm: theme.spacing(3) }, // Margin right for spacing
+                // Add a subtle border to images if desired, themed
+                border: `1px solid ${theme.palette.divider}`,
+                borderRadius: theme.shape.borderRadius,
               }}
               image={cert.logo}
               alt={cert.organization}
+              // Fallback for broken images
+              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null; // Prevent infinite loop
+                target.src = `https://placehold.co/151x151/${theme.palette.grey[300].substring(1)}/${theme.palette.grey[700].substring(1)}?text=Logo`;
+              }}
             />
             <Box sx={{ flexGrow: 1 }}>
               <Typography
@@ -137,26 +158,27 @@ const Certifications: React.FC = () => {
                 sx={{
                   fontSize: { xs: '1.2rem', sm: '1.5rem' }, // Responsive font size
                   fontWeight: 'bold',
+                  color: theme.palette.text.primary, // Themed text color
                 }}
               >
                 {cert.title}
               </Typography>
               <Typography
                 variant="subtitle1"
-                color="text.secondary"
                 sx={{
                   fontSize: { xs: '0.9rem', sm: '1rem' }, // Responsive font size
-                  mt: 1,
+                  mt: theme.spacing(1), // Margin top using theme spacing
+                  color: theme.palette.text.secondary, // Themed secondary text color
                 }}
               >
                 {cert.organization}
               </Typography>
               <Typography
                 variant="body2"
-                color="text.secondary"
                 sx={{
                   fontSize: { xs: '0.8rem', sm: '0.9rem' }, // Responsive font size
-                  mt: 1,
+                  mt: theme.spacing(1), // Margin top using theme spacing
+                  color: theme.palette.text.secondary, // Themed secondary text color
                 }}
               >
                 {cert.date}
@@ -164,10 +186,10 @@ const Certifications: React.FC = () => {
               {cert.id && (
                 <Typography
                   variant="caption"
-                  color="text.secondary"
                   sx={{
                     fontSize: { xs: '0.7rem', sm: '0.8rem' }, // Responsive font size
-                    mt: 1,
+                    mt: theme.spacing(1), // Margin top using theme spacing
+                    color: theme.palette.text.secondary, // Themed secondary text color
                   }}
                 >
                   Certification ID: {cert.id}
@@ -177,8 +199,9 @@ const Certifications: React.FC = () => {
                 variant="body1"
                 sx={{
                   fontSize: { xs: '0.9rem', sm: '1rem' }, // Responsive font size
-                  mt: 2,
+                  mt: theme.spacing(2), // Margin top using theme spacing
                   lineHeight: 1.6, // Improve readability
+                  color: theme.palette.text.primary, // Themed primary text color
                 }}
               >
                 {cert.description}
@@ -190,9 +213,9 @@ const Certifications: React.FC = () => {
                   rel="noopener noreferrer"
                   sx={{
                     display: 'inline-block',
-                    mt: 2,
+                    mt: theme.spacing(2), // Margin top using theme spacing
                     textDecoration: 'none',
-                    color: 'primary.main',
+                    color: theme.palette.primary.main, // Link color from theme's primary
                     fontWeight: 'bold',
                     '&:hover': {
                       textDecoration: 'underline',

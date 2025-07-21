@@ -1,23 +1,25 @@
+// src/pages/index.tsx
 import React from 'react';
+// Box and useTheme imports are no longer needed if the outer Box is removed
+// import { Box } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
 
-import NavBar from '../components/NavBar';
 import About from '../components/About';
-import Education from '../components/Education';
-import Experience from '../components/Experience';
+// Education, Experience, and Contact are now rendered on their own dedicated routes
+// and should not be directly imported or rendered here if this is meant to be the 'About' page.
 
-import Contact from '../components/Contact';
-
+// HomePage now serves primarily as the container for the 'About' page content.
 const HomePage: React.FC = () => {
+    // theme is no longer needed if the outer Box is removed
+    // const theme = useTheme();
+
     return (
-        <div>
-            
-            <NavBar />
+        // The main content Box in App.tsx already handles layout offsets,
+        // background color, and text color for the entire content area.
+        // The About component itself handles its internal centering and styling.
+        <>
             <About />
-            <Education />
-            <Experience />
-            
-            <Contact />
-        </div>
+        </>
     );
 };
 
