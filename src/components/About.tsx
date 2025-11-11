@@ -39,23 +39,10 @@ const About: React.FC = () => {
         }}>
           About Yiğit Çelik
         </Typography>
-
-        <Box
-          component="img"
-          // NEW IMAGE URL put source if needed
-          alt="Yiğit Çelik"
-          sx={{
-            width: { xs: 200, sm: 250, md: 300 }, // Responsive image size
-            height: { xs: 200, sm: 250, md: 300 },
-            borderRadius: '50%',
-            display: 'block',
-            margin: '0 auto',
-            mb: theme.spacing(3),
-            
-            boxShadow: theme.shadows[6],
-          }}
-          onError={handleImageError} // Add error handler
-        />
+      
+        
+        
+     
 
         <Box textAlign="center" mb={theme.spacing(4)}>
           <Button
