@@ -42,7 +42,7 @@ const About: React.FC = () => {
 
         <Box
           component="img"
-          src="" // NEW IMAGE URL
+          // NEW IMAGE URL put source if needed
           alt="Yiğit Çelik"
           sx={{
             width: { xs: 200, sm: 250, md: 300 }, // Responsive image size
