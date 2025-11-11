@@ -40,10 +40,7 @@ const About: React.FC = () => {
           About Yiğit Çelik
         </Typography>
       
-        
-        
-     
-
+  
         <Box textAlign="center" mb={theme.spacing(4)}>
           <Button
             variant="contained"
