@@ -42,7 +42,7 @@ const About: React.FC = () => {
 
         <Box
           component="img"
-          src="https://raw.githubusercontent.com/yigitckk/aboutMe/main/Gemini_Generated_Image_pw9wl8pw9wl8pw9w%20(1).png" // NEW IMAGE URL
+          src="" // NEW IMAGE URL
           alt="Yiğit Çelik"
           sx={{
             width: { xs: 200, sm: 250, md: 300 }, // Responsive image size
