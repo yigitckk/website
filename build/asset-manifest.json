@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e643d31c.css",
+    "main.js": "/static/js/main.11b7b8cc.js",
+    "static/media/sample-post.md": "/static/media/sample-post.ea0791b855dfd61ca2d1.md",
+    "static/media/lambda.md": "/static/media/lambda.06db631ed285bb183030.md",
+    "static/media/user_segmentation_blog.md": "/static/media/user_segmentation_blog.4579f14aa643c401aa49.md",
+    "index.html": "/index.html",
+    "main.e643d31c.css.map": "/static/css/main.e643d31c.css.map",
+    "main.11b7b8cc.js.map": "/static/js/main.11b7b8cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e643d31c.css",
+    "static/js/main.11b7b8cc.js"
+  ]
+}
