@@ -28,9 +28,9 @@ const links = [
   },
   {
     label: 'Email',
-    href: 'mailto:yigitcik55@gmail.com',
+    href: 'mailto:yigitcelik798@gmail.com',
     icon: <EmailIcon fontSize="small" />,
-    handle: 'yigitcik55@gmail.com',
+    handle: 'yigitcelik798@gmail.com',
   },
 ];
 
