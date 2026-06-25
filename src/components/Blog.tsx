@@ -1,6 +1,6 @@
 // src/components/Blog.tsx
 import React, { useEffect, useState, useMemo } from 'react';
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import frontMatter from 'front-matter';
 import { useTheme } from '@mui/material/styles';
@@ -55,97 +55,57 @@ const Blog: React.FC = () => {
                   title: attributes.title || post.title,
                 },
               }));
-            })
-            .catch((err) => console.error('Error fetching markdown content:', err));
-        })
-        .catch((err) => console.error('Error importing markdown module:', err));
+            });
+        });
     });
-  }, [posts]);
+  }, []);
 
-  // uploadDate'e göre sıralı liste (yeni en üstte)
   const sortedPosts = useMemo(() => {
     return [...posts].sort((a, b) => {
-      const dateA = metadata[a.slug]?.uploadDate
-        ? new Date(metadata[a.slug].uploadDate).getTime()
-        : 0;
-      const dateB = metadata[b.slug]?.uploadDate
-        ? new Date(metadata[b.slug].uploadDate).getTime()
-        : 0;
-      return dateB - dateA; // Yeni tarih daha önce gelir
+      const dateA = metadata[a.slug]?.uploadDate ? new Date(metadata[a.slug].uploadDate).getTime() : 0;
+      const dateB = metadata[b.slug]?.uploadDate ? new Date(metadata[b.slug].uploadDate).getTime() : 0;
+      return dateB - dateA;
     });
   }, [posts, metadata]);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: theme.palette.background.paper,
-        color: theme.palette.text.primary,
-        padding: { xs: theme.spacing(2), sm: theme.spacing(3) },
-        maxWidth: { xs: '100%', sm: '800px' },
-        margin: '0 auto',
-        borderRadius: theme.shape.borderRadius,
-        boxShadow: theme.shadows[3],
-        my: theme.spacing(4),
-      }}
-    >
+    <Box sx={{ width: '100%', py: theme.spacing(4) }}>
       <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontSize: { xs: '1.5rem', sm: '2rem' },
-          textAlign: 'center',
-          mb: theme.spacing(4),
-          color: theme.palette.text.primary,
-        }}
+        variant="overline"
+        sx={{ color: theme.palette.text.secondary, letterSpacing: 2, mb: theme.spacing(3), display: 'block' }}
       >
-        Blog Posts
+        Writing
       </Typography>
-      <List>
-        {sortedPosts.map((post: Post) => (
-          <ListItem
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+        {sortedPosts.map((post, i) => (
+          <Box
             key={post.slug}
-            component={RouterLink}
-            to={`/blog/${post.slug}`}
             sx={{
-              padding: { xs: theme.spacing(1, 2), sm: theme.spacing(1.25, 2.5) },
-              borderRadius: theme.shape.borderRadius,
-              marginBottom: theme.spacing(1),
-              transition: 'background-color 0.3s ease',
-              '&:hover': { backgroundColor: theme.palette.action.hover },
+              display: 'flex',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+              gap: theme.spacing(2),
+              py: theme.spacing(1.75),
+              borderBottom: i < sortedPosts.length - 1 ? `1px solid ${theme.palette.divider}` : 'none',
             }}
           >
-            <ListItemText
-              primary={
-                <>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      fontSize: { xs: '0.9rem', sm: '1rem' },
-                      fontWeight: 'bold',
-                      color: theme.palette.text.primary,
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    {metadata[post.slug]?.title || post.title}
-                  </Typography>
-                  {metadata[post.slug]?.uploadDate && (
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        marginLeft: theme.spacing(1.25),
-                        fontSize: { xs: '0.7rem', sm: '0.8rem' },
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      (Uploaded: {new Date(metadata[post.slug].uploadDate).toLocaleDateString()})
-                    </Typography>
-                  )}
-                </>
-              }
-            />
-          </ListItem>
+            <Link
+              component={RouterLink}
+              to={`/blog/${post.slug}`}
+              underline="hover"
+              sx={{ fontWeight: 500, fontSize: '0.9rem', color: theme.palette.text.primary }}
+            >
+              {metadata[post.slug]?.title || post.title}
+            </Link>
+            {metadata[post.slug]?.uploadDate && (
+              <Typography variant="caption" sx={{ color: theme.palette.text.secondary, flexShrink: 0 }}>
+                {new Date(metadata[post.slug].uploadDate).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+              </Typography>
+            )}
+          </Box>
         ))}
-      </List>
+      </Box>
     </Box>
   );
 };
