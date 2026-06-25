@@ -1,111 +1,64 @@
 // src/components/Experience.tsx
 import React from 'react';
-import { Box, Typography, Card, CardContent } from '@mui/material';
-import { useTheme } from '@mui/material/styles'; // Import useTheme hook
+import { Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
+const experiences = [
+  {
+    title: 'Research Scholar — Optimization Project',
+    organization: 'TÜBİTAK 1001',
+    date: 'Oct 2024 – Feb 2025',
+    description:
+      'Contributed to an academic operations research project. Responsibilities included recording and synthesizing meeting notes, learning how optimization solvers are applied to real problems, and participating in the research process end-to-end.',
+  },
+];
 
 const Experience: React.FC = () => {
-  const theme = useTheme(); // Access the current theme object
-
-  const experiences = [
-
-    {
-      title: 'TÜBİTAK 1001 Project Bachelor\'s Scholar',
-      organization: 'TÜBİTAK',
-      date: '01/10/2024 – 1/02/2025',
-      description:
-        'I was taking part in an academic optimization project that will last until 2026.I was experiencing the research environment and had a responsibility for recording and summarizing meeting notes, as well as learning how optimization programs are used and problems are solved throughout the process.',
-    },
-    // Add more experiences here in the future
-  ];
+  const theme = useTheme();
 
   return (
-    <Box
-      sx={{
-        // Apply themed background and text colors to the main container
-        backgroundColor: theme.palette.background.paper, // Use paper background for a card-like effect
-        color: theme.palette.text.primary, // Primary text color from theme
-        p: { xs: theme.spacing(2), sm: theme.spacing(3) }, // Responsive padding using theme spacing
-        maxWidth: { xs: '100%', sm: '800px' }, // Limit width on larger screens
-        margin: '0 auto', // Center the content horizontally
-        my: theme.spacing(4), // Margin top and bottom using theme spacing
-        borderRadius: theme.shape.borderRadius, // Apply theme's border radius
-        boxShadow: theme.shadows[3], // Apply a subtle shadow from the theme
-      }}
-    >
+    <Box sx={{ width: '100%', py: theme.spacing(4) }}>
       <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive font size
-          textAlign: 'center',
-          mb: theme.spacing(4), // Margin bottom using theme spacing
-          color: theme.palette.text.primary, // Themed text color
-        }}
+        variant="overline"
+        sx={{ color: theme.palette.text.secondary, letterSpacing: 2, mb: theme.spacing(3), display: 'block' }}
       >
         Experience
       </Typography>
-      {experiences.map((exp, index) => (
-        <Card
-          key={index}
-          sx={{
-            mb: theme.spacing(3), // Margin bottom using theme spacing
-            transition: 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease', // Smooth transition for hover effects
-            backgroundColor: theme.palette.background.paper, // Themed background for the card
-            boxShadow: theme.shadows[3], // Themed shadow for the card
-            borderRadius: theme.shape.borderRadius, // Themed border radius
-            '&:hover': {
-              transform: 'scale(1.02)', // Slightly enlarge on hover
-              boxShadow: theme.shadows[6], // Stronger shadow on hover
-            },
-          }}
-        >
-          <CardContent sx={{ color: theme.palette.text.primary }}>
-            <Typography
-              variant="h5"
-              sx={{
-                fontSize: { xs: '1.2rem', sm: '1.5rem' }, // Responsive font size
-                fontWeight: 'bold',
-                color: theme.palette.text.primary, // Themed text color
-              }}
-            >
-              {exp.title}
-            </Typography>
-            {exp.organization && (
-              <Typography
-                variant="subtitle1"
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(3) }}>
+        {experiences.map((exp, i) => (
+          <Box key={i} sx={{ display: 'flex', gap: theme.spacing(3) }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pt: 0.6 }}>
+              <Box
                 sx={{
-                  fontSize: { xs: '0.9rem', sm: '1rem' }, // Responsive font size
-                  mt: theme.spacing(1), // Margin top using theme spacing
-                  color: theme.palette.text.secondary, // Themed secondary text color
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.primary.main,
+                  flexShrink: 0,
                 }}
-              >
-                {exp.organization}
+              />
+              <Box sx={{ width: 1, flexGrow: 1, backgroundColor: theme.palette.divider, mt: 1 }} />
+            </Box>
+            <Box sx={{ pb: theme.spacing(2) }}>
+              <Typography sx={{ fontWeight: 600, fontSize: '0.95rem', color: theme.palette.text.primary }}>
+                {exp.title}
               </Typography>
-            )}
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: { xs: '0.8rem', sm: '0.9rem' }, // Responsive font size
-                mt: theme.spacing(1), // Margin top using theme spacing
-                color: theme.palette.text.secondary, // Themed secondary text color
-              }}
-            >
-              {exp.date}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: { xs: '0.9rem', sm: '1rem' }, // Responsive font size
-                mt: theme.spacing(2), // Margin top using theme spacing
-                lineHeight: 1.6, // Improve readability
-                color: theme.palette.text.primary, // Themed primary text color
-              }}
-            >
-              {exp.description}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+              <Box sx={{ display: 'flex', gap: theme.spacing(1.5), mt: 0.5, mb: 1.5, flexWrap: 'wrap' }}>
+                <Typography variant="body2" sx={{ color: theme.palette.primary.main, fontWeight: 500 }}>
+                  {exp.organization}
+                </Typography>
+                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                  {exp.date}
+                </Typography>
+              </Box>
+              <Typography variant="body2" sx={{ color: theme.palette.text.secondary, lineHeight: 1.75 }}>
+                {exp.description}
+              </Typography>
+            </Box>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
