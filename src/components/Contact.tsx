@@ -22,9 +22,9 @@ const links = [
   },
   {
     label: 'X / Twitter',
-    href: 'https://x.com/yigit_celik7',
+    href: 'https://x.com/yigitopt',
     icon: <TwitterIcon fontSize="small" />,
-    handle: 'yigit_celik7',
+    handle: 'yigitopt',
   },
   {
     label: 'Email',
