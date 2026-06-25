@@ -153,21 +153,16 @@ const App: React.FC = () => {
           It needs margin/padding to account for the fixed/permanent NavBar.
         */}
         <Box
-          component="main" // Semantic HTML for main content
+          component="main"
           sx={{
-            flexGrow: 1, // Allows this Box to take up available space
-            // Adjusted padding: py for vertical, px for horizontal
-            py: { xs: 0, sm: 0 }, // Vertical padding (top/bottom) - Retained user's 0
-            // Further reduced horizontal padding for wider content on small and up screens
-            px: { xs: 1, sm: 1 }, // Horizontal padding (left/right) - Retained user's 1
-            // Margin-left to push content away from the permanent sidebar on larger screens
-            ml: { xs: 0, sm: '220px' },
-            // Padding-top to push content away from the fixed mobile header on small screens
-            pt: { xs: '56px', sm: '0' }, // 56px (mobile header height) on xs, 0 on sm and up
-            backgroundColor: 'background.default', // Background color from theme palette
-            color: 'text.primary', // Text color from theme palette
-            minHeight: '100vh', // Ensure main content takes at least full viewport height
-            transition: 'margin-left 0.3s ease, background-color 0.3s ease, color 0.3s ease', // Smooth transitions
+            maxWidth: 720,
+            mx: 'auto',
+            px: { xs: 2, sm: 3 },
+            pt: '84px',
+            pb: 8,
+            minHeight: '100vh',
+            backgroundColor: 'background.default',
+            color: 'text.primary',
           }}
         >
           <Routes>
