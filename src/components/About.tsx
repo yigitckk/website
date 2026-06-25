@@ -1,93 +1,152 @@
 // src/components/About.tsx
 import React from 'react';
-import { Box, Typography, Button, useTheme } from '@mui/material';
+import { Box, Typography, Button, Chip, Stack } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const About: React.FC = () => {
   const theme = useTheme();
 
-  // Function to handle image loading errors and provide a placeholder
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.onerror = null; // Prevent infinite loop if placeholder also fails
-    // Use a themed placeholder image
-    target.src = `https://placehold.co/300x300/${theme.palette.grey[300].substring(1)}/${theme.palette.grey[700].substring(1)}?text=YC`;
-  };
-
   return (
-    <Box
-      sx={{
-        // Full width container - remove centering flex and let it fill naturally
-        width: '100%',
-        py: theme.spacing(2),
-        // Remove px padding since App.tsx already handles it
-      }}
-    >
-      <Box
-        sx={{
-          // Content container - center this within the available space
-          width: '100%',
-          maxWidth: '1700px', // Increased max width since we have more space
-          margin: '10 auto', // Center horizontally
-          color: theme.palette.text.primary,
-          borderRadius: theme.shape.borderRadius,
-          textAlign: 'center',
-        }}
-      >
-        <Typography variant="h4" gutterBottom sx={{
-          color: theme.palette.text.primary,
-          mb: theme.spacing(3),
-        }}>
-          About Yiğit Çelik
+    <Box sx={{ width: '100%', py: theme.spacing(4) }}>
+
+      {/* Hero */}
+      <Box sx={{ mb: theme.spacing(5) }}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: 700,
+            fontSize: { xs: '1.8rem', sm: '2.4rem' },
+            color: theme.palette.text.primary,
+            mb: theme.spacing(1),
+          }}
+        >
+          Yiğit Çelik
         </Typography>
-      
-  
-        <Box textAlign="center" mb={theme.spacing(4)}>
+
+        <Typography
+          variant="h6"
+          sx={{
+            color: theme.palette.primary.main,
+            fontWeight: 400,
+            mb: theme.spacing(3),
+            fontSize: { xs: '1rem', sm: '1.1rem' },
+          }}
+        >
+          Backend Engineer · Product Builder
+        </Typography>
+
+        <Typography
+          variant="body1"
+          sx={{
+            color: theme.palette.text.primary,
+            lineHeight: 1.9,
+            fontSize: { xs: '0.95rem', sm: '1rem' },
+            maxWidth: '680px',
+            mb: theme.spacing(2),
+          }}
+        >
+          I build backend systems from scratch and ship products I actually want to exist.
+          Currently working through a structured engineering path — auth services, job queues,
+          event stores — while learning how real production systems behave under load.
+        </Typography>
+
+        <Typography
+          variant="body1"
+          sx={{
+            color: theme.palette.text.secondary,
+            lineHeight: 1.9,
+            fontSize: { xs: '0.95rem', sm: '1rem' },
+            maxWidth: '680px',
+            mb: theme.spacing(4),
+          }}
+        >
+          I'm building toward a life where engineering skill, indie products, and genuine
+          curiosity all compound together. Global in scope. Specific in taste.
+        </Typography>
+
+        <Stack direction="row" spacing={2} flexWrap="wrap" gap={1}>
           <Button
             variant="contained"
-            color="primary"
+            href="https://github.com/yigitckk"
+            target="_blank"
+            rel="noopener"
+            sx={{ fontWeight: 600 }}
+          >
+            GitHub
+          </Button>
+          <Button
+            variant="outlined"
             href="https://github.com/yigitckk/aboutMe/blob/main/YiğitÇelikcv.pdf"
             target="_blank"
             rel="noopener"
-            sx={{
-              color: theme.palette.primary.contrastText,
-              padding: theme.spacing(1.5, 3),
-              fontSize: '1rem',
-            }}
           >
-            Download CV
+            CV
           </Button>
-        </Box>
+        </Stack>
+      </Box>
 
-        <Box sx={{ textAlign: 'left' }}> {/* Left-aligned text container */}
-          <Typography variant="body1" paragraph sx={{
-            color: theme.palette.text.primary,
-            textAlign: 'justify',
-            lineHeight: 1.8,
-            mb: theme.spacing(3),
-            fontSize: { xs: '0.95rem', sm: '1rem' }, // Responsive font size
-          }}>
-            Yiğit Çelik is a 21-year-old university student based in Türkiye, known for his passion for innovation and problem-solving. With a strong academic foundation and an insatiable curiosity, Yiğit has consistently demonstrated a commitment to personal and professional growth through active participation in both national and international projects. His areas of expertise include mathematics, programming, languages, and philosophy, which he leverages to approach challenges with a unique blend of analytical thinking and creative problem-solving.
-          </Typography>
+      {/* Stack */}
+      <Box sx={{ mb: theme.spacing(5) }}>
+        <Typography
+          variant="overline"
+          sx={{ color: theme.palette.text.secondary, letterSpacing: 2, mb: theme.spacing(1.5), display: 'block' }}
+        >
+          Current Stack
+        </Typography>
+        <Stack direction="row" flexWrap="wrap" gap={1}>
+          {['Python', 'FastAPI', 'PostgreSQL', 'TypeScript', 'React', 'Linux', 'nginx', 'Docker'].map((tech) => (
+            <Chip
+              key={tech}
+              label={tech}
+              size="small"
+              sx={{
+                backgroundColor: theme.palette.background.paper,
+                border: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.primary,
+                fontWeight: 500,
+              }}
+            />
+          ))}
+        </Stack>
+      </Box>
 
-          <Typography variant="body1" paragraph sx={{
-            color: theme.palette.text.primary,
-            textAlign: 'justify',
-            lineHeight: 1.8,
-            mb: theme.spacing(3),
-            fontSize: { xs: '0.95rem', sm: '1rem' },
-          }}>
-            Professionally, Yiğit is skilled in multiple programming languages, including HTML, JavaScript, CSS, C, C#, and is currently expanding his proficiency in Java. His technical acumen, combined with his ability to quickly adapt and resolve complex issues, positions him as a dynamic contributor in any team environment. Beyond his technical skills, Yiğit brings a wealth of cross-cultural experience, having participated in over seven cultural, youth, and student exchange programs under the Erasmus+ initiative. These experiences have honed his interpersonal skills, enabling him to thrive in collaborative settings and engage in meaningful, interactive discussions with individuals from diverse backgrounds.
-          </Typography>
-
-          <Typography variant="body1" paragraph sx={{
-            color: theme.palette.text.primary,
-            textAlign: 'justify',
-            lineHeight: 1.8,
-            mb: theme.spacing(0),
-            fontSize: { xs: '0.95rem', sm: '1rem' },
-          }}>
-            Driven by a growth mindset and a desire to create impactful innovations, Yiğit is always eager to embrace new challenges and opportunities. His professional ethos centers on continuous learning and contributing value to the world through his work. Whether developing software solutions, engaging in philosophical discourse, or fostering connections with peers across the globe, Yiğit remains dedicated to making a positive and lasting impact in his field and beyond.
-          </Typography>
+      {/* Path */}
+      <Box>
+        <Typography
+          variant="overline"
+          sx={{ color: theme.palette.text.secondary, letterSpacing: 2, mb: theme.spacing(2), display: 'block' }}
+        >
+          Path
+        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(1.5) }}>
+          {[
+            { label: 'Backend Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
+            { label: 'Data Engineering', status: 'next', note: 'Pipelines · dbt · Airflow' },
+            { label: 'ML Engineering', status: 'later', note: 'Feature stores · Model serving · not notebooks' },
+          ].map(({ label, status, note }) => (
+            <Box key={label} sx={{ display: 'flex', alignItems: 'center', gap: theme.spacing(1.5) }}>
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor:
+                    status === 'active'
+                      ? theme.palette.primary.main
+                      : status === 'next'
+                      ? theme.palette.text.secondary
+                      : theme.palette.divider,
+                  flexShrink: 0,
+                }}
+              />
+              <Typography variant="body2" sx={{ color: theme.palette.text.primary, fontWeight: status === 'active' ? 600 : 400 }}>
+                {label}
+              </Typography>
+              <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
+                — {note}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       </Box>
     </Box>
