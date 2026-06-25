@@ -161,7 +161,7 @@ const App: React.FC = () => {
             // Further reduced horizontal padding for wider content on small and up screens
             px: { xs: 1, sm: 1 }, // Horizontal padding (left/right) - Retained user's 1
             // Margin-left to push content away from the permanent sidebar on larger screens
-            ml: { xs: 0, sm: '400px' }, // Retained user's 400px
+            ml: { xs: 0, sm: '220px' },
             // Padding-top to push content away from the fixed mobile header on small screens
             pt: { xs: '56px', sm: '0' }, // 56px (mobile header height) on xs, 0 on sm and up
             backgroundColor: 'background.default', // Background color from theme palette
