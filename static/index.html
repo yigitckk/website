@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yiğit Çelik</title>
+<meta name="description" content="Industrial engineer turned backend builder. A dated record of what I build, what broke, and what I got wrong.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F3EB'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='bold' fill='%23A33529' text-anchor='middle'%3EY%C3%87%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ═══ THE LEDGER — a personal site as a dated, falsifiable record ═══
+     Not a portfolio of claims; a logbook of verified work. The design
+     rules come from how the work is actually done: dated entries,
+     status stamps, death conditions declared up front. */
+  :root{
+    --paper:#F6F3EB;          /* warm technical paper */
+    --paper-2:#EFEBDF;        /* raised card */
+    --ink:#1B1A15;
+    --muted:#6F6A5C;
+    --faint:#A39D8D;
+    --seal:#A33529;           /* stamp red — the one accent */
+    --rule:rgba(27,26,21,0.16);
+    --rule-soft:rgba(27,26,21,0.08);
+    --grid:rgba(27,26,21,0.045);
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+    --serif:"Instrument Serif",Georgia,serif;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --paper:#161511;        /* dark graphite ledger */
+      --paper-2:#1E1C17;
+      --ink:#EDEAE1;
+      --muted:#9A9486;
+      --faint:#6B665A;
+      --seal:#D0554A;         /* seal brightened for dark ground */
+      --rule:rgba(237,234,225,0.18);
+      --rule-soft:rgba(237,234,225,0.08);
+      --grid:rgba(237,234,225,0.035);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);font-family:var(--sans);
+    font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;
+    /* graph paper — the IE background, kept almost subliminal */
+    background:
+      repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 28px),
+      var(--paper);
+  }
+  ::selection{background:rgba(163,53,41,0.22)}
+  a{color:var(--ink);text-decoration-color:var(--faint);text-underline-offset:3px}
+  a:hover{text-decoration-color:var(--seal);color:var(--seal)}
+  .wrap{max-width:700px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+
+  /* ── status bar: what is OPEN right now — the ACIK.md discipline ── */
+  .statusbar{
+    border-bottom:1px solid var(--rule);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);padding:10px 0;
+    background:var(--paper);
+  }
+  .statusbar .wrap{display:flex;gap:18px;flex-wrap:wrap}
+  .statusbar b{color:var(--seal);font-weight:500}
+
+  header.top{padding:64px 0 8px}
+  .name{font-family:var(--mono);font-size:13px;letter-spacing:0.22em;color:var(--muted)}
+
+  .hero{padding:16px 0 56px}
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(32px,6.4vw,50px);line-height:1.14;
+    letter-spacing:-0.01em;margin:10px 0 0;text-wrap:balance}
+  .hero h1 em{font-style:italic;color:var(--seal)}
+  .hero p{color:var(--muted);max-width:36em;margin:22px 0 0}
+
+  section{padding:44px 0;border-top:1px solid var(--rule)}
+  h2{
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:0.2em;color:var(--seal);margin:0 0 24px;
+    text-transform:uppercase}
+  h2 .idx{color:var(--faint);margin-right:10px}
+
+  /* ── ledger entries: mono date column, like a register ── */
+  .entry{display:grid;grid-template-columns:96px 1fr;gap:18px;
+         padding:14px 0;border-bottom:1px solid var(--rule-soft)}
+  .entry:last-child{border-bottom:none}
+  .entry .d{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:4px}
+  .entry .b{margin:0}
+  .entry .b strong{font-weight:600}
+  .entry .b .sub{color:var(--muted);font-size:14.5px;display:block;margin-top:2px}
+  @media(max-width:520px){.entry{grid-template-columns:1fr;gap:2px}}
+
+  /* ── project cards with stamps ── */
+  .proj{border:1px solid var(--rule);background:var(--paper-2);
+        padding:20px 22px;margin-bottom:14px;position:relative}
+  .proj h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-0.01em}
+  .proj h3 a{text-decoration:none}
+  .proj p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+  .proj .tags{font-family:var(--mono);font-size:11px;color:var(--faint);
+              margin-top:12px;letter-spacing:0.03em}
+  .stamp{
+    position:absolute;top:16px;right:16px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;
+    padding:4px 9px;border:1.4px solid;transform:rotate(-4deg);
+    color:var(--faint);border-color:var(--faint)}
+  .stamp.live{color:var(--seal);border-color:var(--seal)}
+  .stamp.building{transform:rotate(3deg)}
+
+  /* ── method list ── */
+  ol.method{list-style:none;margin:0;padding:0;counter-reset:m}
+  ol.method li{
+    counter-increment:m;padding:16px 0 16px 52px;position:relative;
+    border-bottom:1px solid var(--rule-soft)}
+  ol.method li:last-child{border-bottom:none}
+  ol.method li::before{
+    content:counter(m,decimal-leading-zero);
+    position:absolute;left:0;top:19px;
+    font-family:var(--mono);font-size:12px;color:var(--seal)}
+  ol.method li strong{display:block;font-weight:600;margin-bottom:3px}
+  ol.method li span{color:var(--muted);font-size:14.5px;line-height:1.65}
+
+  /* ── compact rows (education, contact) ── */
+  .row{display:flex;justify-content:space-between;gap:16px;
+       padding:11px 0;border-bottom:1px solid var(--rule-soft);
+       font-size:15px;align-items:baseline}
+  .row:last-child{border-bottom:none}
+  .row .r{font-family:var(--mono);font-size:12px;color:var(--faint);
+          text-align:right;white-space:nowrap}
+  .note{color:var(--muted);font-size:13.5px;margin-top:14px}
+
+  footer{border-top:1px solid var(--rule);padding:36px 0 64px;
+         font-family:var(--mono);font-size:12px;color:var(--faint);line-height:2}
+</style>
+</head>
+<body>
+
+<div class="statusbar"><div class="wrap">
+  <span><b>OPEN</b> MINTIKA — 14-day field test</span>
+  <span><b>NEXT</b> internship, Sept '26</span>
+  <span><b>THEN</b> Porto — Erasmus research, Feb '27</span>
+</div></div>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="name">YİĞİT ÇELİK — BACKEND ENGINEER · PRODUCT BUILDER</div>
+</header>
+
+<div class="hero">
+  <h1>I keep a dated record of what I build —<br><em>including what broke.</em></h1>
+  <p>I build backend systems from scratch and ship products I actually want to exist.
+  Industrial engineering background, working through a structured path — auth services,
+  job queues, event stores — while learning how real production systems behave.</p>
+  <p>Every project here ends in a postmortem, every direction change keeps its old
+  documents, and every plan states up front what would kill it.
+  Global in scope. Specific in taste.</p>
+</div>
+
+<!-- BUILDING -->
+<section id="building">
+  <h2><span class="idx">01</span>Building</h2>
+
+  <div class="proj">
+    <span class="stamp building">TESTING</span>
+    <h3><a href="https://mintika.studio">MINTIKA</a></h3>
+    <p>A local, offline film-strip tool. You photograph a cinema moment, write its
+    conditions — <span class="mono">35mm · Kadıköy · 25.08.2026</span> — and the frame
+    joins a strip on your device. No server, no account, no feed. The thesis: a template
+    can't be wrong, but a record can — and only a record that can be wrong can be right.
+    Started as a 9-feature social app; on 25.08.2026 I froze 30k lines and kept the
+    one claim worth keeping.</p>
+    <div class="tags">Flutter · SQLite · on-device only</div>
+  </div>
+
+  <div class="proj">
+    <span class="stamp live">LIVE</span>
+    <h3><a href="https://plotpoint.space">plotpoint.space</a></h3>
+    <p>Jackbox-style multiplayer film party game using real Letterboxd data.
+    8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes,
+    and Blind Ranking. Built with FastAPI + React Native, deployed on a VPS.</p>
+    <div class="tags">FastAPI · React Native · WebSocket · TypeScript</div>
+  </div>
+
+  <div class="proj">
+    <span class="stamp building">BUILDING</span>
+    <h3>Append-Only Event Log</h3>
+    <p>Event store with replay, snapshot, and idempotency. The foundation for
+    event sourcing patterns — and for any stateful product that needs audit
+    trails or time-travel.</p>
+    <div class="tags">FastAPI · PostgreSQL · Event Sourcing</div>
+  </div>
+
+  <div class="proj">
+    <span class="stamp">DONE</span>
+    <h3><a href="https://github.com/yigitckk/job-queue">Async Job Queue</a></h3>
+    <p>PostgreSQL-backed async task queue with no Redis dependency. Push/pop/retry
+    logic, dead-letter queue, structured logging. Built from scratch to understand
+    queue semantics. <a href="/blog/job-queue-postmortem.html">Postmortem →</a></p>
+    <div class="tags">FastAPI · PostgreSQL · Python</div>
+  </div>
+
+  <div class="proj">
+    <span class="stamp">DONE</span>
+    <h3><a href="https://github.com/yigitckk/auth-service">Auth Service</a></h3>
+    <p>Production-grade standalone auth system. JWT issue/refresh/revoke, rate
+    limiting, session management, Testcontainers test suite, VPS deployed with
+    systemd + nginx + TLS. <a href="/blog/auth-service-postmortem.html">Postmortem →</a></p>
+    <div class="tags">FastAPI · PostgreSQL · JWT · Alembic</div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section id="method">
+  <h2><span class="idx">02</span>Method</h2>
+  <ol class="method">
+    <li><strong>A tool's exit code verifies its own job, not my claim.</strong>
+      <span>"Install succeeded" doesn't mean the phone runs my code. Every claim of
+      done gets its own check — timestamps compared, screens actually looked at.</span></li>
+    <li><strong>Freeze, don't delete.</strong>
+      <span>When a direction dies, its code moves to <span class="mono">parked/</span>
+      with written return-conditions. Deleting feels irreversible, so the decision gets
+      postponed — freezing makes the decision cheap enough to take today.</span></li>
+    <li><strong>Every plan states what would kill it.</strong>
+      <span>A growth stage without a death condition is not a plan, it's a wish.
+      Thresholds are written before the test, not after the result.</span></li>
+    <li><strong>Lessons need a control group.</strong>
+      <span>"The winner did X" means nothing until you check whether the dead did X too.
+      Most of them did.</span></li>
+    <li><strong>Old documents don't get corrected — they get dated.</strong>
+      <span>A wrong answer, kept next to when and why it was falsified, is a record.
+      Overwritten, it's just today's opinion.</span></li>
+  </ol>
+</section>
+
+<!-- LOG -->
+<section id="log">
+  <h2><span class="idx">03</span>Log</h2>
+  <div class="entry"><div class="d">2026-08-25</div><p class="b"><strong>MINTIKA changed direction.</strong>
+    <span class="sub">Four candidate strategies audited against control groups; all four died.
+    39k lines of Dart became 8.7k. The social app froze; the tool shipped to device the same day.</span></p></div>
+  <div class="entry"><div class="d">2026-06-25</div><p class="b"><strong>plotpoint.space went live on a VPS.</strong>
+    <span class="sub">First product I deployed and kept alive myself — the thing I used to be most afraid of.</span></p></div>
+  <div class="entry"><div class="d">2026-06-24</div><p class="b"><strong>Job queue shipped, postmortem written.</strong>
+    <span class="sub">pending → processing → completed / failed → retry → dead-letter, no Redis.</span></p></div>
+  <div class="entry"><div class="d">2026-06-22</div><p class="b"><strong>Auth service shipped, postmortem written.</strong>
+    <span class="sub">"Testing processes almost killed me by the end" — kept in the record, because it's true.</span></p></div>
+  <div class="entry"><div class="d">2024-10</div><p class="b"><strong>Research scholar, TÜBİTAK 1001 optimization project.</strong>
+    <span class="sub">Watched optimization solvers meet real problems, end to end. (–Feb 2025)</span></p></div>
+</section>
+
+<!-- WRITING -->
+<section id="writing">
+  <h2><span class="idx">04</span>Writing</h2>
+  <div class="entry"><div class="d">2026-06-24</div><p class="b"><a href="/blog/job-queue-postmortem.html">Job Queue — Project Postmortem</a></p></div>
+  <div class="entry"><div class="d">2026-06-22</div><p class="b"><a href="/blog/auth-service-postmortem.html">Auth Service — Project Postmortem</a></p></div>
+  <div class="entry"><div class="d">2025-08-14</div><p class="b"><a href="/blog/user-segmentation.html">From Data to Personas — User Segmentation Case Study</a></p></div>
+  <div class="entry"><div class="d">2024-10-11</div><p class="b"><a href="/blog/streams.html">Understanding Streams in Programming</a></p></div>
+  <div class="entry"><div class="d">2024-10-10</div><p class="b"><a href="/blog/lambda.html">Lambda Expressions in Java</a></p></div>
+</section>
+
+<!-- PATH -->
+<section id="path">
+  <h2><span class="idx">05</span>Path</h2>
+  <div class="row"><span><strong>Backend Engineering</strong> — auth · job queue · event log</span><span class="r mono" style="color:var(--seal)">ACTIVE</span></div>
+  <div class="row"><span><strong>Data Engineering</strong> — pipelines · dbt · Airflow</span><span class="r">NEXT</span></div>
+  <div class="row"><span><strong>ML Engineering</strong> — feature stores · serving · not notebooks</span><span class="r">LATER</span></div>
+  <p class="note">The through-line is decision systems: industrial engineering for the
+  problem, backend for the machinery, ML/OR for the choice. Predict, then optimize.</p>
+</section>
+
+<!-- RECORD -->
+<section id="record">
+  <h2><span class="idx">06</span>Record</h2>
+  <div class="row"><span>Industrial Engineering &amp; Management — Pamukkale University</span><span class="r">2022–2026</span></div>
+  <div class="row"><span>Computer Science (Exchange) — Białystok University of Technology</span><span class="r">2024–2025</span></div>
+  <div class="row"><span><a href="https://github.com/yigitckk/certificates">Certificates &amp; programs</a> — Erasmus+, TEKNOFEST, Cisco, AFAD</span><span class="r">2019–2023</span></div>
+  <div class="row"><span>Stack — Python · FastAPI · PostgreSQL · TypeScript · React · Linux · nginx · Docker</span><span class="r">&nbsp;</span></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2><span class="idx">07</span>Contact</h2>
+  <div class="row"><span>GitHub</span><span class="r"><a href="https://github.com/yigitckk">yigitckk</a></span></div>
+  <div class="row"><span>LinkedIn</span><span class="r"><a href="https://www.linkedin.com/in/yigitck/">yigitck</a></span></div>
+  <div class="row"><span>X</span><span class="r"><a href="https://x.com/yigitopt">yigitopt</a></span></div>
+  <div class="row"><span>Email</span><span class="r"><a href="mailto:yigitcelik798@gmail.com">yigitcelik798@gmail.com</a></span></div>
+</section>
+
+</div>
+
+<footer><div class="wrap">
+  YİĞİT ÇELİK · yigitcelik.net · 2026<br>
+  This page is itself a record — dated 25.08.2026. When it becomes wrong,
+  it won't be corrected; a new one will be dated next to it.
+</div></footer>
+
+</body>
+</html>
