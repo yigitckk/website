@@ -1,8 +1,8 @@
 // src/components/MarkdownPage.tsx
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Box, Typography, Link } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Box, Typography, Link as MuiLink, Button, Chip } from '@mui/material';
+import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
@@ -47,6 +47,9 @@ const MarkdownPage: React.FC = () => {
     return (
       <Box sx={{ py: theme.spacing(8), textAlign: 'center' }}>
         <Typography sx={{ color: theme.palette.text.secondary }}>{error}</Typography>
+        <Button component={RouterLink} to="/blog" sx={{ mt: 2 }} variant="outlined">
+          ← Back to Writing
+        </Button>
       </Box>
     );
   }
@@ -55,17 +58,49 @@ const MarkdownPage: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%', maxWidth: 720, py: theme.spacing(4) }}>
-      <Typography
-        sx={{ fontWeight: 700, fontSize: '1.6rem', color: theme.palette.text.primary, mb: 1, lineHeight: 1.3 }}
+      <Button
+        component={RouterLink}
+        to="/blog"
+        size="small"
+        sx={{
+          mb: 3,
+          color: theme.palette.text.secondary,
+          fontFamily: 'monospace',
+          fontSize: '0.8rem',
+          textTransform: 'none',
+          '&:hover': { color: theme.palette.primary.main },
+        }}
       >
-        {metadata.title}
-      </Typography>
+        ← Back to Writing
+      </Button>
 
-      {metadata.uploadDate && (
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, display: 'block', mb: theme.spacing(4) }}>
-          {new Date(metadata.uploadDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+      <Box sx={{ mb: 4, pb: 3, borderBottom: `1px solid ${theme.palette.divider}` }}>
+        <Chip
+          label="ENGINEERING_POSTMORTEM"
+          size="small"
+          sx={{
+            fontFamily: 'monospace',
+            fontSize: '0.7rem',
+            fontWeight: 600,
+            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0, 123, 255, 0.08)',
+            color: theme.palette.primary.main,
+            border: `1px solid ${theme.palette.primary.main}33`,
+            mb: 1.5,
+          }}
+        />
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: 700, color: theme.palette.text.primary, mb: 1.5, lineHeight: 1.3 }}
+        >
+          {metadata.title}
         </Typography>
-      )}
+
+        {metadata.uploadDate && (
+          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
+            {new Date(metadata.uploadDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </Typography>
+        )}
+      </Box>
 
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
@@ -74,7 +109,7 @@ const MarkdownPage: React.FC = () => {
           code: ({ inline, className, children, ...props }: CodeProps) => {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
-              <Box sx={{ overflowX: 'auto', borderRadius: 1, mb: 3 }}>
+              <Box sx={{ overflowX: 'auto', borderRadius: 2, mb: 3, border: `1px solid ${theme.palette.divider}` }}>
                 <SyntaxHighlighter {...props} style={codeStyle} language={match[1]} PreTag="div">
                   {String(children).replace(/\n$/, '')}
                 </SyntaxHighlighter>
@@ -83,12 +118,12 @@ const MarkdownPage: React.FC = () => {
               <Typography
                 component="code"
                 sx={{
-                  backgroundColor: theme.palette.action.hover,
-                  color: theme.palette.text.primary,
-                  px: 0.75,
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
+                  color: theme.palette.primary.main,
+                  px: 0.8,
                   py: 0.25,
-                  borderRadius: 0.5,
-                  fontSize: '0.875em',
+                  borderRadius: 1,
+                  fontSize: '0.85em',
                   fontFamily: 'monospace',
                 }}
                 {...props}
@@ -103,7 +138,7 @@ const MarkdownPage: React.FC = () => {
             </Typography>
           ),
           h2: ({ children }) => (
-            <Typography variant="h6" sx={{ fontWeight: 600, mt: 3, mb: 1, color: theme.palette.text.primary }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mt: 3.5, mb: 1.2, color: theme.palette.text.primary, borderBottom: `1px solid ${theme.palette.divider}`, pb: 0.5 }}>
               {children}
             </Typography>
           ),
@@ -113,14 +148,14 @@ const MarkdownPage: React.FC = () => {
             </Typography>
           ),
           p: ({ children }) => (
-            <Typography variant="body2" sx={{ fontSize: '0.95rem', lineHeight: 1.8, mb: 2, color: theme.palette.text.primary }}>
+            <Typography variant="body2" sx={{ fontSize: '0.96rem', lineHeight: 1.85, mb: 2, color: theme.palette.text.primary }}>
               {children}
             </Typography>
           ),
           a: ({ href, children }) => (
-            <Link href={href} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ color: theme.palette.primary.main }}>
+            <MuiLink href={href} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ color: theme.palette.primary.main, fontWeight: 500 }}>
               {children}
-            </Link>
+            </MuiLink>
           ),
           img: ({ src, alt }) => (
             <Box
@@ -132,32 +167,35 @@ const MarkdownPage: React.FC = () => {
                 height: 'auto',
                 my: 3,
                 display: 'block',
-                borderRadius: 1,
+                borderRadius: 2,
                 border: `1px solid ${theme.palette.divider}`,
               }}
             />
           ),
           ul: ({ children }) => (
-            <Box component="ul" sx={{ pl: 3, mb: 2, fontSize: '0.95rem', color: theme.palette.text.primary }}>
+            <Box component="ul" sx={{ pl: 3, mb: 2, fontSize: '0.96rem', color: theme.palette.text.primary }}>
               {children}
             </Box>
           ),
           ol: ({ children }) => (
-            <Box component="ol" sx={{ pl: 3, mb: 2, fontSize: '0.95rem', color: theme.palette.text.primary }}>
+            <Box component="ol" sx={{ pl: 3, mb: 2, fontSize: '0.96rem', color: theme.palette.text.primary }}>
               {children}
             </Box>
           ),
           li: ({ children }) => (
-            <Typography component="li" sx={{ fontSize: '0.95rem', lineHeight: 1.8, mb: 0.5, color: theme.palette.text.primary }}>
+            <Typography component="li" sx={{ fontSize: '0.96rem', lineHeight: 1.8, mb: 0.5, color: theme.palette.text.primary }}>
               {children}
             </Typography>
           ),
           blockquote: ({ children }) => (
             <Box
               sx={{
-                borderLeft: `3px solid ${theme.palette.divider}`,
-                pl: 2,
-                my: 2,
+                borderLeft: `3px solid ${theme.palette.primary.main}`,
+                pl: 2.5,
+                py: 1,
+                my: 2.5,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.05)' : 'rgba(0, 123, 255, 0.03)',
+                borderRadius: '0 8px 8px 0',
                 color: theme.palette.text.secondary,
                 fontStyle: 'italic',
               }}
