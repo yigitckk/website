@@ -6,9 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import frontMatter from 'front-matter';
 
 import About from '../components/About';
-import DeveloperIdPass from '../components/DeveloperIdPass';
-import CliTerminal from '../components/CliTerminal';
-import TelemetryGauges from '../components/TelemetryGauges';
 import EngineeringPrinciples from '../components/EngineeringPrinciples';
 import Projects from '../components/Projects';
 
@@ -78,7 +75,7 @@ const RecentPosts: React.FC = () => {
         <MuiLink
           component={RouterLink}
           to="/blog"
-          sx={{ fontSize: '0.8rem', color: theme.palette.primary.main }}
+          sx={{ fontSize: '0.8rem', color: theme.palette.primary.main, fontFamily: 'monospace' }}
         >
           All posts →
         </MuiLink>
@@ -93,23 +90,33 @@ const RecentPosts: React.FC = () => {
               alignItems: 'baseline',
               justifyContent: 'space-between',
               gap: theme.spacing(2),
+              p: 1.5,
+              borderRadius: 2,
+              border: `1px solid ${theme.palette.divider}`,
+              backgroundColor: theme.palette.background.paper,
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                borderColor: theme.palette.primary.main,
+                boxShadow: '0 4px 12px rgba(56, 189, 248, 0.1)',
+              },
             }}
           >
             <MuiLink
               component={RouterLink}
               to={`/blog/${post.slug}`}
-              underline="hover"
+              underline="none"
               sx={{
                 color: theme.palette.text.primary,
                 fontSize: '0.95rem',
-                fontWeight: 500,
+                fontWeight: 600,
+                '&:hover': { color: theme.palette.primary.main },
               }}
             >
               {post.title}
             </MuiLink>
             <Typography
               variant="caption"
-              sx={{ color: theme.palette.text.secondary, flexShrink: 0 }}
+              sx={{ color: theme.palette.text.secondary, flexShrink: 0, fontFamily: 'monospace' }}
             >
               {new Date(post.uploadDate).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
             </Typography>
@@ -123,9 +130,6 @@ const RecentPosts: React.FC = () => {
 const HomePage: React.FC = () => {
   return (
     <>
-      <DeveloperIdPass />
-      <CliTerminal />
-      <TelemetryGauges />
       <About />
       <EngineeringPrinciples />
       <Projects />

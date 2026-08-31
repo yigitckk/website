@@ -11,11 +11,29 @@ const About: React.FC = () => {
 
       {/* Hero */}
       <Box sx={{ mb: theme.spacing(5) }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
+          <Chip
+            label="SOVEREIGN_ENGINEER // PAU_IE_2026"
+            size="small"
+            sx={{
+              fontFamily: 'monospace',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+              backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0, 123, 255, 0.08)',
+              color: theme.palette.primary.main,
+              border: `1px solid ${theme.palette.primary.main}33`,
+            }}
+          />
+          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
+            yigitc.dev
+          </Typography>
+        </Box>
+
         <Typography
           variant="h3"
           sx={{
             fontWeight: 700,
-            fontSize: { xs: '1.8rem', sm: '2.4rem' },
+            fontSize: { xs: '1.8rem', sm: '2.5rem' },
             color: theme.palette.text.primary,
             mb: theme.spacing(1),
           }}
