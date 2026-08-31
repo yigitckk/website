@@ -6,6 +6,10 @@ import { useTheme } from '@mui/material/styles';
 import frontMatter from 'front-matter';
 
 import About from '../components/About';
+import DeveloperIdPass from '../components/DeveloperIdPass';
+import CliTerminal from '../components/CliTerminal';
+import TelemetryGauges from '../components/TelemetryGauges';
+import EngineeringPrinciples from '../components/EngineeringPrinciples';
 import Projects from '../components/Projects';
 
 declare const require: {
@@ -119,7 +123,11 @@ const RecentPosts: React.FC = () => {
 const HomePage: React.FC = () => {
   return (
     <>
+      <DeveloperIdPass />
+      <CliTerminal />
+      <TelemetryGauges />
       <About />
+      <EngineeringPrinciples />
       <Projects />
       <RecentPosts />
     </>
