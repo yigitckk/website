@@ -11,24 +11,6 @@ const About: React.FC = () => {
 
       {/* Hero */}
       <Box sx={{ mb: theme.spacing(5) }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-          <Chip
-            label="SOVEREIGN_ENGINEER // PAU_IE_2026"
-            size="small"
-            sx={{
-              fontFamily: 'monospace',
-              fontSize: '0.72rem',
-              fontWeight: 600,
-              backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0, 123, 255, 0.08)',
-              color: theme.palette.primary.main,
-              border: `1px solid ${theme.palette.primary.main}33`,
-            }}
-          />
-          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
-            yigitc.dev
-          </Typography>
-        </Box>
-
         <Typography
           variant="h3"
           sx={{
@@ -50,7 +32,7 @@ const About: React.FC = () => {
             fontSize: { xs: '1rem', sm: '1.1rem' },
           }}
         >
-          Systems & AI Architect · Industrial Engineer
+          Backend Engineer · Product Builder
         </Typography>
 
         <Typography
@@ -63,8 +45,7 @@ const About: React.FC = () => {
             mb: theme.spacing(2),
           }}
         >
-          I design autonomous AI agent memory architectures, local-first intelligence hubs, and resilient backend systems.
-          Background in Industrial Engineering (PAU) synthesizing Endüstri 5.0 systems optimization with geopolitical OSINT analytics and high-taste digital product design.
+          I build backend systems from scratch and ship products I actually want to exist. Currently working through a structured engineering path — auth services, job queues, event stores — while learning how real production systems behave under load.
         </Typography>
 
         <Typography
@@ -77,7 +58,7 @@ const About: React.FC = () => {
             mb: theme.spacing(4),
           }}
         >
-          Building toward a lifelong practice where sovereign engineering skill, local LLM infrastructure, and personal agency compound together. Global in scope. Specific in taste.
+          Industrial engineering background (PAU) synthesizing Endüstri 5.0 systems thinking with cultural product architecture (building MINTIKA Cinema OS). Building toward a life where engineering skill, indie products, and genuine curiosity all compound together. Global in scope. Specific in taste.
         </Typography>
 
         <Stack direction="row" spacing={2} flexWrap="wrap" gap={1}>
@@ -110,7 +91,7 @@ const About: React.FC = () => {
           Current Stack
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={1}>
-          {['Python', 'FastAPI', 'PyTorch', 'C++', 'PostgreSQL', 'TypeScript', 'React', 'Linux (Kernel/systemd)', 'Docker', 'Graph RAG'].map((tech) => (
+          {['Python', 'FastAPI', 'PostgreSQL', 'TypeScript', 'React', 'Linux', 'nginx', 'Docker'].map((tech) => (
             <Chip
               key={tech}
               label={tech}
@@ -136,9 +117,9 @@ const About: React.FC = () => {
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(1.5) }}>
           {[
-            { label: 'Backend & Systems Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
-            { label: 'Sovereign AI & Agent Architecture', status: 'active', note: 'Local LLMs · Graph RAG · Memory Store' },
-            { label: 'Data & OSINT Engineering', status: 'next', note: 'Pipelines · Geopolitical Feeds · Obsidian Knowledge Vault' },
+            { label: 'Backend Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
+            { label: 'Data Engineering', status: 'next', note: 'Pipelines · dbt · Airflow' },
+            { label: 'ML Engineering', status: 'later', note: 'Feature stores · Model serving · not notebooks' },
           ].map(({ label, status, note }) => (
             <Box key={label} sx={{ display: 'flex', alignItems: 'center', gap: theme.spacing(1.5) }}>
               <Box
