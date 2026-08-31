@@ -1,8 +1,7 @@
 // src/components/NavBar.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Box, Typography, IconButton, Drawer, List, ListItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Box, Typography, IconButton } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useTheme } from '@mui/material/styles';
@@ -13,135 +12,99 @@ interface NavBarProps {
 }
 
 const navItems = [
-  { to: '/', label: 'About' },
   { to: '/blog', label: 'Writing' },
-  { to: '/experience', label: 'Experience' },
-  { to: '/education', label: 'Education' },
-  { to: '/certifications', label: 'Certifications' },
+  { to: '/#projects', label: 'Projects' },
   { to: '/contact', label: 'Contact' },
 ];
 
 const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const location = useLocation();
 
-  const isActive = (to: string) =>
-    to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
+  const isActive = (to: string) => {
+    if (to === '/blog') return location.pathname.startsWith('/blog');
+    if (to === '/contact') return location.pathname === '/contact';
+    if (to === '/#projects') return location.hash === '#projects';
+    return false;
+  };
 
   return (
-    <>
+    <Box
+      component="nav"
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 56,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        px: { xs: 2.5, sm: 4 },
+        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(9, 9, 11, 0.85)' : 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        zIndex: theme.zIndex.appBar,
+      }}
+    >
+      {/* Brand */}
       <Box
-        component="nav"
+        component={Link}
+        to="/"
         sx={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0,
-          height: 52,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          px: { xs: 2, sm: 4 },
-          backgroundColor: theme.palette.background.default,
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          zIndex: theme.zIndex.appBar,
+          gap: 1,
+          textDecoration: 'none',
         }}
       >
-        {/* Brand */}
-        <Typography
-          component={Link}
-          to="/"
+        <Box
           sx={{
-            fontWeight: 600,
-            fontSize: '0.9rem',
+            width: 9,
+            height: 9,
+            borderRadius: '50%',
+            backgroundColor: theme.palette.primary.main,
+            boxShadow: '0 0 10px rgba(56, 189, 248, 0.6)',
+          }}
+        />
+        <Typography
+          sx={{
+            fontWeight: 700,
+            fontSize: '0.92rem',
             color: theme.palette.text.primary,
-            textDecoration: 'none',
-            flexShrink: 0,
+            letterSpacing: '-0.02em',
+            fontFamily: 'monospace',
           }}
         >
-          Yiğit Çelik
+          yigitc.dev
         </Typography>
-
-        {/* Desktop nav links */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
-          {navItems.map(({ to, label }) => (
-            <Box
-              key={to}
-              component={Link}
-              to={to}
-              sx={{
-                px: 1.25,
-                py: 0.5,
-                fontSize: '0.825rem',
-                fontWeight: isActive(to) ? 600 : 400,
-                color: isActive(to) ? theme.palette.text.primary : theme.palette.text.secondary,
-                textDecoration: 'none',
-                borderRadius: 1,
-                '&:hover': { color: theme.palette.text.primary, backgroundColor: theme.palette.action.hover },
-                transition: 'color 0.15s ease, background-color 0.15s ease',
-              }}
-            >
-              {label}
-            </Box>
-          ))}
-          <IconButton size="small" onClick={toggleTheme} sx={{ ml: 1, color: theme.palette.text.secondary }}>
-            {themeMode === 'dark' ? <LightModeIcon sx={{ fontSize: 17 }} /> : <DarkModeIcon sx={{ fontSize: 17 }} />}
-          </IconButton>
-        </Box>
-
-        {/* Mobile right side */}
-        <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 0.5 }}>
-          <IconButton size="small" onClick={toggleTheme} sx={{ color: theme.palette.text.secondary }}>
-            {themeMode === 'dark' ? <LightModeIcon sx={{ fontSize: 17 }} /> : <DarkModeIcon sx={{ fontSize: 17 }} />}
-          </IconButton>
-          <IconButton size="small" onClick={() => setDrawerOpen(true)} sx={{ color: theme.palette.text.secondary }}>
-            <MenuIcon sx={{ fontSize: 20 }} />
-          </IconButton>
-        </Box>
       </Box>
 
-      {/* Mobile drawer */}
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': {
-            width: 200,
-            mt: '52px',
-            backgroundColor: theme.palette.background.default,
-            borderLeft: `1px solid ${theme.palette.divider}`,
-            boxShadow: 'none',
-            pt: 1,
-          },
-        }}
-      >
-        <List disablePadding>
-          {navItems.map(({ to, label }) => (
-            <ListItem key={to} disablePadding>
-              <Box
-                component={Link}
-                to={to}
-                onClick={() => setDrawerOpen(false)}
-                sx={{
-                  display: 'block',
-                  width: '100%',
-                  px: 2,
-                  py: 1,
-                  fontSize: '0.875rem',
-                  fontWeight: isActive(to) ? 600 : 400,
-                  color: isActive(to) ? theme.palette.text.primary : theme.palette.text.secondary,
-                  textDecoration: 'none',
-                  '&:hover': { color: theme.palette.text.primary, backgroundColor: theme.palette.action.hover },
-                }}
-              >
-                {label}
-              </Box>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </>
+      {/* Nav links (Clean horizontal without hamburger menu) */}
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1.5, sm: 3 } }}>
+        {navItems.map(({ to, label }) => (
+          <Typography
+            key={to}
+            component={Link}
+            to={to}
+            sx={{
+              fontSize: '0.85rem',
+              fontWeight: isActive(to) ? 600 : 400,
+              color: isActive(to) ? theme.palette.text.primary : theme.palette.text.secondary,
+              textDecoration: 'none',
+              transition: 'color 0.15s ease',
+              '&:hover': { color: theme.palette.text.primary },
+            }}
+          >
+            {label}
+          </Typography>
+        ))}
+
+        <IconButton size="small" onClick={toggleTheme} sx={{ color: theme.palette.text.secondary, ml: 0.5 }}>
+          {themeMode === 'dark' ? <LightModeIcon sx={{ fontSize: 16 }} /> : <DarkModeIcon sx={{ fontSize: 16 }} />}
+        </IconButton>
+      </Box>
+    </Box>
   );
 };
 

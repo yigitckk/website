@@ -2,15 +2,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Material-UI imports for theming and layout
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline'; // Provides a baseline for CSS and applies theme colors to body
-import Box from '@mui/material/Box'; // A flexible layout component
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
 
-// Import your application components
 import NavBar from './components/NavBar';
-import HomePage from './pages/index'; // Assuming index.tsx in pages/ is your home page
-import About from './components/About'; // Keep for direct routing if needed, but HomePage will render it
+import HomePage from './pages/index';
 import Experience from './components/Experience';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
@@ -18,163 +15,95 @@ import Contact from './components/Contact';
 import Blog from './components/Blog';
 import MarkdownPage from './components/MarkdownPage';
 
-// Import your custom CSS (if you have any global styles not handled by MUI)
 import './styles/main.css';
 
 const App: React.FC = () => {
-  // Function to determine the initial theme mode
-  // It checks localStorage first, then the user's system preference
   const getInitialThemeMode = (): 'light' | 'dark' => {
     const savedMode = localStorage.getItem('themeMode');
     if (savedMode) {
       return savedMode as 'light' | 'dark';
     }
-    // Check if the user's system prefers dark mode
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return 'dark'; // Default to pitch dark Sovereign theme
   };
 
-  // State to hold the current theme mode ('light' or 'dark')
   const [mode, setMode] = useState<'light' | 'dark'>(getInitialThemeMode());
 
-  // useEffect to persist the theme mode in localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('themeMode', mode);
-  }, [mode]); // Dependency array: runs when 'mode' changes
+  }, [mode]);
 
-  // Function to toggle between light and dark mode
   const toggleThemeMode = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
-  // Memoized theme object creation
-  // useMemo prevents the theme object from being recreated on every render
-  // It only recreates when 'mode' changes
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
-          mode, // This property is crucial: it tells MUI to apply light or dark palette
+          mode,
           primary: {
-            main: mode === 'light' ? '#007bff' : '#82b1ff', // Lighter blue for dark mode for better visibility
-            contrastText: '#ffffff', // White text on primary buttons
+            main: mode === 'dark' ? '#38bdf8' : '#0284c7', // Electric Cyan
+            contrastText: '#000000',
           },
           secondary: {
-            main: mode === 'light' ? '#6c757d' : '#bbdefb', // Lighter grey/blue for dark mode
+            main: mode === 'dark' ? '#6366f1' : '#4f46e5', // Indigo Glow
           },
           background: {
-            default: mode === 'light' ? '#ffffff' : '#121212', // Much darker background for true dark mode
-            paper: mode === 'light' ? '#f8f9fa' : '#1e1e1e', // Slightly lighter than default for cards/drawers
+            default: mode === 'dark' ? '#09090b' : '#fafafa', // Pitch Black OLED
+            paper: mode === 'dark' ? '#121215' : '#ffffff', // Card surface
           },
           text: {
-            primary: mode === 'light' ? '#333333' : '#e0e0e0', // Slightly softer white for primary text
-            secondary: mode === 'light' ? '#666666' : '#b0b0b0', // Slightly softer grey for secondary text
+            primary: mode === 'dark' ? '#f4f4f5' : '#18181b', // Zinc White
+            secondary: mode === 'dark' ? '#a1a1aa' : '#71717a', // Zinc Gray
           },
-          divider: mode === 'light' ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.12)', // Themed dividers
+          divider: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
         },
         typography: {
-            // Apply the new font family globally
-            fontFamily: '"Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif',
-            // You can define other typography variants here (h1, h2, body1, etc.)
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        },
+        shape: {
+          borderRadius: 8,
         },
         components: {
-            // Global style overrides for specific Material-UI components
-            MuiButton: {
-                styleOverrides: {
-                    root: ({ theme }) => ({
-                        // Default text color for variant="text" buttons
-                        color: theme.palette.text.primary,
-                        '&:hover': {
-                            backgroundColor: theme.palette.action.hover, // MUI's default hover color
-                        },
-                    }),
-                },
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                textTransform: 'none',
+                borderRadius: 6,
+                fontWeight: 600,
+              },
             },
-            MuiDrawer: {
-                styleOverrides: {
-                    paper: ({ theme }) => ({
-                        backgroundColor: theme.palette.background.paper,
-                        color: theme.palette.text.primary,
-                    }),
-                },
-            },
-            MuiIconButton: {
-                styleOverrides: {
-                    root: ({ theme }) => ({
-                        color: theme.palette.text.primary,
-                    }),
-                },
-            },
-            MuiTypography: {
-                styleOverrides: {
-                    root: ({ theme }) => ({
-                        color: theme.palette.text.primary,
-                    }),
-                },
-            },
-            MuiListItem: {
-                styleOverrides: {
-                    root: ({ theme }) => ({
-                        // Default color for list items, can be inherited by ListItemText
-                    }),
-                },
-            },
-            MuiLink: {
-                styleOverrides: {
-                    root: ({ theme }) => ({
-                        color: theme.palette.primary.main, // Links use primary color
-                        textDecoration: 'none',
-                        '&:hover': {
-                            textDecoration: 'underline',
-                        },
-                    }),
-                },
-            },
+          },
         },
       }),
-    [mode], // Recreate theme only when 'mode' changes
+    [mode],
   );
 
   return (
-    // ThemeProvider makes the 'theme' object available to all MUI components
     <ThemeProvider theme={theme}>
-      {/* CssBaseline applies global CSS resets and sets body background/text colors based on theme */}
       <CssBaseline />
       <Router>
-        {/*
-          NavBar is rendered outside the main content Box because it's a fixed/permanent sidebar
-          Pass the toggleThemeMode function and current themeMode to NavBar
-        */}
         <NavBar toggleTheme={toggleThemeMode} themeMode={mode} />
-
-        {/*
-          Main content area that will display different pages via React Router.
-          It needs margin/padding to account for the fixed/permanent NavBar.
-        */}
         <Box
           component="main"
           sx={{
             maxWidth: 720,
             mx: 'auto',
-            px: { xs: 2, sm: 3 },
-            pt: '84px',
-            pb: 8,
+            px: { xs: 2.5, sm: 3 },
+            pt: '80px',
+            pb: 10,
             minHeight: '100vh',
             backgroundColor: 'background.default',
             color: 'text.primary',
           }}
         >
           <Routes>
-            {/* Correctly render HomePage for the root path */}
             <Route path="/" element={<HomePage />} />
-            {/* Other routes can remain as direct components if they don't have nested NavBars */}
             <Route path="/experience" element={<Experience />} />
             <Route path="/education" element={<Education />} />
             <Route path="/certifications" element={<Certifications />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
-            {/* Route for individual blog posts, assuming slug as parameter */}
             <Route path="/blog/:slug" element={<MarkdownPage />} />
           </Routes>
         </Box>

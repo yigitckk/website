@@ -1,12 +1,11 @@
 // src/pages/index.tsx
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Link as MuiLink } from '@mui/material';
+import { Box, Typography, Link as MuiLink, Card, CardContent, Chip } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import frontMatter from 'front-matter';
 
 import About from '../components/About';
-import EngineeringPrinciples from '../components/EngineeringPrinciples';
 import Projects from '../components/Projects';
 
 declare const require: {
@@ -28,7 +27,7 @@ interface Post {
   uploadDate: string;
 }
 
-const RecentPosts: React.FC = () => {
+const RecentWritingSection: React.FC = () => {
   const theme = useTheme();
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -55,8 +54,7 @@ const RecentPosts: React.FC = () => {
     ).then((results) => {
       const sorted = results
         .filter((p) => p.uploadDate)
-        .sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime())
-        .slice(0, 3);
+        .sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime());
       setPosts(sorted);
     });
   }, []);
@@ -64,64 +62,122 @@ const RecentPosts: React.FC = () => {
   if (posts.length === 0) return null;
 
   return (
-    <Box sx={{ mb: theme.spacing(6) }}>
-      <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', mb: theme.spacing(2) }}>
+    <Box id="writing" sx={{ mb: theme.spacing(8) }}>
+      <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', mb: theme.spacing(3) }}>
         <Typography
           variant="overline"
-          sx={{ color: theme.palette.text.secondary, letterSpacing: 2 }}
+          sx={{ color: theme.palette.text.secondary, letterSpacing: 2, fontWeight: 700 }}
         >
-          Recent Writing
+          Writing
         </Typography>
         <MuiLink
           component={RouterLink}
           to="/blog"
           sx={{ fontSize: '0.8rem', color: theme.palette.primary.main, fontFamily: 'monospace' }}
         >
-          All posts →
+          All posts ({posts.length}) →
         </MuiLink>
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(1.5) }}>
+      <Typography variant="body2" sx={{ color: theme.palette.text.secondary, mb: theme.spacing(3) }}>
+        Thoughts on backend architecture, local LLMs, and systems engineering.
+      </Typography>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(2) }}>
         {posts.map((post) => (
-          <Box
+          <Card
             key={post.slug}
+            elevation={0}
             sx={{
-              display: 'flex',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-              gap: theme.spacing(2),
-              p: 1.5,
-              borderRadius: 2,
               border: `1px solid ${theme.palette.divider}`,
               backgroundColor: theme.palette.background.paper,
+              borderRadius: 2,
               transition: 'all 0.2s ease',
               '&:hover': {
                 borderColor: theme.palette.primary.main,
-                boxShadow: '0 4px 12px rgba(56, 189, 248, 0.1)',
+                boxShadow: '0 4px 20px rgba(56, 189, 248, 0.08)',
+                transform: 'translateY(-1px)',
               },
             }}
           >
-            <MuiLink
-              component={RouterLink}
-              to={`/blog/${post.slug}`}
-              underline="none"
-              sx={{
-                color: theme.palette.text.primary,
-                fontSize: '0.95rem',
-                fontWeight: 600,
-                '&:hover': { color: theme.palette.primary.main },
-              }}
-            >
-              {post.title}
-            </MuiLink>
-            <Typography
-              variant="caption"
-              sx={{ color: theme.palette.text.secondary, flexShrink: 0, fontFamily: 'monospace' }}
-            >
-              {new Date(post.uploadDate).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
-            </Typography>
-          </Box>
+            <CardContent sx={{ p: theme.spacing(2.5), '&:last-child': { pb: theme.spacing(2.5) } }}>
+              <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
+                <MuiLink
+                  component={RouterLink}
+                  to={`/blog/${post.slug}`}
+                  underline="none"
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    color: theme.palette.text.primary,
+                    '&:hover': { color: theme.palette.primary.main },
+                  }}
+                >
+                  {post.title}
+                </MuiLink>
+
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Chip
+                    label="TR"
+                    size="small"
+                    sx={{
+                      fontFamily: 'monospace',
+                      fontSize: '0.65rem',
+                      height: 18,
+                      backgroundColor: 'transparent',
+                      border: `1px solid ${theme.palette.divider}`,
+                      color: theme.palette.text.secondary,
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}
+                  >
+                    {new Date(post.uploadDate).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')}
+                  </Typography>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
         ))}
+      </Box>
+    </Box>
+  );
+};
+
+const SovereignFooter: React.FC = () => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      component="footer"
+      sx={{
+        pt: theme.spacing(6),
+        pb: theme.spacing(4),
+        borderTop: `1px solid ${theme.palette.divider}`,
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: { xs: 'flex-start', sm: 'center' },
+        justifyContent: 'space-between',
+        gap: 2,
+      }}
+    >
+      <Box>
+        <Typography variant="body2" sx={{ fontWeight: 700, color: theme.palette.text.primary }}>
+          Yiğit Çelik
+        </Typography>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, display: 'block', mt: 0.5 }}>
+          Backend Systems & AI Architect · Industrial Engineering
+        </Typography>
+      </Box>
+
+      <Box sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
+          37.7749°N · 29.0875°E
+        </Typography>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block', mt: 0.25 }}>
+          MMXXVI · yigitc.dev
+        </Typography>
       </Box>
     </Box>
   );
@@ -131,9 +187,11 @@ const HomePage: React.FC = () => {
   return (
     <>
       <About />
-      <EngineeringPrinciples />
-      <Projects />
-      <RecentPosts />
+      <RecentWritingSection />
+      <Box id="projects">
+        <Projects />
+      </Box>
+      <SovereignFooter />
     </>
   );
 };
