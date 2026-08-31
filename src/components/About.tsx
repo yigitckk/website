@@ -32,7 +32,7 @@ const About: React.FC = () => {
             fontSize: { xs: '1rem', sm: '1.1rem' },
           }}
         >
-          Backend Engineer · Product Builder
+          Sovereign Systems & AI Engineer · Product Builder
         </Typography>
 
         <Typography
@@ -45,9 +45,8 @@ const About: React.FC = () => {
             mb: theme.spacing(2),
           }}
         >
-          I build backend systems from scratch and ship products I actually want to exist.
-          Currently working through a structured engineering path — auth services, job queues,
-          event stores — while learning how real production systems behave under load.
+          I build autonomous AI agent memory systems, local-first cinema engines, and sovereign backend infrastructure.
+          Industrial engineering background synthesizing Endüstri 5.0 systems thinking with high-taste visual aesthetic frameworks.
         </Typography>
 
         <Typography
@@ -94,7 +93,7 @@ const About: React.FC = () => {
           Current Stack
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={1}>
-          {['Python', 'FastAPI', 'PostgreSQL', 'TypeScript', 'React', 'Linux', 'nginx', 'Docker'].map((tech) => (
+          {['Python', 'FastAPI', 'PyTorch', 'C++', 'PostgreSQL', 'TypeScript', 'React', 'Linux', 'Docker', 'Graph RAG'].map((tech) => (
             <Chip
               key={tech}
               label={tech}

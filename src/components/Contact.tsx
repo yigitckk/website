@@ -27,7 +27,13 @@ const links = [
     handle: 'yigitopt',
   },
   {
-    label: 'Email',
+    label: 'Academic Email',
+    href: 'mailto:ycelik221@posta.pau.edu.tr',
+    icon: <EmailIcon fontSize="small" />,
+    handle: 'ycelik221@posta.pau.edu.tr',
+  },
+  {
+    label: 'Personal Email',
     href: 'mailto:yigitcelik798@gmail.com',
     icon: <EmailIcon fontSize="small" />,
     handle: 'yigitcelik798@gmail.com',

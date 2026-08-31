@@ -13,6 +13,38 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: 'MINTIKA Cinema OS',
+    description:
+      'Culturally-driven Cinema OS featuring 35mm thermal receipts, film narratology vector engines, and P2P co-presence social architecture.',
+    tags: ['Flutter', 'SQLite', 'Thermal Receipt Engine', 'On-Device Only'],
+    url: 'https://mintika.dev',
+    status: 'building',
+  },
+  {
+    name: 'Hayat OS Sovereign Intelligence Hub',
+    description:
+      'Privacy-first command center running Ollama/Qwen2.5 local LLMs, Graph RAG pipelines, n8n/Miniflux fetchers, and remote SSH watchdogs.',
+    tags: ['Python', 'FastAPI', 'Qwen2.5', 'Graph RAG', 'Docker'],
+    url: 'https://github.com/yigitckk/hayat-os',
+    status: 'live',
+  },
+  {
+    name: 'Sovereign Cloud Gaming Hub',
+    description:
+      'Sunshine/RPCS3/Wine hardware-accelerated 60 FPS streaming server provisioned on dedicated sovereign Linux NVMe storage partitions.',
+    tags: ['Linux Kernel', 'Sunshine', 'WebRTC', 'Wine'],
+    url: 'https://github.com/yigitckk/cloud-gaming-hub',
+    status: 'live',
+  },
+  {
+    name: 'cinemaclust & sportlytics (PyPI)',
+    description:
+      'Open-source Python packages for unsupervised visual film clustering and high-density WRC/Football/F1 telemetry analytics.',
+    tags: ['Python', 'PyPI', 'Scikit-Learn', 'Telemetry'],
+    url: 'https://pypi.org',
+    status: 'live',
+  },
+  {
     name: 'plotpoint.space',
     description:
       'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking. Built with FastAPI + React Native, deployed on VPS.',
