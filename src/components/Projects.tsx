@@ -8,7 +8,7 @@ interface Project {
   description: string;
   tags: string[];
   url?: string;
-  status: 'live' | 'building' | 'done';
+  status: 'live' | 'building' | 'done' | 'archived';
 }
 
 const projects: Project[] = [
@@ -21,10 +21,10 @@ const projects: Project[] = [
     status: 'building',
   },
   {
-    name: 'Hayat OS Sovereign Intelligence Hub',
+    name: 'Sentinel Sovereign OS & Agent Core',
     description:
-      'Privacy-first command center running Ollama/Qwen2.5 local LLMs, Graph RAG pipelines, n8n/Miniflux fetchers, and remote SSH watchdogs.',
-    tags: ['Python', 'FastAPI', 'Qwen2.5', 'Graph RAG', 'Docker'],
+      'Privacy-first local intelligence command center running Ollama/Qwen2.5 LLMs, Graph RAG memory pipelines, n8n OSINT fetchers, and automated Obsidian knowledge graphs.',
+    tags: ['Python', 'FastAPI', 'Qwen2.5', 'Graph RAG', 'Linux systemd'],
     url: 'https://github.com/yigitckk/hayat-os',
     status: 'live',
   },
@@ -37,26 +37,19 @@ const projects: Project[] = [
     status: 'live',
   },
   {
-    name: 'cinemaclust & sportlytics (PyPI)',
-    description:
-      'Open-source Python packages for unsupervised visual film clustering and high-density WRC/Football/F1 telemetry analytics.',
-    tags: ['Python', 'PyPI', 'Scikit-Learn', 'Telemetry'],
-    url: 'https://pypi.org',
-    status: 'live',
-  },
-  {
     name: 'plotpoint.space',
     description:
-      'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking. Built with FastAPI + React Native, deployed on VPS.',
+      'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking.',
     tags: ['FastAPI', 'React Native', 'WebSocket', 'TypeScript'],
     url: 'https://plotpoint.space',
-    status: 'live',
+    status: 'archived',
   },
   {
     name: 'Auth Service',
     description:
       'Production-grade standalone auth system. JWT issue/refresh/revoke, rate limiting, session management, Testcontainers test suite, VPS deployed with systemd + nginx + TLS.',
     tags: ['FastAPI', 'PostgreSQL', 'JWT', 'Alembic'],
+    url: 'https://github.com/yigitckk/auth-service',
     status: 'done',
   },
   {
@@ -64,6 +57,7 @@ const projects: Project[] = [
     description:
       'PostgreSQL-backed async task queue with no Redis dependency. Push/pop/retry logic, dead-letter queue, structured logging. Built from scratch to understand queue semantics.',
     tags: ['FastAPI', 'PostgreSQL', 'Python'],
+    url: 'https://github.com/yigitckk/job-queue',
     status: 'done',
   },
   {
@@ -71,6 +65,7 @@ const projects: Project[] = [
     description:
       'Event store with replay, snapshot, and idempotency. The foundation for event sourcing patterns — and for any stateful product that needs audit trails or time-travel.',
     tags: ['FastAPI', 'PostgreSQL', 'Event Sourcing'],
+    url: 'https://github.com/yigitckk/event-log',
     status: 'building',
   },
 ];
@@ -79,12 +74,14 @@ const statusColors: Record<Project['status'], string> = {
   live: '#22c55e',
   building: '#f59e0b',
   done: '#64748b',
+  archived: '#94a3b8',
 };
 
 const statusLabels: Record<Project['status'], string> = {
   live: 'Live',
   building: 'Building',
   done: 'Done',
+  archived: 'Archived',
 };
 
 const Projects: React.FC = () => {

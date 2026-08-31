@@ -45,40 +45,39 @@ const About: React.FC = () => {
           variant="h6"
           sx={{
             color: theme.palette.primary.main,
-            fontWeight: 400,
+            fontWeight: 500,
             mb: theme.spacing(3),
             fontSize: { xs: '1rem', sm: '1.1rem' },
           }}
         >
-          Sovereign Systems & AI Engineer · Product Builder
+          Systems & AI Architect · Industrial Engineer
         </Typography>
 
         <Typography
           variant="body1"
           sx={{
             color: theme.palette.text.primary,
-            lineHeight: 1.9,
+            lineHeight: 1.8,
             fontSize: { xs: '0.95rem', sm: '1rem' },
             maxWidth: '680px',
             mb: theme.spacing(2),
           }}
         >
-          I build autonomous AI agent memory systems, local-first cinema engines, and sovereign backend infrastructure.
-          Industrial engineering background synthesizing Endüstri 5.0 systems thinking with high-taste visual aesthetic frameworks.
+          I design autonomous AI agent memory architectures, local-first intelligence hubs, and resilient backend systems.
+          Background in Industrial Engineering (PAU) synthesizing Endüstri 5.0 systems optimization with geopolitical OSINT analytics and high-taste digital product design.
         </Typography>
 
         <Typography
           variant="body1"
           sx={{
             color: theme.palette.text.secondary,
-            lineHeight: 1.9,
+            lineHeight: 1.8,
             fontSize: { xs: '0.95rem', sm: '1rem' },
             maxWidth: '680px',
             mb: theme.spacing(4),
           }}
         >
-          I'm building toward a life where engineering skill, indie products, and genuine
-          curiosity all compound together. Global in scope. Specific in taste.
+          Building toward a lifelong practice where sovereign engineering skill, local LLM infrastructure, and personal agency compound together. Global in scope. Specific in taste.
         </Typography>
 
         <Stack direction="row" spacing={2} flexWrap="wrap" gap={1}>
@@ -111,7 +110,7 @@ const About: React.FC = () => {
           Current Stack
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={1}>
-          {['Python', 'FastAPI', 'PyTorch', 'C++', 'PostgreSQL', 'TypeScript', 'React', 'Linux', 'Docker', 'Graph RAG'].map((tech) => (
+          {['Python', 'FastAPI', 'PyTorch', 'C++', 'PostgreSQL', 'TypeScript', 'React', 'Linux (Kernel/systemd)', 'Docker', 'Graph RAG'].map((tech) => (
             <Chip
               key={tech}
               label={tech}
@@ -137,9 +136,9 @@ const About: React.FC = () => {
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(1.5) }}>
           {[
-            { label: 'Backend Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
-            { label: 'Data Engineering', status: 'next', note: 'Pipelines · dbt · Airflow' },
-            { label: 'ML Engineering', status: 'later', note: 'Feature stores · Model serving · not notebooks' },
+            { label: 'Backend & Systems Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
+            { label: 'Sovereign AI & Agent Architecture', status: 'active', note: 'Local LLMs · Graph RAG · Memory Store' },
+            { label: 'Data & OSINT Engineering', status: 'next', note: 'Pipelines · Geopolitical Feeds · Obsidian Knowledge Vault' },
           ].map(({ label, status, note }) => (
             <Box key={label} sx={{ display: 'flex', alignItems: 'center', gap: theme.spacing(1.5) }}>
               <Box
