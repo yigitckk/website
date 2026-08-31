@@ -15,7 +15,7 @@ interface NavBarProps {
 const navItems = [
   { to: '/blog', label: 'Writing' },
   { to: '/#projects', label: 'Projects' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/#contact', label: 'Contact' },
 ];
 
 const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
 
   const isActive = (to: string) => {
     if (to === '/blog') return location.pathname.startsWith('/blog');
-    if (to === '/contact') return location.pathname === '/contact';
+    if (to === '/#contact') return location.hash === '#contact';
     if (to === '/#projects') return location.hash === '#projects';
     return false;
   };
@@ -42,7 +42,7 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         px: { xs: 2.5, sm: 4 },
-        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(10, 11, 13, 0.88)' : 'rgba(255, 255, 255, 0.88)',
+        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 15, 20, 0.88)' : 'rgba(255, 255, 255, 0.88)',
         backdropFilter: 'blur(12px)',
         borderBottom: `1px solid ${theme.palette.divider}`,
         zIndex: theme.zIndex.appBar,

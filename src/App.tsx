@@ -23,7 +23,7 @@ const App: React.FC = () => {
     if (savedMode) {
       return savedMode as 'light' | 'dark';
     }
-    return 'dark'; // Default to pitch dark Sovereign theme
+    return 'dark';
   };
 
   const [mode, setMode] = useState<'light' | 'dark'>(getInitialThemeMode());
@@ -42,19 +42,19 @@ const App: React.FC = () => {
         palette: {
           mode,
           primary: {
-            main: mode === 'dark' ? '#38bdf8' : '#0284c7', // Electric Cyan
+            main: mode === 'dark' ? '#f59e0b' : '#d97706', // Warm Copper Amber / Gold
             contrastText: '#000000',
           },
           secondary: {
-            main: mode === 'dark' ? '#6366f1' : '#4f46e5', // Indigo Glow
+            main: mode === 'dark' ? '#38bdf8' : '#0284c7', // Sky Blue Accent
           },
           background: {
-            default: mode === 'dark' ? '#09090b' : '#fafafa', // Pitch Black OLED
-            paper: mode === 'dark' ? '#121215' : '#ffffff', // Card surface
+            default: mode === 'dark' ? '#0d0f14' : '#f8fafc', // Rich Deep Slate Charcoal (Not cold pitch black)
+            paper: mode === 'dark' ? '#141822' : '#ffffff', // Card surface
           },
           text: {
-            primary: mode === 'dark' ? '#f4f4f5' : '#18181b', // Zinc White
-            secondary: mode === 'dark' ? '#a1a1aa' : '#71717a', // Zinc Gray
+            primary: mode === 'dark' ? '#f8fafc' : '#0f172a', // Slate Warm White
+            secondary: mode === 'dark' ? '#94a3b8' : '#64748b', // Muted Slate Silver
           },
           divider: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
         },
@@ -93,7 +93,7 @@ const App: React.FC = () => {
             pt: '80px',
             pb: 10,
             minHeight: '100vh',
-            backgroundColor: 'background.default',
+            backgroundColor: 'transparent', // Inherit body radial gradient
             color: 'text.primary',
           }}
         >
