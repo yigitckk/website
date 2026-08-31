@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAMGA / SIGIL LABS — Dijital Monogram, Sticker & Amblem Jeneratörü</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0d0f14;
+      --surface-card: #141822;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --accent-amber: #f59e0b;
+      --accent-amber-glow: rgba(245, 158, 11, 0.25);
+      --accent-cyan: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #181d2a 0%, #0d0f14 80%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    /* Header Bar */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-hairline);
+    }
+    .brand { display: flex; align-items: center; gap: 0.75rem; font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.3rem; letter-spacing: 2px; color: #fff; }
+    .badge {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-amber);
+      padding: 0.3rem 0.75rem; border-radius: 999px; border: 1px solid rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.06);
+    }
+
+    /* Hero Headline */
+    .hero { text-align: center; max-width: 760px; margin: 0 auto 4rem auto; }
+    .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-amber); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; display: block; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero-desc { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; }
+
+    /* Studio Layout */
+    .studio-grid { display: grid; grid-template-columns: 360px 1fr; gap: 2rem; align-items: start; }
+    @media (max-width: 880px) { .studio-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .form-group { margin-bottom: 1.5rem; }
+    label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+    input[type="text"], select {
+      width: 100%; background: #0b0c10; border: 1px solid var(--border-hairline);
+      color: var(--text-main); font-family: 'JetBrains Mono', monospace; padding: 0.75rem 1rem;
+      border-radius: 8px; font-size: 0.92rem; outline: none; transition: border 0.2s ease;
+    }
+    input[type="text"]:focus { border-color: var(--accent-amber); box-shadow: 0 0 12px var(--accent-amber-glow); }
+
+    .canvas-viewport {
+      width: 100%; height: 420px; background: #07080b; border: 1px solid var(--border-hairline);
+      border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+    }
+
+    .btn-free {
+      width: 100%; background: linear-gradient(135deg, var(--accent-amber), #d97706);
+      border: none; border-radius: 8px; padding: 0.9rem; color: #000; font-weight: 700;
+      font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-bottom: 0.75rem;
+    }
+    .btn-free:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); }
+
+    .btn-pro {
+      width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-hairline);
+      border-radius: 8px; padding: 0.8rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; text-align: center;
+    }
+    .btn-pro:hover { background: rgba(56, 189, 248, 0.1); border-color: var(--accent-cyan); }
+
+    /* Use Cases Grid */
+    .use-cases-sec { margin-top: 5rem; border-top: 1px solid var(--border-hairline); padding-top: 3.5rem; }
+    .uc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .uc-card { background: var(--surface-card); border: 1px solid var(--border-hairline); border-radius: 12px; padding: 1.5rem; }
+    .uc-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+    .uc-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .uc-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+    footer {
+      margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--border-hairline);
+      display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; color: #475569;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <rect x="2" y="2" width="36" height="36" rx="4" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M 12 12 L 20 20 L 28 12 M 20 20 L 20 28" stroke="#f59e0b" stroke-width="2"/>
+        </svg>
+        <span>TAMGA LABS</span>
+      </div>
+      <span class="badge">Sovereign Monogram Engine</span>
+    </header>
+
+    <div class="hero">
+      <span class="hero-tag">Sıfır Sürtünme · Sonsuz Geometri</span>
+      <h1 class="hero-title">Kendi Dijital Amblemini ve İmzalanı Yarat</h1>
+      <p class="hero-desc">Tarihsel Türk tamgaları, Selçuklu 8-köşeli yıldızı ve 35mm minimalizmi ile özgün monogramını, sticker şablonunu veya dövme vektörünü saniyeler içinde üret.</p>
+    </div>
+
+    <div class="studio-grid">
+      <!-- Left Controls Panel -->
+      <div class="panel">
+        <h3 style="font-size: 1.05rem; margin-bottom: 1.5rem; color: var(--accent-amber); font-family: 'JetBrains Mono', monospace;">Studio Controls</h3>
+        
+        <div class="form-group">
+          <label>Monogram Harfleri</label>
+          <input type="text" id="monoText" value="YÇ" maxlength="3" oninput="drawTamga()">
+        </div>
+
+        <div class="form-group">
+          <label>Tarihsel Arketip Kütüphanesi</label>
+          <select id="motifType" onchange="drawTamga()">
+            <option value="kayi">24 Oğuz Boyu — Kayı Tamgası</option>
+            <option value="kinik">24 Oğuz Boyu — Kınık Tamgası</option>
+            <option value="selcuklu">Selçuklu 8-Köşeli Geometrik Yıldız</option>
+            <option value="gokturk">Göktürk Börü & Runik Hat</option>
+            <option value="hitit">Hitit Güneş Kursu & Anatolian Motifs</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Çerçeve & Görsel Format</label>
+          <select id="borderStyle" onchange="drawTamga()">
+            <option value="sticker">Die-Cut 3px Beyaz Sticker (WhatsApp/Telegram/Laptop)</option>
+            <option value="35mm">35mm Diyafram & Fiş Izgarası</option>
+            <option value="minimal">Minimal Linework (Dövme Şablonu PDF)</option>
+          </select>
+        </div>
+
+        <button class="btn-free" onclick="alert('⚡ Sosyal Medya PNG & Sticker İndirildi! (Sıfır Ücret)')">Sosyal Medya PNG İndir (Ücretsiz)</button>
+        <button class="btn-pro" onclick="alert('🔒 PRO VEKTÖR SVG / DXF PAYWALL ($5 Tek Seferlik veya Pro Abonelik)')">PRO 4K SVG / DXF İndir ($5)</button>
+      </div>
+
+      <!-- Right Interactive Canvas Viewport -->
+      <div class="panel" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="canvas-viewport" id="viewport">
+          <svg id="tamgaCanvas" width="240" height="240" viewBox="0 0 100 100" fill="none">
+            <!-- Dynamic SVG content -->
+          </svg>
+        </div>
+        <div style="margin-top: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+          ◆ Live Vector Canvas // Dynamic Geometry Engine Active
+        </div>
+      </div>
+    </div>
+
+    <!-- Use Cases Section -->
+    <div class="use-cases-sec">
+      <span class="hero-tag" style="text-align: center;">KULLANIM ALANLARI</span>
+      <h2 style="font-family: 'Cinzel', serif; font-size: 2.2rem; text-align: center; color: #fff; margin-top: 0.5rem;">Aynı jeneratör, dört farklı alan</h2>
+      
+      <div class="uc-grid">
+        <div class="uc-card">
+          <div class="uc-icon">✒️</div>
+          <div class="uc-title">Dövme Şablonu</div>
+          <div class="uc-desc">Vücut sanatına uygun, minimalist linework yüksek kontrastlı dövme stensil çıktısı.</div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-icon">🏷️</div>
+          <div class="uc-title">Sticker & Etiket</div>
+          <div class="uc-desc">WhatsApp, Telegram, Discord ve laptop kapağı yapıştırması için die-cut şeffaf etiketler.</div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-icon">🎮</div>
+          <div class="uc-title">Klan & Avatarlar</div>
+          <div class="uc-desc">Esports takımları, Twitch yayıncıları ve klanlar için modern birlik bayrakları ve amblemleri.</div>
+        </div>
+
+        <div class="uc-card">
+          <div class="uc-icon">💼</div>
+          <div class="uc-title">Kişisel Marka</div>
+          <div class="uc-desc">Yazılımcılar ve geliştiriciler için Twitter/X, GitHub ve kişisel portfolio mühür simgesi.</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>TAMGA OS / SIGIL LABS · otonom monogram ve amblem jeneratörü</span>
+      <span>studio@tamga.studio · 2026</span>
+    </footer>
+  </div>
+
+  <script>
+    function drawTamga() {
+      const text = document.getElementById('monoText').value || 'YÇ';
+      const border = document.getElementById('borderStyle').value;
+      const svg = document.getElementById('tamgaCanvas');
+      
+      let strokeColor = "#f59e0b";
+      let filterStyle = border === 'sticker' ? 'style="filter: drop-shadow(0 0 16px rgba(255,255,255,0.3))"' : '';
+
+      svg.innerHTML = `
+        <g ${filterStyle}>
+          <rect x="5" y="5" width="90" height="90" rx="10" stroke="${strokeColor}" stroke-width="1.8" />
+          <path d="M 5 22 L 22 22 M 22 5 L 22 22" stroke="${strokeColor}" stroke-width="1.5"/>
+          <path d="M 95 22 L 78 22 M 78 5 L 78 22" stroke="${strokeColor}" stroke-width="1.5"/>
+          <path d="M 5 78 L 22 78 M 22 95 L 22 78" stroke="${strokeColor}" stroke-width="1.5"/>
+          <path d="M 95 78 L 78 78 M 78 95 L 78 78" stroke="${strokeColor}" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="34" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"/>
+          <text x="50" y="59" font-family="'JetBrains Mono', monospace" font-weight="bold" font-size="26" fill="${strokeColor}" text-anchor="middle">${text}</text>
+        </g>
+      `;
+    }
+
+    drawTamga();
+  </script>
+</body>
+</html>

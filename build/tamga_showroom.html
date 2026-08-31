@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MINTIKA v0.1.0 & TAMGA OS — Visual UI/UX Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0d0f14;
+      --surface-card: #141822;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --accent-amber: #f59e0b;
+      --accent-cyan: #38bdf8;
+      --accent-red: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #171b26 0%, #0d0f14 75%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-hairline);
+    }
+    .brand { display: flex; align-items: center; gap: 0.75rem; font-weight: 800; font-size: 1.2rem; }
+    .badge {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent-amber);
+      padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; }
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-hairline);
+      color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+      padding: 0.65rem 1.25rem; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(245, 158, 11, 0.12); color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 340px 1fr; gap: 2rem; }
+    @media (max-width: 850px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 1.5rem;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+    label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
+    input[type="text"], select {
+      width: 100%; background: #0b0c10; border: 1px solid var(--border-hairline);
+      color: var(--text-main); font-family: 'JetBrains Mono', monospace; padding: 0.65rem 0.85rem;
+      border-radius: 8px; font-size: 0.9rem; outline: none;
+    }
+
+    /* MINTIKA 11 REÇETE CARDS */
+    .recete-card {
+      background: #11141d; border: 1px solid var(--border-hairline); border-radius: 12px;
+      padding: 1.25rem; font-family: 'JetBrains Mono', monospace; position: relative;
+    }
+    .recete-tag {
+      font-size: 0.65rem; padding: 0.2rem 0.5rem; background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-amber); border-radius: 4px; display: inline-block; margin-bottom: 0.5rem;
+    }
+    .recete-title { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 0.3rem; }
+    .recete-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* FILM STRIP REEL */
+    .film-strip-reel {
+      display: flex; gap: 8px; background: #000; padding: 12px; border-radius: 8px;
+      border: 1px stroke #333; overflow-x: auto; margin-top: 1rem;
+    }
+    .strip-frame {
+      width: 70px; height: 90px; background: #1a1e29; border: 1px solid #333; flex-shrink: 0;
+      display: flex; flex-direction: column; justify-content: space-between; padding: 4px;
+      font-family: monospace; font-size: 9px; color: #aaa; text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <rect x="2" y="2" width="36" height="36" rx="4" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M 12 12 L 20 20 L 28 12 M 20 20 L 20 28" stroke="#f59e0b" stroke-width="2"/>
+        </svg>
+        <span>MINTIKA v0.1.0 & TAMGA OS Studio</span>
+      </div>
+      <span class="badge">Sovereign Ecosystem Studio</span>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchView('mintika')">🎬 MINTIKA v0.1.0 — Film Şeridi & 11 Reçete Baskı</button>
+      <button class="tab-btn" onclick="switchView('tamga')">🏛️ TAMGA OS — Vektörel Damga & Sticker Studio</button>
+    </div>
+
+    <!-- MINTIKA VIEW -->
+    <div id="mintikaView" class="grid-2">
+      <div class="panel">
+        <h3 style="font-size: 1rem; margin-bottom: 1.25rem; color: var(--accent-amber);">MINTIKA v0.1.0 (Yerel & Çevrimdışı)</h3>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+          ◆ Cihazda SQLite depolama.<br>
+          ◆ 0 HTTP Ağ Çağrısı (İnternetsiz).<br>
+          ◆ 24fps Film Şeridi (96 kare = 4.0 sn).<br>
+          ◆ Vektörel Halftone Matbaa Baskısı.
+        </div>
+        <div class="form-group">
+          <label>Seçili Matbaa Reçetesi</label>
+          <select id="receteSelect" onchange="updateRecete()">
+            <option value="sokak">1. Sokak Afişi (Türk litografi 1955-80)</option>
+            <option value="kunye">2. Künye Bloğu (ABD One-Sheet %26 Bant)</option>
+            <option value="kesik">3. Kesik Kağıt Siluet (Orta Yüzyıl 2 Mürekkep)</option>
+            <option value="guaj">4. Guaj Soyutlama (Düz Renk Blokları)</option>
+            <option value="sekizli">5. Sekizli Set (Lobik Kart Seti)</option>
+            <option value="alti">6. Altı Sütun (Gazete/Dergi İlanı)</option>
+            <option value="ikimuk">7. İki Mürekkep (Duotone Litografi)</option>
+            <option value="diyagonal">8. Diyagonal Montaj (Açılı Tipografi)</option>
+            <option value="ayak">9. Ayak-Kare (Şerit Metraj Numarası)</option>
+            <option value="gerisayım">10. Geri Sayım (35mm Başlama Kasedi)</option>
+            <option value="kamera">11. Kamera Raporu (Teknik Banyo Kartı)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="recete-card" id="receteDisplay">
+          <span class="recete-tag" id="rTag">REÇETE #1</span>
+          <div class="recete-title" id="rTitle">SOKAK AFİŞİ</div>
+          <div class="recete-desc" id="rDesc">
+            Türk litografi sinema afişi · 1955-80 · 68×100 cm<br>
+            4 düz spot mürekkep + kâğıt + kontur baskı matbaa süreci.
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <label style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">24fps Film Şeridi Önizlemesi (35mm Perforasyon Hücreleri)</label>
+          <div class="film-strip-reel">
+            <div class="strip-frame"><span>#001</span><span>35mm</span><span>MANİSA</span></div>
+            <div class="strip-frame"><span>#002</span><span>DCP</span><span>İZMİR</span></div>
+            <div class="strip-frame"><span>#003</span><span>HOME</span><span>EVI</span></div>
+            <div class="strip-frame"><span>#004</span><span>4K</span><span>FESTIVAL</span></div>
+            <div class="strip-frame"><span>#005</span><span>35mm</span><span>OUTDOOR</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAMGA VIEW -->
+    <div id="tamgaView" class="grid-2" style="display: none;">
+      <div class="panel">
+        <h3 style="font-size: 1rem; margin-bottom: 1.25rem; color: var(--accent-amber);">TAMGA Studio Controls</h3>
+        <div class="form-group">
+          <label>Monogram / Baş Harfler</label>
+          <input type="text" id="monogramText" value="YÇ" oninput="renderSigil()">
+        </div>
+        <div class="form-group">
+          <label>Arketip Motif</label>
+          <select id="tamgaType" onchange="renderSigil()">
+            <option value="kayi">Oğuz Kayı Boyu Tamgası</option>
+            <option value="kinik">Oğuz Kınık Boyu Tamgası</option>
+            <option value="selcuklu">Selçuklu 8-Köşeli Yıldız</option>
+            <option value="gokturk">Göktürk Börü & Runik Hat</option>
+            <option value="hitit">Hitit Güneş Kursu</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="width: 100%; height: 260px; background: #07080a; border: 1px solid var(--border-hairline); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+          <svg id="sigilSvg" width="200" height="200" viewBox="0 0 100 100" fill="none">
+            <!-- Dynamic SVG content -->
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const receteler = {
+      sokak: { tag: "REÇETE #1", title: "SOKAK AFİŞİ", desc: "Türk litografi sinema afişi · 1955-80 · 68×100 cm<br>4 düz spot mürekkep + kâğıt + kontur baskı süreci." },
+      kunye: { tag: "REÇETE #2", title: "KÜNYE BLOĞU", desc: "ABD one-sheet · 1970– · 27×40 in<br>Künye bandı afişin %26'sını kaplayan matbaa dizilimi." },
+      kesik: { tag: "REÇETE #3", title: "KESİK KAĞIT SİLUT", desc: "Orta yüzyıl modernist afiş · 1955-65 · insert 14×36 in<br>Tam 2 mürekkep + kâğıt baskı süreci." },
+      guaj: { tag: "REÇETE #4", title: "GUAJ SOYUTLAMA", desc: "Düz renk blokları ve kalın kontur tipografisi." },
+      sekizli: { tag: "REÇETE #5", title: "SEKİZLİ SET", desc: "Lobik kart seti kaset ızgarası." },
+      alti: { tag: "REÇETE #6", title: "ALTI SÜTUN", desc: "Sıkıştırılmış gazete ve dergi ilan dizilimi." },
+      ikimuk: { tag: "REÇETE #7", title: "İKİ MÜREKKEP", desc: "Duotone yüksek kontrastlı litografi baskı." },
+      diyagonal: { tag: "REÇETE #8", title: "DİYAGONAL MONTAJ", desc: "Açılı sinematik tipografi kurgusu." },
+      ayak: { tag: "REÇETE #9", title: "AYAK-KARE", desc: "Film şeridi alt metraj ve kare numarası." },
+      gerisayım: { tag: "REÇETE #10", title: "GERİ SAYIM", desc: "35mm başlama kasedi daire ve geri sayım numarası." },
+      kamera: { tag: "REÇETE #11", title: "KAMERA RAPORU", desc: "Negatif banyo ve kaset teknik rapor kartı." }
+    };
+
+    function switchView(view) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (view === 'mintika') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('mintikaView').style.display = 'grid';
+        document.getElementById('tamgaView').style.display = 'none';
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('mintikaView').style.display = 'none';
+        document.getElementById('tamgaView').style.display = 'grid';
+      }
+    }
+
+    function updateRecete() {
+      const val = document.getElementById('receteSelect').value;
+      const data = receteler[val];
+      document.getElementById('rTag').innerText = data.tag;
+      document.getElementById('rTitle').innerText = data.title;
+      document.getElementById('rDesc').innerHTML = data.desc;
+    }
+
+    function renderSigil() {
+      const mono = document.getElementById('monogramText').value || 'YÇ';
+      const svg = document.getElementById('sigilSvg');
+      svg.innerHTML = `
+        <rect x="5" y="5" width="90" height="90" rx="8" stroke="#f59e0b" stroke-width="1.5" />
+        <path d="M 5 20 L 15 20 M 20 5 L 20 15" stroke="#f59e0b" stroke-width="1.5"/>
+        <path d="M 95 20 L 85 20 M 80 5 L 80 15" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="32" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="50" y="58" font-family="monospace" font-weight="bold" font-size="26" fill="#f59e0b" text-anchor="middle">${mono}</text>
+      `;
+    }
+
+    renderSigil();
+  </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yiğit's Sovereign Self-Hosted Stack — UI/UX Redesign Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #08090c;
+      --surface-card: #11131a;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --accent-amber: #f59e0b;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+
+    /* Top Nav */
+    header {
+      background: #0d0e14; border-bottom: 1px solid var(--border-hairline);
+      padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand { font-weight: 800; font-size: 1.2rem; color: #fff; display: flex; align-items: center; gap: 0.75rem; }
+    .badge-count {
+      background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 999px;
+    }
+
+    /* Layout Grid */
+    .app-layout { display: grid; grid-template-columns: 320px 1fr; flex: 1; min-height: calc(100vh - 70px); }
+    @media (max-width: 900px) { .app-layout { grid-template-columns: 1fr; } }
+
+    /* Left Sidebar */
+    .sidebar {
+      background: #0a0b0f; border-right: 1px solid var(--border-hairline);
+      padding: 1.5rem 1rem; overflow-y: auto;
+    }
+    .service-btn {
+      display: flex; flex-direction: column; gap: 0.25rem;
+      padding: 0.85rem 1rem; border-radius: 10px; cursor: pointer; margin-bottom: 0.6rem;
+      border: 1px solid transparent; background: transparent; transition: all 0.2s ease;
+      text-align: left; width: 100%;
+    }
+    .service-btn:hover, .service-btn.active {
+      background: #141722; border-color: rgba(255, 255, 255, 0.12);
+    }
+    .service-btn.active { border-left: 3px solid var(--accent-amber); }
+    .service-title { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .service-sub { font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+    /* Main Content Area */
+    .main-content { padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at 50% 0%, #121520 0%, #08090c 80%); }
+
+    .card {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .redesign-stage {
+      width: 100%; min-height: 380px; background: #050608; border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 2rem; margin-top: 1.5rem; display: flex;
+      flex-direction: column; align-items: center; justify-content: center; position: relative;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 40 40" fill="none">
+        <rect x="2" y="2" width="36" height="36" rx="6" stroke="#f59e0b" stroke-width="2"/>
+        <path d="M 12 20 L 28 20 M 20 12 L 20 28" stroke="#38bdf8" stroke-width="2"/>
+      </svg>
+      <span>YİĞİT'S SELF-HOSTED STACK — UI/UX REDESIGN HUB</span>
+    </div>
+    <span class="badge-count">8 Sovereign Services</span>
+  </header>
+
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main-content">
+      <div class="card">
+        <h1 id="serviceName" style="font-size: 2rem; font-weight: 800; color: #fff;">Hayat OS & Glance Komuta Tablosu</h1>
+        <p id="serviceDesc" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-amber); margin-top: 0.5rem;"></p>
+        
+        <div style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;" id="serviceDetails"></div>
+
+        <div class="redesign-stage" id="stage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const services = [
+      {
+        id: 1, name: "🏛️ Hayat OS & Glance", sub: "Local Ollama · Glance YML · 14-Day Motor Windows",
+        desc: "Calm Tech Obsidian Command Hub — Yön ve Son Teslim Kapıları",
+        details: "Hantal metrik göstergeleri yerine, 14 günlük son teslim kapılarını (Erasmus, İME Stajı, SQL Karar Günleri) ve yerel motor durumunu gösteren asgari, sessiz 35mm izleme göstergeleri.",
+        ui: `<div style="background:#08090c; border:1px stroke #f59e0b; border-radius:14px; padding:2rem; width:100%; max-width:480px; font-family:'JetBrains Mono', monospace; color:#fff;">
+              <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.75rem; margin-bottom:1rem;">
+                <span style="color:#f59e0b; font-weight:bold;">HAYAT OS // KOMUTA TABLOSU</span>
+                <span style="color:#10b981;">● MOTOR ACTIVE</span>
+              </div>
+              <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.4rem;">→ 12 Gün: Ölüm-Koşulu SQL Karar Günü</div>
+              <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.4rem;">→ 14 Gün: EMAS İME Staj Başlangıcı (Manisa)</div>
+              <div style="font-size:0.85rem; color:#94a3b8;">→ 161 Gün: Nova FCT Erasmus Başlangıcı (Portekiz)</div>
+            </div>`
+      },
+      {
+        id: 2, name: "📰 Miniflux & RSS-Bridge", sub: "n8n · Local Ollama Summarizer · RSS Ingestion",
+        desc: "High-Density Editorial Monospace Reader — Gazete Tipografisi",
+        details: "Sosyal ağ gürültüsü ve hantal kartlar yerine, yüksek yoğunluklu gazete dizilimi. Sıfır reklam, doğrudan kaynak atfı ve yerel Ollama ile anında özetleme.",
+        ui: `<div style="background:#0f1117; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1.75rem; width:100%; max-width:480px; font-family:'JetBrains Mono', monospace; color:#e2e8f0;">
+              <div style="font-size:0.75rem; color:#d97706; margin-bottom:0.4rem;">GEOPOLITICAL DIGEST · MINIFLUX</div>
+              <h3 style="font-size:1.1rem; font-family:serif; color:#fff; margin-bottom:0.5rem;">Sovereign Infrastructure in 2026: Local-First Systems</h3>
+              <p style="font-size:0.8rem; color:#94a3b8;">2 min read · Ollama Summary Ready · Source: HackerNews</p>
+            </div>`
+      },
+      {
+        id: 3, name: "🎬 TubeArchivist & Cobalt", sub: "Local Video Archival · Offline Storage Vault",
+        desc: "Cinematic Archival Vault — 35mm Metraj & Disk Sayacı",
+        details: "Klasik YouTube ızgarası yerine, yerel disk alanını ve video kalitesini gösteren 35mm sinema kasedi ve klasör dizilimi.",
+        ui: `<div style="background:#0a0b0e; border:1px solid #06b6d4; border-radius:12px; padding:1.5rem; width:100%; max-width:440px; font-family:'JetBrains Mono', monospace; color:#06b6d4;">
+              <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span>TUTORIAL_ARCHIVE // COBALT</span><span>DISK: 1.4 TB FREE</span></div>
+              <div style="margin-top:1rem; padding:1rem; background:#12151e; border-radius:8px; color:#fff;">
+                <div style="font-size:0.9rem; font-weight:bold;">Advanced Rust Concurrency & Async Engine</div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.3rem;">1080p60 · 482 MB · Local Disk Storage</div>
+              </div>
+            </div>`
+      },
+      {
+        id: 4, name: "🎧 Navidrome & Audiobookshelf", sub: "Bit-Perfect FLAC · Tailscale Streaming · MPV",
+        desc: "Bit-Perfect Hi-Fi Lounge — Dönünen Vinil Plak & Kaset Sırtı",
+        details: "Bit-perfect 24-bit/192kHz spektrum frekans göstergesi, dönen dijital vinil efekti ve kaset sırtı albüm kartları.",
+        ui: `<div style="background:#1c1917; border:1px solid #d97706; border-radius:14px; padding:1.75rem; width:100%; max-width:420px; font-family:'JetBrains Mono', monospace; color:#f59e0b; text-align:center;">
+              <div style="font-size:0.75rem; color:#d97706;">NAVIDROME HI-FI STREAM</div>
+              <div style="font-size:1.3rem; color:#fff; font-weight:bold; margin:0.5rem 0;">A24 OST · Atmospheric Synthesizers</div>
+              <div style="font-size:0.75rem; color:#94a3b8;">FLAC 24-bit / 192kHz · Tailscale Lossless</div>
+            </div>`
+      },
+      {
+        id: 5, name: "📄 Paperless-ngx Vault", sub: "OCR Document Engine · Metadata Archival",
+        desc: "Swiss Industrial Minimalist Document Index",
+        details: "Fiziksel arşiv klasörü hissiyatı veren Swiss tipografisi grid yapısı ve anında doküman arama paneli.",
+        ui: `<div style="background:#111318; border:1px solid #e11d48; border-radius:12px; padding:1.5rem; width:100%; max-width:440px; font-family:'JetBrains Mono', monospace; color:#fff;">
+              <div style="font-size:0.75rem; color:#e11d48; font-weight:bold;">PAPERLESS-NGX // SWISS INDEX</div>
+              <div style="font-size:1rem; margin-top:0.5rem;">[2026-08-14] EMAS_STAJ_KABUL_MEKTUBU.PDF</div>
+              <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem;">OCR MATCH: 100% · TAGS: #IME #STAJ #MANISA</div>
+            </div>`
+      },
+      {
+        id: 6, name: "🎟️ Jellyfin Cinematheque", sub: "Oracle VPS Nginx Proxy · Cinephile Server",
+        desc: "Private Cinematheque Marquee — 1970'ler Afiş Panosu",
+        details: "Ticari Netflix/Plex arayüzü yerine 1970'ler Paris sinematek afiş panosu ve 35mm bilet koçanı tarzı film kartları.",
+        ui: `<div style="background:#050608; border:2px solid #991b1b; border-radius:14px; padding:1.75rem; width:100%; max-width:440px; font-family:serif; color:#fff; text-align:center;">
+              <div style="font-family:monospace; font-size:0.75rem; color:#f59e0b;">JELLYFIN PRIVATE CINEMATHEQUE</div>
+              <h2 style="font-size:1.8rem; margin:0.4rem 0;">SOLARIS (1972)</h2>
+              <div style="font-family:monospace; font-size:0.75rem; color:#94a3b8;">Dir. Andrei Tarkovsky · 4K Remastered</div>
+            </div>`
+      },
+      {
+        id: 7, name: "🛡️ Wazuh & CyberChef", sub: "SIEM Threat Radar · Authentik SSO · Malware Lab",
+        desc: "Radar Emerald Cybersecurity Terminal — Live Log Stream",
+        details: "Karışık enterprise dashboardlar yerine ASCII log stream konsolu, canlı ip paket akış radarı ve tek tıkla CyberChef paneli.",
+        ui: `<div style="background:#060709; border:1px solid #10b981; border-radius:10px; padding:1.5rem; width:100%; max-width:460px; font-family:'Fira Code', monospace; color:#10b981;">
+              <div style="font-size:0.8rem; font-weight:bold;">[WAZUH_SIEM] THREAT RADAR ACTIVE</div>
+              <div style="font-size:0.75rem; color:#38bdf8; margin-top:0.5rem;">AUTHENTIK SSO :: USER yigit SECURE LOGGED IN</div>
+              <div style="font-size:0.75rem; color:#94a3b8;">ALERT LEVEL 0 · ZERO ANOMALIES DETECTED</div>
+            </div>`
+      },
+      {
+        id: 8, name: "🎮 Cloud Gaming Hub", sub: "Systemd Service · FIFA 17 · Low-Latency Engine",
+        desc: "Arcade Cloud Telemetry HUD — Low Latency Overlay",
+        details: "Gecikme (ms), FPS ve GPU sıcaklığını şeffaf bir overlay olarak gösteren minimalist başlatıcı kartları.",
+        ui: `<div style="background:#0a0714; border:1px solid #d946ef; border-radius:12px; padding:1.5rem; width:100%; max-width:420px; font-family:monospace; color:#d946ef; text-align:center;">
+              <div style="font-size:0.8rem; color:#8b5cf6;">CLOUD GAMING HUB // SYSTEMD ACTIVE</div>
+              <h3 style="font-size:1.4rem; color:#fff; margin:0.4rem 0;">FIFA 17 STREAM</h3>
+              <div style="font-size:0.75rem; color:#10b981;">LATENCY: 4.2ms · 1080p 60FPS · GPU 52°C</div>
+            </div>`
+      }
+    ];
+
+    function renderSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.innerHTML = services.map((s, idx) => `
+        <button class="service-btn ${idx === 0 ? 'active' : ''}" onclick="selectService(${s.id})">
+          <span class="service-title">${s.name}</span>
+          <span class="service-sub">${s.sub}</span>
+        </button>
+      `).join('');
+    }
+
+    function selectService(id) {
+      document.querySelectorAll('.service-btn').forEach((btn, idx) => {
+        if (services[idx].id === id) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const s = services.find(item => item.id === id);
+      document.getElementById('serviceName').innerText = s.name;
+      document.getElementById('serviceDesc').innerText = s.desc;
+      document.getElementById('serviceDetails').innerText = s.details;
+      document.getElementById('stage').innerHTML = s.ui;
+    }
+
+    renderSidebar();
+    selectService(1);
+  </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MINTIKA — Yerel, Çevrimdışı Film Şeridi & 11 Reçete Aracı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0c0e;
+      --card-bg: #121418;
+      --text-main: #e2e8f0;
+      --text-muted: #8e99a8;
+      --accent-olive: #a39e47;
+      --accent-gold: #c6a052;
+      --border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 3rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    .wrapper { max-width: 1040px; margin: 0 auto; }
+
+    /* Top Brand */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .brand-logo { color: #fff; font-weight: 700; letter-spacing: 2px; text-decoration: none; }
+
+    /* Subtitle Tag */
+    .tagline {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      color: var(--accent-olive); text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 1.5rem; display: block;
+    }
+
+    /* Hero Headline */
+    h1.hero-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      font-weight: 400; line-height: 1.05; color: #ffffff;
+      margin-bottom: 2rem; letter-spacing: -0.02em;
+    }
+
+    .hero-lead {
+      font-size: 1.25rem; color: #cbd5e1; max-width: 680px;
+      margin-bottom: 1.5rem; font-weight: 400; line-height: 1.5;
+    }
+
+    .hero-sublead {
+      font-size: 0.95rem; color: var(--text-muted); max-width: 640px;
+      margin-bottom: 4rem; line-height: 1.6;
+    }
+
+    /* Grid 2 Column for Hero Section */
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 420px; gap: 4rem;
+      align-items: start; margin-bottom: 6rem;
+    }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    /* Steps List */
+    .steps-list { display: flex; flex-direction: column; gap: 2rem; border-top: 1px solid var(--border-color); padding-top: 2rem; }
+    .step-item { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-olive); font-weight: 600; }
+    .step-title { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+    .step-desc { font-size: 0.9rem; color: var(--text-muted); }
+    .step-pills { display: inline-flex; gap: 0.5rem; margin-top: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-olive); }
+
+    /* Smartphone Phone Frame Mockup */
+    .phone-mockup {
+      background: #000; border: 1px solid #222; border-radius: 24px;
+      padding: 1rem; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      position: relative; overflow: hidden;
+    }
+    .phone-header {
+      display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--accent-olive); margin-bottom: 0.75rem; padding: 0 0.25rem;
+    }
+    .strip-cell {
+      background: #111318; border: 1px solid #222; border-radius: 8px; margin-bottom: 12px;
+      padding: 8px; position: relative;
+    }
+    .strip-img-placeholder {
+      width: 100%; height: 180px; background: #1a1d24; border-radius: 4px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .reel-circle {
+      width: 90px; height: 90px; border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-family: 'Instrument Serif', serif;
+      font-size: 2.5rem; color: #fff; position: relative;
+    }
+    .reel-circle::before, .reel-circle::after {
+      content: ''; position: absolute; background: rgba(255,255,255,0.2);
+    }
+    .reel-circle::before { width: 100%; height: 1px; top: 50%; left: 0; }
+    .reel-circle::after { width: 1px; height: 100%; top: 0; left: 50%; }
+
+    .strip-caption {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #778899; margin-top: 6px;
+    }
+
+    /* Section Styling */
+    section { margin-bottom: 6rem; border-top: 1px solid var(--border-color); padding-top: 3.5rem; }
+    .section-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-olive); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
+    h2.section-title { font-family: 'Instrument Serif', serif; font-size: 2.6rem; font-weight: 400; color: #fff; margin-bottom: 2rem; }
+
+    /* 5 Use Cases Grid */
+    .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
+    .use-case-box h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-olive); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .use-case-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* 6 Gains Grid */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .gain-box h4 { font-size: 1.1rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem; }
+    .gain-box p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Excluded Grid */
+    .excluded-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .excluded-tag {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+      padding: 0.5rem 0.75rem; border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem; color: #64748b; text-decoration: line-through; text-align: center;
+    }
+
+    /* 11 Reçete Posters Grid */
+    .posters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .poster-card {
+      background: #101216; border: 1px solid var(--border-color); border-radius: 12px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .poster-art {
+      height: 320px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative;
+    }
+    .poster-art-sokak { background: linear-gradient(180deg, #d97706 0%, #1e1b18 100%); color: #000; }
+    .poster-art-kunye { background: #1a1d24; color: #fff; }
+    .poster-art-kesik { background: #000; color: #ea580c; border-top: 8px solid #ea580c; }
+    .poster-info { padding: 1rem; border-top: 1px solid var(--border-color); }
+    .poster-name { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .poster-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    /* CTA Section */
+    .cta-box {
+      background: #101216; border: 1px solid var(--border-color); border-radius: 16px;
+      padding: 3rem 2rem; text-align: center; margin-top: 4rem;
+    }
+    .btn-primary {
+      display: inline-block; background: var(--accent-olive); color: #000; font-weight: 700;
+      padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem;
+      margin-top: 1.5rem; transition: background 0.2s ease;
+    }
+    .btn-primary:hover { background: #c6a052; }
+
+    footer {
+      margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--border-color);
+      display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; color: #475569;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <nav class="top-nav">
+      <a href="#" class="brand-logo">MINTIKA</a>
+      <span style="color: var(--text-muted);">v0.1.0 · YEREL FİLM ŞERİDİ ARACI</span>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <span class="tagline">YEREL · ÇEVRİMDİŞİ · HESAPSIZ</span>
+        <h1 class="hero-title">Bir kare çek.<br>Şeridin büyüsün.</h1>
+        <p class="hero-lead">MINTIKA çektiğin kareyi bir arşive alır, ona bir numara verir, ve o numarayı bir daha kimseye vermez. Yirmi dört kare bir saniye eder.</p>
+        <p class="hero-sublead">Sunucu yok. Hesap yok. İnternet yok — uygulamanın bağımlılık listesinde bir HTTP istemcisi bile bulunmuyor. Kaydın telefonundan hiç çıkmıyor.</p>
+
+        <div class="steps-list">
+          <div class="step-item">
+            <span class="step-num">01</span>
+            <div>
+              <div class="step-title">Kareyi çek</div>
+              <div class="step-desc">Kamerayla ya da galeriden. Fotoğraf çekemediysen kare yine açılır.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">02</span>
+            <div>
+              <div class="step-title">Koşulu yaz</div>
+              <div class="step-desc">Kendi cümlen ya da hazır seçenekler. Film adı isteğe bağlı.</div>
+              <div class="step-pills"><span>35mm</span> · <span>DCP</span> · <span>ev</span> · <span>açık hava</span></div>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">03</span>
+            <div>
+              <div class="step-title">Şeride girer</div>
+              <div class="step-desc">Kare bir numara alır ve o numara asla yeniden kullanılmaz. 24 kare = 1 saniye.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">04</span>
+            <div>
+              <div class="step-title">Karta dönüşür</div>
+              <div class="step-desc">On bir reçeteden biriyle basılır, tam çözünürlükte dışa aktarılır.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup Preview -->
+      <div class="phone-mockup">
+        <div class="phone-header">
+          <span>96 kare · 4.0 saniye</span>
+          <span>▶</span>
+        </div>
+        <div class="strip-cell">
+          <div class="strip-img-placeholder" style="background: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+          <div class="strip-caption">MINTIKA +0098 · ev · ifade</div>
+        </div>
+        <div class="strip-cell">
+          <div class="strip-img-placeholder">
+            <div class="reel-circle">4</div>
+          </div>
+          <div class="strip-caption">MINTIKA +0097 · açık hava · 35mm</div>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #555; text-align: center; margin-top: 1rem;">
+          Şerit ekranı — 96 kare, 4.0 saniye.<br>Her karenin altında kendi künyesi.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: 5 Use Cases -->
+    <section>
+      <span class="section-tag">KİMİN İÇİN. NE İÇİN</span>
+      <h2 class="section-title">Aynı araç, beş farklı kullanım</h2>
+      <div class="grid-5">
+        <div class="use-case-box">
+          <h4>Sinema Kaydı</h4>
+          <p>Bir film izledin. Puan vermek yerine o akşamdan bir kare bırakıyorsun. Film adı ve koşul künyeye giriyor — DCP, 35mm, 4K restorasyon.</p>
+        </div>
+        <div class="use-case-box">
+          <h4>Gündelik</h4>
+          <p>Film yok. Bir gün, bir kare. Künyede yalnızca yer ve tarih kalıyor — ve bu da yeterli bir kayıttır.</p>
+        </div>
+        <div class="use-case-box">
+          <h4>Seyahat</h4>
+          <p>Yer değişiyor, koşul değişiyor, şerit kesilmiyor. Dört gün üst üste çekilen kareler şeritte bir blok olarak duruyor.</p>
+        </div>
+        <div class="use-case-box">
+          <h4>Festival</h4>
+          <p>Dört günde altı film. Şerit onu tek bir yoğunlaşma olarak gösteriyor; sonradan bakınca o hafta ayırt ediliyor.</p>
+        </div>
+        <div class="use-case-box">
+          <h4>Fotoğrafsız Kare</h4>
+          <p>Salonda çekim yasaktı, telefon şarjda kaldı. Kare yine açılıyor — kart bu kez şeridin durumundan hesaplanıyor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: 6 Gains -->
+    <section>
+      <span class="section-tag">NE KAZANIRSIN</span>
+      <h2 class="section-title">Altı açıdan</h2>
+      <div class="grid-3">
+        <div class="gain-box">
+          <h4>Sahiplik</h4>
+          <p>Arşiv cihazında, SQLite'ta. Sunucu, hesap, telemetri yok. Uygulama ağa çıkmıyor, çünkü ağa çıkacak kodu yok.</p>
+        </div>
+        <div class="gain-box">
+          <h4>Fiziksel Çıktı</h4>
+          <p>Kart baskı çözünürlüğünde çıkıyor. Halftone noktası bir piksel değil, çizilmiş bir nesne: büyüttükçe bulanıklaşmıyor, keskinleşiyor.</p>
+        </div>
+        <div class="gain-box">
+          <h4>Sürtünmesizlik</h4>
+          <p>Kurulum yok, giriş yok, senkron yok, bildirim yok. Uçakta, bodrum sinemasında, kapalı salonda aynı çalışıyor.</p>
+        </div>
+        <div class="gain-box">
+          <h4>Kaynağı Olan Biçim</h4>
+          <p>On bir reçete, her birinin kaynağı kartın altında yazılı: ülke, dönem, format, ölçü. Sahte rozet, taklit marka yok.</p>
+        </div>
+        <div class="gain-box">
+          <h4>Zaman</h4>
+          <p>Bir kare yaklaşık yirmi saniye. Yıldız verme, puanlama, inceleme yazma yok — kaydı vergiye çeviren şey onlar.</p>
+        </div>
+        <div class="gain-box">
+          <h4>Biriken Şey</h4>
+          <p>Kare numarası geri alınamaz ve yeniden kullanılamaz. Dört yüzüncü kare birinciyle aynı şey değil; aradaki fark geçen zamandır.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Explicit Exclusions -->
+    <section>
+      <span class="section-tag">VE BİLEREK OLMAYANLAR</span>
+      <p style="color: var(--text-muted); max-width: 600px; margin-bottom: 1.5rem;">Bunların hiçbiri "sonra eklenecek" değil. Her biri kaydı bir yarışa çeviren mekanizmalar ve araç onlarsız tasarlandı.</p>
+      <div class="excluded-grid">
+        <div class="excluded-tag">akış</div>
+        <div class="excluded-tag">beğeni</div>
+        <div class="excluded-tag">takipçi</div>
+        <div class="excluded-tag">puan / yıldız</div>
+        <div class="excluded-tag">yorum</div>
+        <div class="excluded-tag">öneri algoritması</div>
+        <div class="excluded-tag">seri / streak</div>
+        <div class="excluded-tag">bildirim</div>
+        <div class="excluded-tag">reklam</div>
+        <div class="excluded-tag">sunucu</div>
+        <div class="excluded-tag">hesap</div>
+        <div class="excluded-tag">abonelik</div>
+      </div>
+    </section>
+
+    <!-- Section: 11 Recipes -->
+    <section>
+      <span class="section-tag">REÇETELER</span>
+      <h2 class="section-title">Kart bir filtre değil, bir baskı</h2>
+      <p style="color: var(--text-muted); max-width: 640px; margin-bottom: 2rem;">Her reçete gerçek bir baskı geleneğinden geliyor ve kısıtlarını da beraberinde getiriyor: kaç mürekkep kullanılabileceğini, kenar boşluğunun neden asimetrik olduğunu, hangi fotoğrafta çökeceğini.</p>
+
+      <div class="posters-grid">
+        <div class="poster-card">
+          <div class="poster-art poster-art-sokak">
+            <h3 style="font-size: 1.8rem; font-weight: 800;">SOKAK AFİŞİ</h3>
+            <p style="font-size: 0.8rem;">4 DÜZ SPOT + KÂĞIT + KONTUR</p>
+          </div>
+          <div class="poster-info">
+            <div class="poster-name">SOKAK AFİŞİ</div>
+            <div class="poster-sub">Türk litografi sinema afişi · 1955-80 · 68×100 cm</div>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <div class="poster-art poster-art-kunye">
+            <h3 style="font-size: 1.5rem; font-weight: 700;">KÜNYE BLOĞU</h3>
+            <p style="font-size: 0.75rem; color: #8e99a8;">KÜNYE BANDI AFİŞİN %26'SI</p>
+          </div>
+          <div class="poster-info">
+            <div class="poster-name">KÜNYE BLOĞU</div>
+            <div class="poster-sub">ABD one-sheet · 1970– · 27×40 in</div>
+          </div>
+        </div>
+
+        <div class="poster-card">
+          <div class="poster-art poster-art-kesik">
+            <h3 style="font-size: 1.6rem; font-weight: 700;">KESİK KAĞIT SİLUET</h3>
+            <p style="font-size: 0.75rem;">TAM 2 MÜREKKEP + KÂĞIT</p>
+          </div>
+          <div class="poster-info">
+            <div class="poster-name">KESİK KAĞIT SİLUET</div>
+            <div class="poster-sub">Orta yüzyıl modernist afiş · 1955-65 · 14×36 in</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section>
+      <div class="cta-box">
+        <span class="section-tag">AÇIK ÇAĞRI</span>
+        <h2 style="font-family: 'Instrument Serif', serif; font-size: 2.4rem; color: #fff; margin-top: 0.5rem;">İlk yirmi kişi aranıyor</h2>
+        <p style="color: var(--text-muted); max-width: 580px; margin: 1rem auto 0 auto; font-size: 0.95rem;">MINTIKA yayında değil. On bir reçete çalışıyor, şerit çalışıyor, dışa aktarma çalışıyor — ama henüz tanımadığım biri tarafından denenmedi. İki hafta boyunca kare çekip neyin işe yaramadığını söyleyecek yirmi kişi.</p>
+        <a href="mailto:studio@mintika.app" class="btn-primary">Test Grubuna Yaz (studio@mintika.app)</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>MINTIKA · v0.1.0 · yerel, çevrimdışı film şeridi aracı</span>
+      <span>studio@mintika.app · 2026</span>
+    </footer>
+  </div>
+</body>
+</html>

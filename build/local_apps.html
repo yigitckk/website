@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yiğit's Sovereign Local Apps & Emblems Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07080a;
+      --surface-card: #11131a;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --accent-amber: #f59e0b;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #151926 0%, #07080a 80%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-hairline);
+    }
+    .brand { font-weight: 800; font-size: 1.3rem; color: #fff; display: flex; align-items: center; gap: 0.75rem; }
+    .badge {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-amber);
+      padding: 0.3rem 0.8rem; border-radius: 999px; border: 1px solid rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.06);
+    }
+
+    .hero { text-align: center; max-width: 760px; margin: 0 auto 4rem auto; }
+    .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-amber); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.75rem; display: block; }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+    .hero-desc { font-size: 1.05rem; color: var(--text-muted); }
+
+    /* Apps Grid */
+    .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .app-card {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 1.75rem; display: flex; flex-direction: column;
+      align-items: center; text-align: center; position: relative; transition: all 0.25 ease;
+    }
+    .app-card:hover { transform: translateY(-4px); border-color: rgba(245, 158, 11, 0.4); box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
+
+    .emblem-box {
+      width: 80px; height: 80px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center;
+    }
+    .emblem-box img { width: 100%; height: 100%; object-fit: contain; }
+
+    .app-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+    .app-cat { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-amber); margin-bottom: 0.75rem; text-transform: uppercase; }
+    .app-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; flex: 1; }
+
+    .app-status {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.65rem; border-radius: 6px; display: inline-block;
+    }
+
+    .btn-launch {
+      display: inline-block; width: 100%; background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-hairline); color: #fff; text-decoration: none;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 600;
+      padding: 0.65rem; border-radius: 8px; margin-top: 1rem; transition: all 0.2s ease;
+    }
+    .btn-launch:hover { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border-color: var(--accent-amber); }
+
+    footer {
+      margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--border-hairline);
+      display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; color: #475569;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <rect x="2" y="2" width="36" height="36" rx="6" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="20" cy="20" r="10" stroke="#38bdf8" stroke-width="2"/>
+        </svg>
+        <span>SOVEREIGN LOCAL APPS HUB</span>
+      </div>
+      <span class="badge">8 Sovereign Applications & Emblems</span>
+    </header>
+
+    <div class="hero">
+      <span class="hero-tag">Yerel · Bağımsız · Tam Özgün İkonografı</span>
+      <h1 class="hero-title">Yerel Uygulamalar & Özgün Amblem Karargâhı</h1>
+      <p class="hero-desc">Yiğit'in yerel makinesinde ve private sunucularında çalışan tüm bağımsız yazılımlar; kendilerine özgün vektörel amblemleri, Calm Tech arayüzleri ve yenilenmiş UI/UX standartları ile burada.</p>
+    </div>
+
+    <div class="apps-grid">
+      <!-- 1. Hayat OS -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/hayat_os_emblem.svg" alt="Hayat OS Emblem">
+        </div>
+        <div class="app-name">Hayat OS</div>
+        <div class="app-cat">Sovereign Intelligence Hub</div>
+        <div class="app-desc">Local Ollama, Obsidian Vault RAG, Miniflux ve 14-günlük motor pencereleri komuta paneli.</div>
+        <span class="app-status">● LOCAL ACTIVE (8095)</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele & Çalıştır</a>
+      </div>
+
+      <!-- 2. Miniflux / Dünya Okuma Tezgahı -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/miniflux_digest_emblem.svg" alt="Miniflux Emblem">
+        </div>
+        <div class="app-name">Dünya Okuma Tezgâhı</div>
+        <div class="app-cat">Editorial RSS Ingestion</div>
+        <div class="app-desc">RSS-Bridge + n8n + Miniflux yüksek yoğunluklu gazete okuma ve Ollama özetleme tezgahı.</div>
+        <span class="app-status">● LOCAL ACTIVE (8092)</span>
+        <a href="http://localhost:3010/dunya-okuma-tezgahi.html" class="btn-launch">Tezgâhı Aç</a>
+      </div>
+
+      <!-- 3. TubeArchivist & Cobalt -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/tubearchivist_vault_emblem.svg" alt="TubeArchivist Emblem">
+        </div>
+        <div class="app-name">TubeArchivist Vault</div>
+        <div class="app-cat">Media Archival Engine</div>
+        <div class="app-desc">YouTube/Cobalt yerel eğitim ve teknik video arşivi. 35mm metraj & disk sayacı.</div>
+        <span class="app-status">● LOCAL ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+
+      <!-- 4. Navidrome & Audiobookshelf -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/navidrome_hifi_emblem.svg" alt="Navidrome Emblem">
+        </div>
+        <div class="app-name">Navidrome Hi-Fi Lounge</div>
+        <div class="app-cat">Lossless Audio Streaming</div>
+        <div class="app-desc">Tailscale üzerinden MPV bit-perfect 24-bit/192kHz müzik ve sesli kitap akış sunucusu.</div>
+        <span class="app-status">● LOCAL ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+
+      <!-- 5. Paperless-ngx Vault -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/paperless_vault_emblem.svg" alt="Paperless Emblem">
+        </div>
+        <div class="app-name">Paperless-ngx Vault</div>
+        <div class="app-cat">Swiss Document Index</div>
+        <div class="app-desc">Fatura, kontrat ve teknik belge OCR arşiv sunucusu. Swiss tipografisi grid yapısı.</div>
+        <span class="app-status">● LOCAL ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+
+      <!-- 6. Jellyfin Cinematheque -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/jellyfin_cine_emblem.svg" alt="Jellyfin Emblem">
+        </div>
+        <div class="app-name">Jellyfin Cinematheque</div>
+        <div class="app-cat">Private Cinephile Server</div>
+        <div class="app-desc">Oracle VPS Nginx reverse proxy + 1970'ler Paris sinematek afiş panosu ve 35mm bilet kartları.</div>
+        <span class="app-status">● VPS ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+
+      <!-- 7. Wazuh & CyberChef -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/sentinel_osint_emblem.svg" alt="Sentinel Emblem">
+        </div>
+        <div class="app-name">Wazuh & CyberChef</div>
+        <div class="app-cat">Cybersecurity Radar</div>
+        <div class="app-desc">SIEM tehdit matrisi gridi, ASCII log stream konsolu ve canlı IP paket akış radarı.</div>
+        <span class="app-status">● LOCAL ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+
+      <!-- 8. Cloud Gaming Hub -->
+      <div class="app-card">
+        <div class="emblem-box">
+          <img src="/emblems/cloud_gaming_emblem.svg" alt="Cloud Gaming Emblem">
+        </div>
+        <div class="app-name">Cloud Gaming Hub</div>
+        <div class="app-cat">Arcade Cloud Telemetry</div>
+        <div class="app-desc">Systemd yerel oyun akış servisi (FIFA 17). Gecikme (ms) ve FPS şeffaf overlay HUD.</div>
+        <span class="app-status">● SYSTEMD ACTIVE</span>
+        <a href="http://localhost:3010/self_hosted_ui_ux.html" class="btn-launch">UI/UX İncele</a>
+      </div>
+    </div>
+
+    <footer>
+      <span>SOVEREIGN LOCAL APPS HUB · YİĞİT C. DEV</span>
+      <span>2026</span>
+    </footer>
+  </div>
+</body>
+</html>

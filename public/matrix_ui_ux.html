@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20 Sovereign UI/UX Design Systems — Interactive Matrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fira+Code:wght@400;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;800&family=Outfit:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #08090c;
+      --surface-card: #11131a;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+
+    /* Top Nav */
+    header {
+      background: #0d0e14; border-bottom: 1px solid var(--border-hairline);
+      padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand { font-weight: 800; font-size: 1.2rem; color: #fff; display: flex; align-items: center; gap: 0.75rem; }
+    .badge-count {
+      background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px;
+    }
+
+    /* Main Explorer Layout */
+    .explorer-layout { display: grid; grid-template-columns: 320px 1fr; flex: 1; min-height: calc(100vh - 70px); }
+    @media (max-width: 900px) { .explorer-layout { grid-template-columns: 1fr; } }
+
+    /* Left Sidebar List */
+    .sidebar {
+      background: #0a0b0f; border-right: 1px solid var(--border-hairline);
+      padding: 1.5rem 1rem; overflow-y: auto; max-height: calc(100vh - 70px);
+    }
+    .system-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer; margin-bottom: 0.5rem;
+      border: 1px solid transparent; transition: all 0.2s ease;
+    }
+    .system-item:hover, .system-item.active {
+      background: #141722; border-color: rgba(255, 255, 255, 0.12);
+    }
+    .system-item.active { border-left: 3px solid #f59e0b; }
+    .item-name { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; }
+    .item-cat { font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+    /* Right Main Display Canvas */
+    .main-canvas { padding: 2.5rem; overflow-y: auto; background: radial-gradient(circle at 50% 0%, #121520 0%, #08090c 75%); }
+
+    /* Card Panels */
+    .card-panel {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .system-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .system-subtitle { font-size: 1rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 1.5rem; }
+
+    /* Color Swatches Grid */
+    .swatches-grid { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    .swatch-item {
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-muted);
+    }
+    .swatch-color { width: 64px; height: 48px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); }
+
+    /* UI Component Display Box */
+    .component-stage {
+      width: 100%; min-height: 320px; background: #050608; border: 1px solid var(--border-hairline);
+      border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; position: relative; overflow: hidden; margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 40 40" fill="none">
+        <rect x="2" y="2" width="36" height="36" rx="6" stroke="#38bdf8" stroke-width="2"/>
+        <circle cx="20" cy="20" r="10" stroke="#f59e0b" stroke-width="2"/>
+      </svg>
+      <span>20 SOVEREIGN UI/UX DESIGN MATRIX</span>
+    </div>
+    <span class="badge-count">20 Design Systems Active</span>
+  </header>
+
+  <div class="explorer-layout">
+    <!-- Left Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <!-- Items generated dynamically -->
+    </div>
+
+    <!-- Right Display -->
+    <div class="main-canvas" id="mainCanvas">
+      <div class="card-panel">
+        <div id="sysHeader">
+          <h1 class="system-title" id="sysTitle">MINTIKA Cinema OS</h1>
+          <div class="system-subtitle" id="sysCat">🎬 Sinema & Narratoloji · Quiet Luxury & 35mm Strip</div>
+        </div>
+
+        <h3 style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-transform: uppercase; margin-top: 1.5rem;">Renk Paleti & Tokenlar</h3>
+        <div class="swatches-grid" id="swatches"></div>
+
+        <h3 style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-transform: uppercase; margin-top: 2rem;">İnteraktif UI Bileşeni & Artifact</h3>
+        <div class="component-stage" id="compStage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const systems = [
+      { id: 1, name: "MINTIKA Cinema OS", cat: "🎬 Sinema & Narratoloji", colors: ["#0b0c0e", "#a39e47", "#c6a052", "#121418"], desc: "Yerel, 35mm perforasyonlu şerit ve 11 matbaa reçetesi kart dili.", ui: `<div style="background:#0b0c0e; border:1px stroke #a39e47; padding:2rem; border-radius:12px; font-family:'Instrument Serif', serif; color:#fff; text-align:center;"><h2 style="font-size:2.2rem;">Bir kare çek. Şeridin büyüsün.</h2><p style="font-family:monospace; font-size:0.8rem; color:#a39e47; margin-top:0.5rem;">MINTIKA +0098 · 35mm · 24fps · MANİSA</p></div>` },
+      { id: 2, name: "TAMGA OS / Sigil Labs", cat: "🏛️ Kültürel Vektör & Monogram", colors: ["#0d0f14", "#f59e0b", "#38bdf8", "#ffffff"], desc: "Türk/Oğuz/Selçuklu geometrisi, die-cut sticker çerçevesi & monogram synthesizer.", ui: `<div style="background:#0d0f14; border:2px solid #f59e0b; padding:2rem; border-radius:12px; font-family:'Cinzel', serif; color:#f59e0b; text-align:center; box-shadow:0 0 20px rgba(245,158,11,0.2);"><h2 style="font-size:2.5rem; letter-spacing:4px;">YÇ MONOGRAM</h2><p style="font-family:monospace; font-size:0.75rem; color:#38bdf8; margin-top:0.5rem;">OĞUZ KAYI TAMGASI · 35mm APERTURE GRID</p></div>` },
+      { id: 3, name: "Endüstri 5.0 OEE OS", cat: "⚙️ Mühendislik & Fabrika", colors: ["#0f172a", "#06b6d4", "#22c55e", "#1e293b"], desc: "Gerçek zamanlı OEE verimlilik göstergeleri, telemetry HUD ve duruş matrisi.", ui: `<div style="background:#0f172a; border:1px solid #06b6d4; padding:1.5rem; border-radius:12px; font-family:'JetBrains Mono', monospace; color:#06b6d4; width:100%; max-width:400px;"><div style="display:flex; justify-content:space-between; font-weight:bold;"><span>OEE EFFICIENCY</span><span>88.4%</span></div><div style="background:#1e293b; height:10px; border-radius:5px; margin-top:0.5rem; overflow:hidden;"><div style="background:#22c55e; width:88.4%; height:100%;"></div></div></div>` },
+      { id: 4, name: "WRC Motorsport OS", cat: "🏎️ Ralli & Otomotiv Telemetri", colors: ["#121212", "#facc15", "#ef4444", "#27272a"], desc: "G-force vektörü, pacenote zaman tüneli ve ALS turbo basınç HUD.", ui: `<div style="background:#121212; border-left:4px solid #facc15; padding:1.5rem; border-radius:8px; font-family:'Space Grotesk', sans-serif; color:#fff; width:100%; max-width:380px;"><div style="font-size:0.75rem; color:#facc15;">STAGE 4 · FINLAND RALLY</div><div style="font-size:2rem; font-weight:bold;">184 KM/H <span style="font-size:1rem; color:#ef4444;">+1.4G</span></div></div>` },
+      { id: 5, name: "Sentinel OSINT OS", cat: "🛡️ Siber Güvenlik & İstihbarat", colors: ["#090a0f", "#10b981", "#06b6d4", "#1e293b"], desc: "Tehdit matrisi gridi, ASCII ağ topoğrafya haritası ve log stream.", ui: `<div style="background:#090a0f; border:1px stroke #10b981; padding:1.5rem; border-radius:8px; font-family:'Fira Code', monospace; color:#10b981; width:100%; max-width:420px;"><div style="font-size:0.8rem; margin-bottom:0.4rem;">[SENTINEL_RADAR] PACKET INGESTION ACTIVE</div><div style="font-size:0.75rem; color:#94a3b8;">127.0.0.1:8105 -> TAILSCALE MESH :: SLA 99.99%</div></div>` },
+      { id: 6, name: "Hi-Fi Audio OS", cat: "🎧 Müzik Arşivi & Vinil", colors: ["#1c1917", "#d97706", "#f59e0b", "#292524"], desc: "Bit-perfect frekans spektrumu, VU metre ve vinil kaset kartı.", ui: `<div style="background:#1c1917; border:1px solid #d97706; padding:1.5rem; border-radius:12px; font-family:'JetBrains Mono', monospace; color:#f59e0b; width:100%; max-width:360px;"><div style="font-size:0.8rem;">NAVIDROME BIT-PERFECT</div><div style="font-size:1.2rem; color:#fff; margin-top:0.2rem;">FLAC 24-bit / 192kHz</div></div>` },
+      { id: 7, name: "Tactics Sports OS", cat: "⚽ Spor Analytics & Moneyball", colors: ["#022c22", "#84cc16", "#38bdf8", "#064e3b"], desc: "Oyuncu radar kartı, saha ısı haritası ve pas telemetrisi.", ui: `<div style="background:#022c22; border:1px solid #84cc16; padding:1.5rem; border-radius:12px; font-family:'Outfit', sans-serif; color:#84cc16; width:100%; max-width:360px;"><div style="font-size:0.75rem; color:#94a3b8;">EXPECTED GOALS (xG)</div><div style="font-size:2.2rem; font-weight:bold; color:#fff;">2.48 <span style="font-size:0.9rem; color:#84cc16;">HIGH RETENTION</span></div></div>` },
+      { id: 8, name: "Barbell Capital OS", cat: "💸 Fintech & Portföy Mimarisi", colors: ["#0a192f", "#e2e8f0", "#10b981", "#1e293b"], desc: "Barbell risk matrisi, varlık dağılım donutu ve sıfır sürtünmeli defter.", ui: `<div style="background:#0a192f; border:1px solid #e2e8f0; padding:1.5rem; border-radius:12px; font-family:sans-serif; color:#fff; width:100%; max-width:360px;"><div style="font-size:0.75rem; color:#94a3b8;">BARBELL ALLOCATION</div><div style="font-size:1.5rem; font-weight:bold; color:#10b981;">85% SAFE · 15% HIGH-UPSIDE</div></div>` },
+      { id: 9, name: "Arcade Cloud OS", cat: "🎮 Oyun & Retro Emülasyon", colors: ["#1e1b4b", "#d946ef", "#a855f7", "#312e81"], desc: "CRT scanline filtresi, pixel-perfect HUD kartı ve oyun durumu kayıtları.", ui: `<div style="background:#1e1b4b; border:2px solid #d946ef; padding:1.5rem; border-radius:12px; font-family:monospace; color:#d946ef; text-align:center;"><h3 style="font-size:1.5rem;">PRESS START 2P</h3><p style="font-size:0.8rem; color:#a855f7; margin-top:0.4rem;">CLOUD GAMING SERVER ACTIVE</p></div>` },
+      { id: 10, name: "Devrim Veksiloloji OS", cat: "🏛️ Veksiloloji & Tarih", colors: ["#881337", "#f8fafc", "#d97706", "#4c0519"], desc: "Vektörel bayrak/damga kartı, anayasa tipografisi ve tarihsel arşiv.", ui: `<div style="background:#881337; border:2px solid #f8fafc; padding:2rem; border-radius:12px; font-family:serif; color:#f8fafc; text-align:center;"><h2 style="font-size:2rem;">TÜRK VEKSİLOLOJİSİ</h2><p style="font-size:0.8rem; color:#d97706; margin-top:0.5rem;">7 BİN YILLIK ANADOLU VE TAMGA MİRASI</p></div>` },
+      { id: 11, name: "Brew Coffee OS", cat: "☕ 3. Dalga Kahve Mekaniği", colors: ["#180e0a", "#d97706", "#f59e0b", "#2a1810"], desc: "Demleme akış grafiği, TDS ekstraksiyon oranı sayacı ve çekirdek künyesi.", ui: `<div style="background:#180e0a; border:1px solid #d97706; padding:1.5rem; border-radius:12px; font-family:monospace; color:#f59e0b; width:100%; max-width:360px;"><div style="font-size:0.75rem;">ETHIOPIA YIRGACHEFFE</div><div style="font-size:1.4rem; color:#fff;">TDS 1.38% · RATIO 1:16</div></div>` },
+      { id: 12, name: "Structure CAD OS", cat: "📐 Mimarlık & CAD Çizim", colors: ["#0c1e3e", "#38bdf8", "#f8fafc", "#1e3a8a"], desc: "Lazer kesim katmanları, DXF izometrik grid ve mimari ölçü çizgileri.", ui: `<div style="background:#0c1e3e; border:1px stroke #38bdf8; padding:1.5rem; border-radius:8px; font-family:monospace; color:#38bdf8; width:100%; max-width:380px;"><div style="font-size:0.8rem;">LAYER: 01_LASER_CUT_DXF</div><div style="font-size:1.2rem; color:#fff;">SCALE 1:50 · TOLERANCE 0.05mm</div></div>` },
+      { id: 13, name: "Signals HAM OS", cat: "📻 Telsiz & SDR Spektrum", colors: ["#141f17", "#22c55e", "#f59e0b", "#1c2e22"], desc: "Şelale spektrumu (Waterfall), QSL kart jeneratörü ve frekans kadranı.", ui: `<div style="background:#141f17; border:1px solid #22c55e; padding:1.5rem; border-radius:8px; font-family:'Fira Code', monospace; color:#22c55e; width:100%; max-width:380px;"><div style="font-size:0.8rem;">SDR WATERFALL SPECTRUM</div><div style="font-size:1.5rem; color:#fff;">144.800 MHz FM</div></div>` },
+      { id: 14, name: "Terra Overland OS", cat: "🌲 Doğa & Dağcılık", colors: ["#141c14", "#f59e0b", "#22c55e", "#1f2b1f"], desc: "Eğim-irtifa topoğrafya haritası, GPX rota telemetrisi ve pusula.", ui: `<div style="background:#141c14; border:1px solid #f59e0b; padding:1.5rem; border-radius:12px; font-family:sans-serif; color:#f59e0b; width:100%; max-width:360px;"><div style="font-size:0.75rem;">ELEVATION GAIN</div><div style="font-size:1.8rem; font-weight:bold; color:#fff;">1,420 m <span style="font-size:0.8rem; color:#22c55e;">GPS LOCKED</span></div></div>` },
+      { id: 15, name: "Mind Zettelkasten OS", cat: "📚 Bilgi Mimarısı & Graph", colors: ["#0f0f11", "#8b5cf6", "#38bdf8", "#1c1c24"], desc: "Düğüm ağ kümesi (Graph View), iki yönlü bağlantı önizleme kartı.", ui: `<div style="background:#0f0f11; border:1px solid #8b5cf6; padding:1.5rem; border-radius:12px; font-family:monospace; color:#8b5cf6; width:100%; max-width:360px;"><div style="font-size:0.75rem;">GRAPH CLUSTER</div><div style="font-size:1.2rem; color:#fff;">[[20_Sovereign_UI_UX_Matrix]]</div></div>` },
+      { id: 16, name: "Gambit Game Theory OS", cat: "♟️ Satranç & Strateji", colors: ["#18181b", "#fef3c7", "#f59e0b", "#27272a"], desc: "FEN notasyonu dizisi, oyun değerlendirme çubuğu ve hamle ağacı.", ui: `<div style="background:#18181b; border:1px solid #fef3c7; padding:1.5rem; border-radius:12px; font-family:serif; color:#fef3c7; width:100%; max-width:360px;"><div style="font-size:0.8rem; font-family:monospace; color:#f59e0b;">EVALUATION: +1.45</div><div style="font-size:1.3rem; margin-top:0.3rem;">1. e4 e5 2. Nf3 Nc6</div></div>` },
+      { id: 17, name: "Savile Sartorial OS", cat: "👗 Moda & Terzilik", colors: ["#1c1c1e", "#a1a1aa", "#d97706", "#2c2c2e"], desc: "Kumaş doku swatch'u, kapsül gardırop ızgarası ve bespoke kartı.", ui: `<div style="background:#1c1c1e; border:1px solid #a1a1aa; padding:1.5rem; border-radius:12px; font-family:serif; color:#fff; width:100%; max-width:360px;"><div style="font-size:0.75rem; font-family:monospace; color:#d97706;">BESPOKE TAILORING</div><div style="font-size:1.2rem;">Super 150s Merino Wool</div></div>` },
+      { id: 18, name: "Agent MLOps OS", cat: "🔬 AI Agent & Deep Learning", colors: ["#030712", "#6366f1", "#10b981", "#111827"], desc: "Latent space 3D haritası, kayıp eğrisi (loss curve) ve agent loop logları.", ui: `<div style="background:#030712; border:1px solid #6366f1; padding:1.5rem; border-radius:12px; font-family:'Fira Code', monospace; color:#6366f1; width:100%; max-width:400px;"><div style="font-size:0.75rem;">OLLAMA RAG AGENT LOOP</div><div style="font-size:1.1rem; color:#10b981;">LOSS: 0.0412 · EMBED 512-dim</div></div>` },
+      { id: 19, name: "Kinesiosis Sport OS", cat: "🏥 Biyometrik Spor", colors: ["#0f172a", "#f43f5e", "#38bdf8", "#1e293b"], desc: "HRV nabız grafiği, kas inceleme vektörü ve set/tekrar sayacı.", ui: `<div style="background:#0f172a; border:1px solid #f43f5e; padding:1.5rem; border-radius:12px; font-family:sans-serif; color:#f43f5e; width:100%; max-width:360px;"><div style="font-size:0.75rem; color:#94a3b8;">HEART RATE VARIABILITY</div><div style="font-size:2rem; font-weight:bold; color:#fff;">164 BPM <span style="font-size:0.8rem; color:#f43f5e;">ZONE 4</span></div></div>` },
+      { id: 20, name: "Orbit Aerospace OS", cat: "🚀 Havacılık & Yörünge", colors: ["#05070e", "#fbbf24", "#38bdf8", "#111827"], desc: "Parabolik yörünge çizgisi, apogee/perigee telemetrisi ve itki HUD.", ui: `<div style="background:#05070e; border:1px solid #fbbf24; padding:1.5rem; border-radius:12px; font-family:'Orbitron', sans-serif; color:#fbbf24; width:100%; max-width:400px;"><div style="font-size:0.75rem;">ORBITAL TELEMETRY</div><div style="font-size:1.4rem; color:#fff;">APOGEE: 410 KM · PERIGEE: 395 KM</div></div>` }
+    ];
+
+    function renderSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.innerHTML = systems.map((sys, idx) => `
+        <div class="system-item ${idx === 0 ? 'active' : ''}" onclick="selectSystem(${sys.id})">
+          <div>
+            <div class="item-name">${sys.name}</div>
+            <div class="item-cat">${sys.cat}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectSystem(id) {
+      document.querySelectorAll('.system-item').forEach((item, idx) => {
+        if (systems[idx].id === id) item.classList.add('active');
+        else item.classList.remove('active');
+      });
+
+      const sys = systems.find(s => s.id === id);
+      document.getElementById('sysTitle').innerText = sys.name;
+      document.getElementById('sysCat').innerText = `${sys.cat} — ${sys.desc}`;
+      
+      const swatches = document.getElementById('swatches');
+      swatches.innerHTML = sys.colors.map(c => `
+        <div class="swatch-item">
+          <div class="swatch-color" style="background:${c}"></div>
+          <span>${c}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('compStage').innerHTML = sys.ui;
+    }
+
+    renderSidebar();
+    selectSystem(1);
+  </script>
+</body>
+</html>
