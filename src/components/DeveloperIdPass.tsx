@@ -70,7 +70,7 @@ const DeveloperIdPass: React.FC = () => {
       <Box
         sx={{
           display: 'flex',
-          justify-content: 'space-between',
+          justifyContent: 'space-between',
           fontSize: '0.75rem',
           fontFamily: 'monospace',
           color: theme.palette.text.secondary,
