@@ -1,12 +1,13 @@
 // src/pages/index.tsx
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Link as MuiLink, Card, CardContent, Chip } from '@mui/material';
+import { Box, Typography, Link as MuiLink, Card, CardContent, Chip, Grid } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import frontMatter from 'front-matter';
 
 import About from '../components/About';
 import Projects from '../components/Projects';
+import SovereignSigil from '../components/SovereignSigil';
 
 declare const require: {
   context(
@@ -95,7 +96,7 @@ const RecentWritingSection: React.FC = () => {
               transition: 'all 0.2s ease',
               '&:hover': {
                 borderColor: theme.palette.primary.main,
-                boxShadow: '0 4px 20px rgba(56, 189, 248, 0.08)',
+                boxShadow: '0 4px 20px rgba(245, 158, 11, 0.08)',
                 transform: 'translateY(-1px)',
               },
             }}
@@ -155,28 +156,89 @@ const SovereignFooter: React.FC = () => {
         pt: theme.spacing(6),
         pb: theme.spacing(4),
         borderTop: `1px solid ${theme.palette.divider}`,
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        alignItems: { xs: 'flex-start', sm: 'center' },
-        justifyContent: 'space-between',
-        gap: 2,
+        mt: theme.spacing(6),
       }}
     >
-      <Box>
-        <Typography variant="body2" sx={{ fontWeight: 700, color: theme.palette.text.primary }}>
-          Yiğit Çelik
-        </Typography>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, display: 'block', mt: 0.5 }}>
-          Backend Systems & AI Architect · Industrial Engineering
-        </Typography>
-      </Box>
+      <Grid container spacing={4}>
+        {/* Brand & Identity Column */}
+        <Grid item xs={12} md={5}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.5 }}>
+            <SovereignSigil size={26} color={theme.palette.primary.main} />
+            <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1.05rem', color: theme.palette.text.primary }}>
+              Yiğit Çelik
+            </Typography>
+          </Box>
+          <Typography variant="body2" sx={{ color: theme.palette.text.secondary, lineHeight: 1.7, mb: 2, fontSize: '0.875rem' }}>
+            Backend Systems & AI Architect · PAU Industrial Engineering. Synthesizing Endüstri 5.0 systems optimization with cultural product architecture (MINTIKA Cinema OS).
+          </Typography>
+          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
+            PGP: 4F92 B7A1 9902 C110 0201
+          </Typography>
+        </Grid>
 
-      <Box sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
-          37.7749°N · 29.0875°E
+        {/* Curated Interests & Systems Column */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography
+            variant="overline"
+            sx={{ color: theme.palette.primary.main, letterSpacing: 1.5, fontWeight: 700, mb: 1.5, display: 'block' }}
+          >
+            Curated Dimensions
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            {[
+              '🎞️ 35mm Analog & Film Narratology',
+              '⚙️ Endüstri 5.0 Systems Optimization',
+              '🏎️ WRC Telemetry & Linux Hardware',
+              '🏛️ Türk Tarihi & Tamga Sembolizmi',
+            ].map((interest) => (
+              <Typography key={interest} variant="caption" sx={{ color: theme.palette.text.secondary, fontSize: '0.8rem' }}>
+                {interest}
+              </Typography>
+            ))}
+          </Box>
+        </Grid>
+
+        {/* Network & Identity Links */}
+        <Grid item xs={12} sm={6} md={3}>
+          <Typography
+            variant="overline"
+            sx={{ color: theme.palette.primary.main, letterSpacing: 1.5, fontWeight: 700, mb: 1.5, display: 'block' }}
+          >
+            Network
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.75 }}>
+            {[
+              { label: 'GitHub', href: 'https://github.com/yigitckk' },
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yigitck/' },
+              { label: 'X / Twitter', href: 'https://x.com/yigitopt' },
+              { label: 'PAU Email', href: 'mailto:ycelik221@posta.pau.edu.tr' },
+            ].map(({ label, href }) => (
+              <MuiLink
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: theme.palette.text.secondary,
+                  fontSize: '0.8rem',
+                  fontFamily: 'monospace',
+                  textDecoration: 'none',
+                  '&:hover': { color: theme.palette.primary.main },
+                }}
+              >
+                {label} →
+              </MuiLink>
+            ))}
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Box sx={{ borderTop: `1px solid ${theme.palette.divider}`, mt: 4, pt: 3, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
+          © {new Date().getFullYear()} Yiğit Çelik · yigitc.dev
         </Typography>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block', mt: 0.25 }}>
-          MMXXVI · yigitc.dev
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
+          Pamukkale IE // 37.7749°N · 29.0875°E
         </Typography>
       </Box>
     </Box>
