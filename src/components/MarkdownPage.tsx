@@ -1,7 +1,7 @@
 // src/components/MarkdownPage.tsx
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Box, Typography, Link as MuiLink, Button, Chip } from '@mui/material';
+import { Box, Typography, Link as MuiLink, Button } from '@mui/material';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import frontMatter from 'front-matter';
 import { useTheme } from '@mui/material/styles';
+import BlogCoverBanner from './BlogCoverBanner';
 
 interface CodeProps {
   node?: any;
@@ -35,7 +36,7 @@ const MarkdownPage: React.FC = () => {
           })
           .then((text) => {
             const { attributes, body } = frontMatter<{ title: string; uploadDate: string }>(text);
-            setMetadata({ title: attributes.title, uploadDate: attributes.uploadDate });
+            setMetadata({ title: attributes.title || slug || '', uploadDate: attributes.uploadDate || '' });
             setContent(body);
           })
           .catch(() => setError('Error loading content.'));
@@ -60,7 +61,7 @@ const MarkdownPage: React.FC = () => {
     <Box sx={{ width: '100%', maxWidth: 720, py: theme.spacing(4) }}>
       <Button
         component={RouterLink}
-        to="/blog"
+        to="/#writing"
         size="small"
         sx={{
           mb: 3,
@@ -74,33 +75,19 @@ const MarkdownPage: React.FC = () => {
         ← Back to Writing
       </Button>
 
-      <Box sx={{ mb: 4, pb: 3, borderBottom: `1px solid ${theme.palette.divider}` }}>
-        <Chip
-          label="ENGINEERING_POSTMORTEM"
-          size="small"
-          sx={{
-            fontFamily: 'monospace',
-            fontSize: '0.7rem',
-            fontWeight: 600,
-            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0, 123, 255, 0.08)',
-            color: theme.palette.primary.main,
-            border: `1px solid ${theme.palette.primary.main}33`,
-            mb: 1.5,
-          }}
-        />
-        <Typography
-          variant="h4"
-          sx={{ fontWeight: 700, color: theme.palette.text.primary, mb: 1.5, lineHeight: 1.3 }}
-        >
-          {metadata.title}
-        </Typography>
+      {/* Cinematic 35mm & Tamga Cover Banner */}
+      <BlogCoverBanner title={metadata.title} category="Engineering Postmortem" />
 
-        {metadata.uploadDate && (
-          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
-            {new Date(metadata.uploadDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+      {metadata.uploadDate && (
+        <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `1px solid ${theme.palette.divider}`, pb: 2 }}>
+          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
+            PUBLISHED: {new Date(metadata.uploadDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
           </Typography>
-        )}
-      </Box>
+          <Typography variant="caption" sx={{ color: theme.palette.primary.main, fontFamily: 'monospace' }}>
+            yigitc.dev // LOG
+          </Typography>
+        </Box>
+      )}
 
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
@@ -194,7 +181,7 @@ const MarkdownPage: React.FC = () => {
                 pl: 2.5,
                 py: 1,
                 my: 2.5,
-                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.05)' : 'rgba(0, 123, 255, 0.03)',
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(245, 158, 11, 0.05)' : 'rgba(0, 123, 255, 0.03)',
                 borderRadius: '0 8px 8px 0',
                 color: theme.palette.text.secondary,
                 fontStyle: 'italic',

@@ -1,12 +1,13 @@
 // src/pages/index.tsx
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Link as MuiLink, Card, CardContent, Chip, Grid } from '@mui/material';
+import { Box, Typography, Link as MuiLink, Card, CardContent, Chip } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import frontMatter from 'front-matter';
 
 import About from '../components/About';
 import Projects from '../components/Projects';
+import Contact from '../components/Contact';
 import SovereignSigil from '../components/SovereignSigil';
 
 declare const require: {
@@ -153,92 +154,36 @@ const SovereignFooter: React.FC = () => {
     <Box
       component="footer"
       sx={{
-        pt: theme.spacing(6),
+        pt: theme.spacing(5),
         pb: theme.spacing(4),
         borderTop: `1px solid ${theme.palette.divider}`,
-        mt: theme.spacing(6),
+        mt: theme.spacing(8),
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: { xs: 'flex-start', sm: 'center' },
+        justifyContent: 'space-between',
+        gap: 2,
+        backgroundColor: 'transparent', // Seamless blend with dark background
       }}
     >
-      <Grid container spacing={4}>
-        {/* Brand & Identity Column */}
-        <Grid item xs={12} md={5}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.5 }}>
-            <SovereignSigil size={26} color={theme.palette.primary.main} />
-            <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '1.05rem', color: theme.palette.text.primary }}>
-              Yiğit Çelik
-            </Typography>
-          </Box>
-          <Typography variant="body2" sx={{ color: theme.palette.text.secondary, lineHeight: 1.7, mb: 2, fontSize: '0.875rem' }}>
-            Backend Systems & AI Architect · PAU Industrial Engineering. Synthesizing Endüstri 5.0 systems optimization with cultural product architecture (MINTIKA Cinema OS).
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <SovereignSigil size={24} color={theme.palette.primary.main} />
+        <Box>
+          <Typography variant="body2" sx={{ fontWeight: 700, color: theme.palette.text.primary }}>
+            Yiğit Çelik
           </Typography>
-          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
-            PGP: 4F92 B7A1 9902 C110 0201
+          <Typography variant="caption" sx={{ color: theme.palette.text.secondary, display: 'block', mt: 0.25 }}>
+            Backend Systems & AI Architect · Industrial Engineering
           </Typography>
-        </Grid>
+        </Box>
+      </Box>
 
-        {/* Curated Interests & Systems Column */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Typography
-            variant="overline"
-            sx={{ color: theme.palette.primary.main, letterSpacing: 1.5, fontWeight: 700, mb: 1.5, display: 'block' }}
-          >
-            Curated Dimensions
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            {[
-              '🎞️ 35mm Analog & Film Narratology',
-              '⚙️ Endüstri 5.0 Systems Optimization',
-              '🏎️ WRC Telemetry & Linux Hardware',
-              '🏛️ Türk Tarihi & Tamga Sembolizmi',
-            ].map((interest) => (
-              <Typography key={interest} variant="caption" sx={{ color: theme.palette.text.secondary, fontSize: '0.8rem' }}>
-                {interest}
-              </Typography>
-            ))}
-          </Box>
-        </Grid>
-
-        {/* Network & Identity Links */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography
-            variant="overline"
-            sx={{ color: theme.palette.primary.main, letterSpacing: 1.5, fontWeight: 700, mb: 1.5, display: 'block' }}
-          >
-            Network
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.75 }}>
-            {[
-              { label: 'GitHub', href: 'https://github.com/yigitckk' },
-              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yigitck/' },
-              { label: 'X / Twitter', href: 'https://x.com/yigitopt' },
-              { label: 'PAU Email', href: 'mailto:ycelik221@posta.pau.edu.tr' },
-            ].map(({ label, href }) => (
-              <MuiLink
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: theme.palette.text.secondary,
-                  fontSize: '0.8rem',
-                  fontFamily: 'monospace',
-                  textDecoration: 'none',
-                  '&:hover': { color: theme.palette.primary.main },
-                }}
-              >
-                {label} →
-              </MuiLink>
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-
-      <Box sx={{ borderTop: `1px solid ${theme.palette.divider}`, mt: 4, pt: 3, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
-          © {new Date().getFullYear()} Yiğit Çelik · yigitc.dev
+      <Box sx={{ textAlign: { xs: 'left', sm: 'right' } }}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace', display: 'block' }}>
+          Manisa, TR // Sovereign Base
         </Typography>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontFamily: 'monospace' }}>
-          Pamukkale IE // 37.7749°N · 29.0875°E
+        <Typography variant="caption" sx={{ color: theme.palette.primary.main, fontFamily: 'monospace', display: 'block', mt: 0.25, fontWeight: 600 }}>
+          yigitc.dev · MMXXVI
         </Typography>
       </Box>
     </Box>
@@ -246,15 +191,20 @@ const SovereignFooter: React.FC = () => {
 };
 
 const HomePage: React.FC = () => {
+  const theme = useTheme();
+
   return (
-    <>
+    <Box>
       <About />
       <RecentWritingSection />
-      <Box id="projects">
+      <Box id="projects" sx={{ mb: theme.spacing(8) }}>
         <Projects />
       </Box>
+      <Box id="contact">
+        <Contact />
+      </Box>
       <SovereignFooter />
-    </>
+    </Box>
   );
 };
 
