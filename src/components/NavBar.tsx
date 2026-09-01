@@ -37,15 +37,16 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
         top: 0,
         left: 0,
         right: 0,
-        height: 56,
+        height: { xs: 56, sm: 60 },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        px: { xs: 2.5, sm: 4 },
-        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 15, 20, 0.88)' : 'rgba(255, 255, 255, 0.88)',
-        backdropFilter: 'blur(12px)',
+        px: { xs: 2, sm: 4 },
+        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(13, 15, 20, 0.92)' : 'rgba(255, 255, 255, 0.92)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         borderBottom: `1px solid ${theme.palette.divider}`,
-        zIndex: theme.zIndex.appBar,
+        zIndex: theme.zIndex.appBar + 10,
       }}
     >
       {/* Brand & Custom Sovereign Sigil */}
@@ -55,15 +56,16 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: 1.25,
+          gap: { xs: 1, sm: 1.25 },
           textDecoration: 'none',
+          flexShrink: 0,
         }}
       >
-        <SovereignSigil size={24} color={theme.palette.primary.main} />
+        <SovereignSigil size={22} color={theme.palette.primary.main} />
         <Typography
           sx={{
             fontWeight: 700,
-            fontSize: '0.95rem',
+            fontSize: { xs: '0.875rem', sm: '0.95rem' },
             color: theme.palette.text.primary,
             letterSpacing: '-0.02em',
             fontFamily: 'monospace',
@@ -74,14 +76,14 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
       </Box>
 
       {/* Nav links (Horizontal, minimal) */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 2, sm: 3 } }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1.5, sm: 2.5 } }}>
         {navItems.map(({ to, label }) => (
           <Typography
             key={to}
             component={Link}
             to={to}
             sx={{
-              fontSize: '0.85rem',
+              fontSize: { xs: '0.8rem', sm: '0.85rem' },
               fontWeight: isActive(to) ? 600 : 400,
               color: isActive(to) ? theme.palette.text.primary : theme.palette.text.secondary,
               textDecoration: 'none',
@@ -93,7 +95,7 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
           </Typography>
         ))}
 
-        <IconButton size="small" onClick={toggleTheme} sx={{ color: theme.palette.text.secondary, ml: 0.5 }}>
+        <IconButton size="small" onClick={toggleTheme} sx={{ color: theme.palette.text.secondary, ml: { xs: 0.25, sm: 0.5 } }}>
           {themeMode === 'dark' ? <LightModeIcon sx={{ fontSize: 16 }} /> : <DarkModeIcon sx={{ fontSize: 16 }} />}
         </IconButton>
       </Box>

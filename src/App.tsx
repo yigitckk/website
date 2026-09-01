@@ -90,7 +90,7 @@ const App: React.FC = () => {
             maxWidth: 720,
             mx: 'auto',
             px: { xs: 2.5, sm: 3 },
-            pt: '80px',
+            pt: { xs: '76px', sm: '88px' },
             pb: 10,
             minHeight: '100vh',
             backgroundColor: 'transparent', // Inherit body radial gradient
