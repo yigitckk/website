@@ -71,7 +71,7 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
             fontFamily: 'monospace',
           }}
         >
-          yigitc.dev
+          yigitc.tech
         </Typography>
       </Box>
 

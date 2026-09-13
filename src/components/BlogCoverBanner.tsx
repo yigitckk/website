@@ -81,7 +81,7 @@ export const BlogCoverBanner: React.FC<BlogCoverBannerProps> = ({ title, categor
           zIndex: 1,
         }}
       >
-        ◆ yigitc.dev // {category.toUpperCase()}
+        ◆ yigitc.tech // {category.toUpperCase()}
       </Typography>
 
       <Typography

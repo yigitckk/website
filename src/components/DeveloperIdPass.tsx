@@ -78,7 +78,7 @@ const DeveloperIdPass: React.FC = () => {
           borderTop: `1px solid ${theme.palette.divider}`,
         }}
       >
-        <span>DOMAIN: <strong>yigitc.dev</strong></span>
+        <span>DOMAIN: <strong>yigitc.tech</strong></span>
         <span>PAU IND ENG · 2026</span>
         <span>LOC: <strong>TURKEY</strong></span>
       </Box>

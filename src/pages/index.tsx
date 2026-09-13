@@ -183,7 +183,7 @@ const SovereignFooter: React.FC = () => {
           Manisa, TR // Sovereign Base
         </Typography>
         <Typography variant="caption" sx={{ color: theme.palette.primary.main, fontFamily: 'monospace', display: 'block', mt: 0.25, fontWeight: 600 }}>
-          yigitc.dev · MMXXVI
+          yigitc.tech · MMXXVI
         </Typography>
       </Box>
     </Box>

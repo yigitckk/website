@@ -84,7 +84,7 @@ const MarkdownPage: React.FC = () => {
             PUBLISHED: {new Date(metadata.uploadDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
           </Typography>
           <Typography variant="caption" sx={{ color: theme.palette.primary.main, fontFamily: 'monospace' }}>
-            yigitc.dev // LOG
+            yigitc.tech // LOG
           </Typography>
         </Box>
       )}
