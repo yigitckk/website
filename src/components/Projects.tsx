@@ -44,12 +44,12 @@ const projects: Project[] = [
     status: 'done',
   },
   {
-    name: 'Append-Only Event Log',
+    name: 'plotpoint.space',
     description:
-      'Event store with replay, snapshot, and idempotency. The foundation for event sourcing patterns — and for any stateful product that needs audit trails or time-travel.',
-    tags: ['FastAPI', 'PostgreSQL', 'Event Sourcing'],
-    url: 'https://github.com/yigitckk/event-log',
-    status: 'building',
+      'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking.',
+    tags: ['FastAPI', 'React Native', 'WebSocket', 'TypeScript'],
+    url: 'https://plotpoint.space',
+    status: 'archived',
   },
 ];
 

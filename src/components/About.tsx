@@ -117,7 +117,7 @@ const About: React.FC = () => {
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(1.5) }}>
           {[
-            { label: 'Backend Engineering', status: 'active', note: 'Auth · Job Queue · Event Log' },
+            { label: 'Backend Engineering', status: 'active', note: 'Auth · Job Queue' },
             { label: 'Data Engineering', status: 'next', note: 'Pipelines · dbt · Airflow' },
             { label: 'ML Engineering', status: 'later', note: 'Feature stores · Model serving · not notebooks' },
           ].map(({ label, status, note }) => (
