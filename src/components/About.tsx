@@ -58,7 +58,7 @@ const About: React.FC = () => {
             mb: theme.spacing(4),
           }}
         >
-          Industrial engineering background (PAU) synthesizing Endüstri 5.0 systems thinking with cultural product architecture (building MINTIKA Cinema OS). Building toward a life where engineering skill, indie products, and genuine curiosity all compound together. Global in scope. Specific in taste.
+          Industrial engineering background (PAU) synthesizing Endüstri 5.0 systems thinking with production backend engineering. Building toward a life where engineering skill, indie products, and genuine curiosity all compound together. Global in scope. Specific in taste.
         </Typography>
 
         <Stack direction="row" spacing={2} flexWrap="wrap" gap={1}>

@@ -29,16 +29,16 @@ const CliTerminal: React.FC = () => {
       </Typography>
 
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
-        [OK] Ollama Local LLM (Qwen2.5-27B) → 42.8 tok/s inference speed
+        [OK] Vikunja Task OS → 1,213 tasks / 35 projects (Cloudflare Tunnel)
       </Typography>
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
-        [OK] MINTIKA Thermal Receipt Engine → Online (35mm Card Ready)
+        [OK] Miniflux Intelligence Feed → 459 sources / 42 categories
       </Typography>
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
-        [OK] Hayat OS Graph RAG → 14,280 Nodes Indexed
+        [OK] Local RAG Engine (motor.py) → 11,405-doc corpus, citation-gated
       </Typography>
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
-        [OK] Sovereign Cloud Gaming → Sunshine 60 FPS Stream (NVMe Partition)
+        [OK] Glance Command Hub → services + RSS on one pane
       </Typography>
 
       <Typography sx={{ color: '#22c55e', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 600, mt: 1 }}>

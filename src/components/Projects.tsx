@@ -13,27 +13,10 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: 'MINTIKA Cinema OS',
+    name: 'Sentinel — Sovereign Intelligence OS',
     description:
-      'Culturally-driven Cinema OS featuring 35mm thermal receipts, film narratology vector engines, and P2P co-presence social architecture.',
-    tags: ['Flutter', 'SQLite', 'Thermal Receipt Engine', 'On-Device Only'],
-    url: 'https://mintika.dev',
-    status: 'building',
-  },
-  {
-    name: 'Sentinel Sovereign OS & Agent Core',
-    description:
-      'Privacy-first local intelligence command center running Ollama/Qwen2.5 LLMs, Graph RAG memory pipelines, n8n OSINT fetchers, and automated Obsidian knowledge graphs.',
-    tags: ['Python', 'FastAPI', 'Qwen2.5', 'Graph RAG', 'Linux systemd'],
-    url: 'https://github.com/yigitckk/hayat-os',
-    status: 'live',
-  },
-  {
-    name: 'Sovereign Cloud Gaming Hub',
-    description:
-      'Sunshine/RPCS3/Wine hardware-accelerated 60 FPS streaming server provisioned on dedicated sovereign Linux NVMe storage partitions.',
-    tags: ['Linux Kernel', 'Sunshine', 'WebRTC', 'Wine'],
-    url: 'https://github.com/yigitckk/cloud-gaming-hub',
+      'Local-first intelligence stack: Miniflux feeds (459 sources), a citation-gated RAG engine over an 11k-doc corpus, Obsidian vault automation, and a Glance command hub — all self-hosted on my own hardware.',
+    tags: ['Python', 'PostgreSQL', 'RAG', 'Miniflux', 'Linux systemd'],
     status: 'live',
   },
   {
