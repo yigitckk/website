@@ -13,14 +13,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: 'plotpoint.space',
-    description:
-      'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking.',
-    tags: ['FastAPI', 'React Native', 'WebSocket', 'TypeScript'],
-    url: 'https://plotpoint.space',
-    status: 'archived',
-  },
-  {
     name: 'Auth Service',
     description:
       'Production-grade standalone auth system. JWT issue/refresh/revoke, rate limiting, session management, Testcontainers test suite, VPS deployed with systemd + nginx + TLS.',
