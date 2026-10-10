@@ -13,13 +13,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: 'Sentinel — Sovereign Intelligence OS',
-    description:
-      'Local-first intelligence stack: Miniflux feeds (459 sources), a citation-gated RAG engine over an 11k-doc corpus, Obsidian vault automation, and a Glance command hub — all self-hosted on my own hardware.',
-    tags: ['Python', 'PostgreSQL', 'RAG', 'Miniflux', 'Linux systemd'],
-    status: 'live',
-  },
-  {
     name: 'plotpoint.space',
     description:
       'Jackbox-style multiplayer film party game using real Letterboxd data. 8 game modes including Classic Movie Roulette, Cinema Dilemma, Hot Takes, and Blind Ranking.',

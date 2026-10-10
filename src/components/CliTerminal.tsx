@@ -32,7 +32,7 @@ const CliTerminal: React.FC = () => {
         [OK] Vikunja Task OS → 1,213 tasks / 35 projects (Cloudflare Tunnel)
       </Typography>
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
-        [OK] Miniflux Intelligence Feed → 459 sources / 42 categories
+        [OK] Obsidian Vault → 300+ notes, git-synced
       </Typography>
       <Typography sx={{ color: '#94a3b8', fontFamily: 'inherit', fontSize: 'inherit' }}>
         [OK] Local RAG Engine (motor.py) → 11,405-doc corpus, citation-gated
