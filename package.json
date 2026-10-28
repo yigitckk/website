@@ -1,11 +1,11 @@
 {
     "name": "portfolio-website",
     "version": "1.0.0",
-    "description": "A personal portfolio website for Anil Ozturk showcasing his background, experience, and projects.",
+    "description": "Personal portfolio of Yiğit Çelik — backend, applied AI and sign CAD projects.",
     "main": "src/index.tsx",
     "scripts": {
         "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-        "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && node scripts/postbuild.js",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -16,17 +16,18 @@
         "@mui/material": "^6.4.3",
         "@types/react": "^18.0.27",
         "@types/react-dom": "^18.0.10",
+        "buffer": "^6.0.3",
         "front-matter": "^4.0.2",
         "gray-matter": "^4.0.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-helmet-async": "^2.0.5",
         "react-markdown": "^9.0.3",
         "react-router-dom": "^7.1.5",
         "react-scripts": "5.0.1",
         "react-syntax-highlighter": "^15.6.1",
         "rehype-raw": "^7.0.0",
-        "remark-gfm": "^4.0.0",
-        "buffer": "^6.0.3"
+        "remark-gfm": "^4.0.0"
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -39,7 +40,7 @@
         "react",
         "typescript"
     ],
-    "author": "Anil Ozturk",
+    "author": "Yiğit Çelik",
     "license": "MIT",
     "browserslist": {
         "production": [

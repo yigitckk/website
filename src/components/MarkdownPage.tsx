@@ -10,6 +10,7 @@ import rehypeRaw from 'rehype-raw';
 import frontMatter from 'front-matter';
 import { useTheme } from '@mui/material/styles';
 import BlogCoverBanner from './BlogCoverBanner';
+import Seo from './Seo';
 
 interface CodeProps {
   node?: any;
@@ -75,6 +76,15 @@ const MarkdownPage: React.FC = () => {
         ← Back to Writing
       </Button>
 
+      {metadata.title && (
+        <Seo
+          title={`${metadata.title} — Yiğit Çelik`}
+          description={content.replace(/[#>*`_\[\]()!-]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)}
+          path={`/blog/${slug}`}
+          type="article"
+          jsonLd={{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: metadata.title, url: `https://yigitc.tech/blog/${slug}`, author: { '@type': 'Person', name: 'Yiğit Çelik', url: 'https://yigitc.tech' } }}
+        />
+      )}
       {/* Cinematic 35mm & Tamga Cover Banner */}
       <BlogCoverBanner title={metadata.title} category="Engineering Postmortem" />
 

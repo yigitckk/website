@@ -10,18 +10,23 @@ React + MUI, built with Create React App, deployed on GitHub Pages under a custo
 
 - **About** — who I am: backend engineer path (auth → job queue → event log), industrial engineering background (PAU), Endüstri 5.0 systems thinking
 - **Path** — Backend / Data / ML engineering tracks I'm working through
-- **Projects** — the real ones, honestly labelled: [Sentinel sovereign intelligence stack](https://yigitc.tech), [plotpoint.space](https://plotpoint.space), [auth-service](https://github.com/yigitckk/auth-service), [job-queue](https://github.com/yigitckk/job-queue), append-only event log (building)
+- **Projects** — categorized portfolio (3D Modeling & Sign Design · Applied AI & Decision Science · Backend & Systems), each with a blog-style detail page at `/projects/<slug>`
 - **CLI terminal block** — the actual status of my self-hosted stack (Vikunja task OS, Miniflux feeds, RAG engine, Glance hub), no fake numbers
 
 ## Build & deploy
 
 ```bash
-npm run build                                  # → build/
-git subtree push --prefix build origin gh-pages
-# (or: git subtree split --prefix build → force push that SHA to gh-pages)
+npm ci
+npm run build        # react-scripts build + scripts/postbuild.js
 ```
 
-GitHub Pages serves the `gh-pages` branch with the `CNAME` file → https://yigitc.tech
+Push to `main` → GitHub Actions (`.github/workflows/deploy.yml`) builds and publishes `build/` to the `gh-pages` branch (CNAME `yigitc.tech`).
+
+`scripts/postbuild.js` writes per-route HTML (`/projects/<slug>`, `/blog/<slug>`) with title/meta/Open Graph/JSON-LD baked in, a `404.html` SPA fallback and `sitemap.xml`.
+
+## Adding a project
+
+Everything lives in `src/data/projects.json`: add an entry to `projects` (slug, title, category, summary, cover, gallery, tags, links, problem/approach/result markdown) and drop optimized images in `public/images/projects/<slug>/`. New category = one entry in `categories`; the filter tabs, detail page, sitemap and meta pick it up automatically.
 
 ## Design
 

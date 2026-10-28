@@ -4,6 +4,7 @@ import { Box, Typography, Link as MuiLink, Card, CardContent, Chip } from '@mui/
 import { Link as RouterLink } from 'react-router-dom';
 import frontMatter from 'front-matter';
 import { useTheme } from '@mui/material/styles';
+import Seo from './Seo';
 
 declare const require: {
   context(
@@ -70,6 +71,7 @@ const Blog: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%', py: theme.spacing(4) }}>
+      <Seo title="Writing — Yiğit Çelik" description="Postmortems and notes on backend architecture, local LLMs and systems engineering." path="/blog" />
       <Box sx={{ mb: theme.spacing(4) }}>
         <Chip
           label="ENGINEERING LOGS & POSTMORTEMS"
