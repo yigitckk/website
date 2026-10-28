@@ -1,0 +1,367 @@
+{
+  "categories": [
+    {
+      "slug": "3d-sign-design",
+      "label": "3D Modeling & Sign Design",
+      "description": "Parametric CAD, fabrication-ready DXF/PDF packages and photoreal Blender renders for architectural signage."
+    },
+    {
+      "slug": "applied-ai",
+      "label": "Applied AI & Decision Science",
+      "description": "Operations research, statistics and decision models applied to real business questions."
+    },
+    {
+      "slug": "backend",
+      "label": "Backend & Systems",
+      "description": "Services built from first principles: auth, queues, real-time multiplayer."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "halo-lit-channel-letter-sign",
+      "title": "Halo-lit reverse channel letter sign — parametric CAD + night-scene render",
+      "category": "3d-sign-design",
+      "summary": "Exterior halo-lit sign for a street-front venue: 3D geometry, cut-ready DXF across a revision cycle, and a from-scratch night scene.",
+      "date": "2026-10-25",
+      "status": "client review",
+      "cover": "/images/projects/halo-lit-channel-letter-sign/cover.webp",
+      "coverAlt": "Night street render of a brick facade with a halo-lit sign above the entrance (lettering blurred pending client approval)",
+      "ogImage": "/images/projects/halo-lit-channel-letter-sign/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/halo-lit-channel-letter-sign/cover.webp",
+          "alt": "Wide night street scene, wet pavement and streetlight",
+          "caption": "Wide night scene — streetlight, wet-pavement reflections, halo glow."
+        },
+        {
+          "src": "/images/projects/halo-lit-channel-letter-sign/halo-wash-profile.webp",
+          "alt": "Profile view of letter returns casting a warm halo onto brick",
+          "caption": "Profile: reverse letters on standoffs, LED wash on the brick behind them."
+        },
+        {
+          "src": "/images/projects/halo-lit-channel-letter-sign/raceway-macro.webp",
+          "alt": "Macro of the halo light spreading across textured brick",
+          "caption": "Macro detail of the halo spill on textured brick."
+        }
+      ],
+      "tags": [
+        "FreeCAD",
+        "Parametric CAD",
+        "DXF",
+        "Blender Cycles",
+        "Halo-lit",
+        "Technical drawing"
+      ],
+      "links": [],
+      "sections": {
+        "problem": "A street-front venue needed an exterior halo-lit sign, 2361 mm wide, with a specific lighting behaviour: the LED glow lands on the wall *behind* the letters, not on the letter faces. The client also went through a revision cycle after seeing the first render (decorative lines removed, text re-justified), so CAD, cut files and drawings had to stay in sync across versions.",
+        "approach": "- Built the full 3D geometry parametrically: reverse channel letters with **100 mm** depth, **38 mm** standoff and a **50×30 mm** raceway.\n- Iterated to v2 per client feedback and re-exported cut-ready **DXF** for both versions, plus a dimensioned technical PDF.\n- Instead of a generic studio render, built a night scene from scratch in Blender (streetlight, wet pavement reflection, halo glow) and a 6-angle detail set for the presentation deck.",
+        "result": "A client-facing presentation package — not just CAD files — that lets the business see the sign installed at night before committing to fabrication, reducing the risk of a costly post-install redesign.\n\n> Client identity is withheld and lettering is blurred in these images while approval is pending."
+      }
+    },
+    {
+      "slug": "lobby-3d-logo-sign-metal-finishes",
+      "title": "Lobby 3D logo wall sign — two metal finishes, 14-render approval set",
+      "category": "3d-sign-design",
+      "summary": "Multi-part 3D logo sign reverse-engineered from a single reference image, rendered as 7 angles × 2 finishes in a scripted Blender scene.",
+      "date": "2026-10-28",
+      "status": "client review",
+      "cover": "/images/projects/lobby-3d-logo-sign-metal-finishes/cover.webp",
+      "coverAlt": "Office lobby render with wood ceiling, reception desk and a gold halo-lit logo sign (logo blurred pending client approval)",
+      "ogImage": "/images/projects/lobby-3d-logo-sign-metal-finishes/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/lobby-3d-logo-sign-metal-finishes/cover.webp",
+          "alt": "Lobby, frontal view, gold finish",
+          "caption": "Lobby, frontal — gold/brass finish with warm halo."
+        },
+        {
+          "src": "/images/projects/lobby-3d-logo-sign-metal-finishes/lobby-angle-steel.webp",
+          "alt": "Lobby, angled view, brushed steel finish",
+          "caption": "Lobby, angled — brushed stainless finish, same geometry and light."
+        },
+        {
+          "src": "/images/projects/lobby-3d-logo-sign-metal-finishes/macro-gold.webp",
+          "alt": "Macro of a gold letter return with halo light",
+          "caption": "Macro: satin-brushed gold face, return depth and halo line."
+        },
+        {
+          "src": "/images/projects/lobby-3d-logo-sign-metal-finishes/macro-steel.webp",
+          "alt": "Macro of a brushed steel letter return with halo light",
+          "caption": "Macro: brushed stainless variant for side-by-side comparison."
+        }
+      ],
+      "tags": [
+        "FreeCAD",
+        "Reverse engineering",
+        "DXF",
+        "Blender 4.2 (headless)",
+        "Python",
+        "Material variants"
+      ],
+      "links": [],
+      "sections": {
+        "problem": "A company needed its multi-part logo produced as a 3D wall sign for an office lobby — but only had a single reference render, no CAD source and no vector logo. The decision-maker also wanted to compare finishes in a realistic room, not on a blank studio wall.",
+        "approach": "- Reverse-engineered the full piece geometry in FreeCAD from the reference image (1500 mm wide) and produced cut-ready DXF for every part plus a technical PDF with a standoff mounting plan (52 pins, ≥2 per piece).\n- Wrote a scripted Blender scene (run headless from a shell batch) so camera, material and room are parameters: **7 angles × 2 finishes = 14 renders** at 2000 px, gold/brass vs. brushed stainless, ~2700 K warm halo, 20 mm standoff.\n- Documented the open item (vector logo still needed from the client) instead of guessing and re-doing work later.",
+        "result": "A QA-passed fabrication package ready the moment the vector logo arrives, and a 14-image comparison set where every frame shares the same geometry and light — so the finish decision is apples-to-apples.\n\n> Client identity is withheld and the logo is blurred / cropped in these images while approval is pending."
+      }
+    },
+    {
+      "slug": "signage-cad-fabrication-pipeline",
+      "title": "Signage CAD → fabrication pipeline with QA gates",
+      "category": "3d-sign-design",
+      "summary": "Scripted spec → CAD → DXF → PDF → render → package pipeline where every stage gates the next and a failed check stops the build.",
+      "date": "2026-10-27",
+      "status": "in production use",
+      "cover": "/images/projects/signage-cad-fabrication-pipeline/cover.webp",
+      "coverAlt": "Diagram of the seven-stage signage pipeline from spec.json to client package",
+      "ogImage": "/images/projects/signage-cad-fabrication-pipeline/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/signage-cad-fabrication-pipeline/cover.webp",
+          "alt": "Pipeline stage diagram",
+          "caption": "Pipeline stages, each with its own QA gate."
+        },
+        {
+          "src": "/images/projects/signage-cad-fabrication-pipeline/channel-letter-depth.webp",
+          "alt": "Macro render of a channel letter stroke and dot",
+          "caption": "Render-stage output: channel-letter return depth, macro angle."
+        }
+      ],
+      "tags": [
+        "FreeCAD",
+        "TechDraw",
+        "DXF",
+        "Blender",
+        "Python",
+        "QA automation"
+      ],
+      "links": [
+        {
+          "label": "Case study on GitHub",
+          "url": "https://github.com/yigitckk/signage-cad-pipeline-case-study"
+        }
+      ],
+      "sections": {
+        "problem": "A fabrication-ready signage deliverable has four interdependent parts — 3D CAD geometry, CNC cut-ready DXF, a dimensioned technical PDF (BOM, mounting detail) and photoreal approval renders. Done by hand, every revision risks the DXF and PDF silently drifting out of sync with the CAD — a mistake that surfaces only when a fabricator is holding the wrong file.",
+        "approach": "`spec.json` (dimensions, material, mount type) drives a staged build:\n\n1. Parametric CAD generation (FreeCAD)\n2. DXF export + contour QA\n3. Technical drawing projection (TechDraw)\n4. Dimensioned PDF + pagination QA\n5. Multi-angle render batch + render sanity check (blank/overexposed frames caught via pixel std-dev)\n6. Client package assembly + automated IP-leak check (fails if `.FCStd/.blend/.py/.json` sources would end up in the client zip)\n\nEvery stage writes to a single QA report; any failed check **stops** the build, so a partial package is never produced.",
+        "result": "From the project logs: ~1.5–2.5 h of active work per new design from spec (+30–40 min unattended render), and **0** CAD/DXF/PDF sync errors reaching a client package across completed projects. No time-savings percentage is claimed — there is no clean manual baseline to compare against."
+      }
+    },
+    {
+      "slug": "f1-strategy-lab",
+      "title": "F1 Strategy Lab — does the undercut actually work?",
+      "category": "applied-ai",
+      "summary": "1070 first-stop pit pairs from the 2024 season: the earlier stopper came out ahead only 39.6% of the time.",
+      "date": "2026-10-27",
+      "status": "done",
+      "cover": "/images/projects/f1-strategy-lab/cover.webp",
+      "coverAlt": "Bar chart: 424 of 1070 undercut attempts won (39.6%) versus a 50% coin-flip line",
+      "ogImage": "/images/projects/f1-strategy-lab/og.jpg",
+      "gallery": [],
+      "tags": [
+        "Python",
+        "pandas",
+        "Statistics",
+        "Jolpica-F1 API",
+        "Sports analytics"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/yigitckk/f1-strategy-lab"
+        }
+      ],
+      "sections": {
+        "problem": "Broadcast commentary treats the undercut — pitting before your rival — as a near-guaranteed strategic win. Is it? The original plan was lap-by-lap telemetry via FastF1, but F1's live-timing backend started returning `403` without an authenticated F1 account mid-project.",
+        "approach": "- Switched to the **Jolpica-F1 API** (community successor to Ergast): results, pit stops and lap-by-lap positions, all cached locally and rate-limited.\n- Paired drivers who made their **first stop within 3 laps** of each other and checked who was ahead afterwards.\n- Ran the full 2024 season: `python analysis/undercut_analysis.py --year 2024 --season --max-lap-gap 3`.",
+        "result": "**1070** pit-stop pairs analysed; the early stopper came out ahead in **424/1070 (39.6%)** — less than a coin flip. The same timing + position-tracking + win-rate technique transfers to any \"does doing X earlier actually help?\" business question (inventory timing, campaign timing)."
+      }
+    },
+    {
+      "slug": "vendor-selection-mcdm",
+      "title": "Vendor selection toolkit — AHP + TOPSIS",
+      "category": "applied-ai",
+      "summary": "Auditable multi-criteria supplier ranking: AHP turns judgments into weights (with a consistency check), TOPSIS ranks the vendors.",
+      "date": "2026-10-27",
+      "status": "done",
+      "cover": "/images/projects/vendor-selection-mcdm/cover.webp",
+      "coverAlt": "Charts of AHP criteria weights and TOPSIS closeness scores; the cheapest vendor ranks last",
+      "ogImage": "/images/projects/vendor-selection-mcdm/og.jpg",
+      "gallery": [],
+      "tags": [
+        "Python",
+        "AHP",
+        "TOPSIS",
+        "MCDM",
+        "Operations research",
+        "Procurement"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/yigitckk/vendor-selection-mcdm"
+        }
+      ],
+      "sections": {
+        "problem": "Small and mid-size businesses pick between 3–6 recurring suppliers on price, lead time, quality and reliability — usually with gut feel or weights invented in a spreadsheet minutes before the meeting, and no way to defend the choice later. In a signage business, choosing acrylic/metal material suppliers is exactly this problem.",
+        "approach": "- **AHP** converts pairwise judgments (\"how much more important is quality than price?\") into criteria weights, with Saaty's **Consistency Ratio** flagging contradictory judgments.\n- **TOPSIS** ranks vendors by distance to an ideal and a worst-case option under those weights.\n- Packaged as a re-runnable CLI instead of a one-off spreadsheet.",
+        "result": "Worked example (`--example sign-materials`): weights Quality 0.466, Reliability 0.277, Price 0.161, Lead Time 0.096 with **CR = 0.011** (consistent). Ranking: QualityFirst Fab 0.718 → Acme Metals 0.601 → FastSign Supply 0.511 → BudgetSign Co 0.241. The **cheapest vendor ranks last** once quality and reliability are weighted in — a non-obvious, defensible conclusion."
+      }
+    },
+    {
+      "slug": "field-service-route-optimizer",
+      "title": "Field-service route optimizer — CVRP with OR-Tools",
+      "category": "applied-ai",
+      "summary": "Quantifies what booking-order dispatch costs a small service fleet: 58.0% less driving on a synthetic 14-job, 2-van day.",
+      "date": "2026-10-27",
+      "status": "done",
+      "cover": "/images/projects/field-service-route-optimizer/cover.webp",
+      "coverAlt": "Two route maps: naive booking-order routes at 226.4 km versus OR-Tools optimized routes at 95.1 km",
+      "ogImage": "/images/projects/field-service-route-optimizer/og.jpg",
+      "gallery": [],
+      "tags": [
+        "Python",
+        "OR-Tools",
+        "CVRP",
+        "Vehicle routing",
+        "Operations research"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/yigitckk/field-service-route-optimizer"
+        }
+      ],
+      "sections": {
+        "problem": "Small field-service businesses — HVAC, plumbing, electrical, sign-installation crews, couriers — dispatch vans in the order jobs were booked, not the order that minimises driving. Dispatchers rarely have a routing background, so the gap is nearly universal under ~20 vehicles.",
+        "approach": "- Model the day as a **Capacitated Vehicle Routing Problem** and solve it with Google **OR-Tools** (path-cheapest-arc start, guided local search).\n- Compare against the naive baseline: jobs visited in booking order, split evenly across vans.\n- Time-window scaffolding (`AddDimension`) is already in place for customer availability slots.",
+        "result": "Synthetic 14-job day, 2 vans (`--jobs 14 --vans 2 --seed 7`): **226.4 km → 95.1 km, a 58.0% distance reduction**, ≈ $22,984/year at $0.70/km for one route per day. The chart above is plotted directly from that run of the repo code. Synthetic data is optimistic; the README notes 20–40% as the realistic range for fleets that have never route-optimised."
+      }
+    },
+    {
+      "slug": "auth-service",
+      "title": "Auth Service — JWT, sessions and revocation from scratch",
+      "category": "backend",
+      "summary": "Standalone auth: register/login/refresh/revoke, session tracking, token blacklist and login rate limiting, deployed on a VPS.",
+      "date": "2026-06-22",
+      "status": "done",
+      "cover": "/images/projects/auth-service/cover.webp",
+      "coverAlt": "Auth service architecture diagram",
+      "ogImage": "/images/projects/auth-service/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/auth-service/architecture.webp",
+          "alt": "Auth service architecture diagram",
+          "caption": "Request flow: FastAPI routes → service layer → PostgreSQL (users, refresh tokens, sessions, blacklist)."
+        }
+      ],
+      "tags": [
+        "FastAPI",
+        "PostgreSQL",
+        "SQLAlchemy 2.0",
+        "Alembic",
+        "JWT",
+        "structlog",
+        "pytest"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/yigitckk/auth-service"
+        },
+        {
+          "label": "Postmortem",
+          "url": "/blog/auth-service-postmortem"
+        }
+      ],
+      "sections": {
+        "problem": "Not \"how to use an auth library\" — the full shape of an auth system: where the trust boundaries are, what a token actually promises, and what operations look like when you own the whole stack.",
+        "approach": "- Short-lived **JWT access tokens** + long-lived, DB-backed **refresh tokens** (revocable → \"sign out everywhere\").\n- A **blacklist** for pre-expiry access-token kills on logout, with TTL cleanup.\n- Sessions as first-class records (IP + user-agent) with per-device revocation.\n- Login rate limit: **5 requests / IP / 5 min**.\n- structlog + request-ID middleware from day one; deployed on an Oracle Cloud VPS behind nginx with TLS.",
+        "result": "Nine endpoints covering the whole lifecycle (`/auth/register`, `/login`, `/refresh`, `/revoke`, `/revoke-all`, `/logout`, `/me`, `/sessions`, `DELETE /sessions/{id}`). Lessons from the postmortem: every \"temporary\" record needs an owner for its end of life, and rate limiting behind a proxy is a trust decision on `X-Forwarded-For` — the first draft rate-limited the proxy itself."
+      }
+    },
+    {
+      "slug": "job-queue",
+      "title": "Job Queue — PostgreSQL-backed task queue, no Redis",
+      "category": "backend",
+      "summary": "Atomic claim with FOR UPDATE SKIP LOCKED, bounded retries and a dead-letter quarantine — a queue as a pattern, not a broker.",
+      "date": "2026-06-24",
+      "status": "done",
+      "cover": "/images/projects/job-queue/cover.webp",
+      "coverAlt": "Job queue architecture diagram",
+      "ogImage": "/images/projects/job-queue/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/job-queue/architecture.webp",
+          "alt": "Job queue architecture diagram",
+          "caption": "Producer → jobs table → competing workers → COMPLETED or DEAD_LETTER."
+        }
+      ],
+      "tags": [
+        "FastAPI",
+        "PostgreSQL",
+        "SKIP LOCKED",
+        "SQLAlchemy",
+        "Alembic",
+        "structlog"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/yigitckk/job-queue"
+        },
+        {
+          "label": "Postmortem",
+          "url": "/blog/job-queue-postmortem"
+        }
+      ],
+      "sections": {
+        "problem": "Installing Celery takes an afternoon; explaining what it does is another matter. The goal was to build the smallest thing that is genuinely a queue — push/pop/retry, competing consumers, dead-letter handling — and let every shortcut show where the real engineering is.",
+        "approach": "- The queue is a Postgres table; the claim is `SELECT … FOR UPDATE SKIP LOCKED`, so competing workers never grab the same row and job state stays transactional with the business data.\n- Status enum `PENDING → RUNNING → COMPLETED / DEAD_LETTER`, bounded retries (`MAX_RETRIES = 5`) with the error message written on the row.\n- Dead-letter as quarantine, not deletion; structured JSON logs with request IDs.",
+        "result": "A queue reduced to four parts you can write down: **atomic claim + status column + retry policy + dead-letter quarantine**. The postmortem names the next fixes honestly — short claim transaction with a lease heartbeat, exponential backoff with jitter, `LISTEN/NOTIFY` instead of a 2-second busy poll."
+      }
+    },
+    {
+      "slug": "plotpoint-space",
+      "title": "plotpoint.space — Letterboxd-powered multiplayer film party game",
+      "category": "backend",
+      "summary": "Jackbox-style game: friends connect Letterboxd accounts and guess who picked which movie, live over WebSockets. Archived.",
+      "date": "2026-02-03",
+      "status": "archived",
+      "cover": "/images/projects/plotpoint-space/cover.webp",
+      "coverAlt": "Plot Point UI/UX flow overview showing the app's four main tabs",
+      "ogImage": "/images/projects/plotpoint-space/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/plotpoint-space/cover.webp",
+          "alt": "UI/UX flow overview",
+          "caption": "UI/UX flow: Discover, Play, Collections, Studio."
+        },
+        {
+          "src": "/images/projects/plotpoint-space/landing.webp",
+          "alt": "Desktop landing screen",
+          "caption": "Web landing with Google sign-in."
+        },
+        {
+          "src": "/images/projects/plotpoint-space/mobile-play.webp",
+          "alt": "Mobile play tab",
+          "caption": "Mobile \"Play\" tab — game modes."
+        }
+      ],
+      "tags": [
+        "FastAPI",
+        "WebSocket",
+        "React Native (Expo)",
+        "TypeScript",
+        "Zustand"
+      ],
+      "links": [],
+      "sections": {
+        "problem": "Film nights with friends need a game that uses what people actually watch. Letterboxd already holds everyone's movie history — the question was whether that data could drive a real-time party game that runs on iOS, Android and web from one codebase.",
+        "approach": "- **FastAPI** backend with WebSocket rooms; a host creates a game and shares a 6-letter code, minimum 3 players.\n- Each player enters a Letterboxd username; rounds show a film from someone's list and everyone guesses whose it is, with a 15-second voting timer and auto-reveal.\n- **React Native (Expo)** universal client, Zustand state with AsyncStorage persistence.",
+        "result": "A working cross-platform multiplayer game with live rounds, scoring and end-of-game awards (Best Guesser, Most Mysterious). The product is now **archived** and the source repository is private."
+      }
+    }
+  ]
+}

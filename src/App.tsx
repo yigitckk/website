@@ -14,6 +14,10 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Blog from './components/Blog';
 import MarkdownPage from './components/MarkdownPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectPage from './pages/ProjectPage';
+import ScrollToTop from './components/ScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
 
 import './styles/main.css';
 
@@ -80,9 +84,11 @@ const App: React.FC = () => {
   );
 
   return (
+    <HelmetProvider>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop />
         <NavBar toggleTheme={toggleThemeMode} themeMode={mode} />
         <Box
           component="main"
@@ -105,10 +111,13 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<MarkdownPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:slug" element={<ProjectPage />} />
           </Routes>
         </Box>
       </Router>
     </ThemeProvider>
+    </HelmetProvider>
   );
 };
 

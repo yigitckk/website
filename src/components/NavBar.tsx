@@ -14,7 +14,7 @@ interface NavBarProps {
 
 const navItems = [
   { to: '/blog', label: 'Writing' },
-  { to: '/#projects', label: 'Projects' },
+  { to: '/projects', label: 'Projects' },
   { to: '/#contact', label: 'Contact' },
 ];
 
@@ -25,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, themeMode }) => {
   const isActive = (to: string) => {
     if (to === '/blog') return location.pathname.startsWith('/blog');
     if (to === '/#contact') return location.hash === '#contact';
-    if (to === '/#projects') return location.hash === '#projects';
+    if (to === '/projects') return location.pathname.startsWith('/projects');
     return false;
   };
 

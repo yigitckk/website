@@ -9,6 +9,7 @@ import About from '../components/About';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import SovereignSigil from '../components/SovereignSigil';
+import Seo, { personJsonLd } from '../components/Seo';
 
 declare const require: {
   context(
@@ -195,10 +196,17 @@ const HomePage: React.FC = () => {
 
   return (
     <Box>
+      <Seo
+        title="Yiğit Çelik — Backend, Applied AI & Sign CAD"
+        description="Portfolio of Yiğit Çelik: backend systems (auth, queues), applied AI & decision science (OR-Tools, AHP/TOPSIS, F1 analytics) and parametric sign CAD with photoreal renders."
+        path="/"
+        type="profile"
+        jsonLd={personJsonLd}
+      />
       <About />
       <RecentWritingSection />
       <Box id="projects" sx={{ mb: theme.spacing(8) }}>
-        <Projects />
+        <Projects compact />
       </Box>
       <Box id="contact">
         <Contact />
