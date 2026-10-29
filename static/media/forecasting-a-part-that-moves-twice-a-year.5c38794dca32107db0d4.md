@@ -27,7 +27,7 @@ That single fact invalidates the comfortable assumptions. A method that implicit
 
 Before forecasting anything, each part gets placed on two axes — ADI (average inter-demand interval: how many months pass between movements) and CV² (how variable the quantity is when it does move). The Syntetos-Boylan-Croston scheme splits the plane at ADI = 1.32 and CV² = 0.49.
 
-![Part classification on the ADI–CV² plane](/images/blog/intermittent/classification.png)
+![Part classification on the ADI–CV² plane](/images/blog/intermittent/classification-en.png)
 
 | Class | Parts |
 |---|---|
@@ -51,7 +51,7 @@ The candidates:
 
 The evaluation is the part most writeups skip. For each part, `α` and the method are chosen on a **validation window** (months 28–39), and the chosen configuration is then scored on a **test window the selection never saw** (the final 12 months). Metric: MASE, scaled by the training set's naive-1 MAE.
 
-![Method comparison, mean MASE on the held-out test window](/images/blog/intermittent/methods.png)
+![Method comparison, mean MASE on the held-out test window](/images/blog/intermittent/methods-en.png)
 
 | Approach | Test MASE (mean) | Median |
 |---|---|---|
@@ -78,7 +78,7 @@ Read that distribution again. SBA genuinely wins on 758 parts — a quarter of t
 
 Forecast accuracy is not a budget line. What a plant manager can act on is the trade-off between service and tied-up capital. So the forecasts feed a periodic-review order-up-to simulation (2-month lead time) over the 200 fastest-moving parts, sweeping the safety multiplier:
 
-![Fill rate against tied-up capital](/images/blog/intermittent/service-capital-curve.png)
+![Fill rate against tied-up capital](/images/blog/intermittent/service-capital-en.png)
 
 | Fill rate | Tied-up capital (at €40/part) |
 |---|---|
@@ -95,6 +95,8 @@ Here is the sentence this whole exercise exists to produce:
 > **Going from 95% to 99% fill rate costs five times the capital.**
 
 Nobody needs a model to understand that sentence, and no one can make the decision without it. "Optimal stock" is not a deliverable. A curve with your own part numbers on it is.
+
+The same finding as a one-page PDF, the way a plant manager would receive it: [sample-finding-spare-parts-audit.pdf](/sample-finding-spare-parts-audit.pdf).
 
 Separately, 698 parts had no movement in the final 12 months despite moving earlier — a cash-release list, sorted by value, that requires no forecasting at all.
 
