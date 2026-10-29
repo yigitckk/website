@@ -78,7 +78,7 @@ Read that distribution again. SBA genuinely wins on 758 parts — a quarter of t
 
 Forecast accuracy is not a budget line. What a plant manager can act on is the trade-off between service and tied-up capital. So the forecasts feed a periodic-review order-up-to simulation (2-month lead time) over the 200 fastest-moving parts, sweeping the safety multiplier:
 
-![Fill rate against tied-up capital](/images/blog/intermittent/service-capital.png)
+![Fill rate against tied-up capital](/images/blog/intermittent/service-capital-curve.png)
 
 | Fill rate | Tied-up capital (at €40/part) |
 |---|---|
