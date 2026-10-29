@@ -107,6 +107,97 @@
       }
     },
     {
+      "slug": "hexagon-metal-logo-sign-halo-lit",
+      "title": "Hexagonal metal logo sign — halo-lit stainless, copper variant, raceway-free mounting",
+      "category": "3d-sign-design",
+      "summary": "1.2 m reception logo sign for an industrial company: brushed-stainless channel letters with cold-white halo, each piece on its own standoffs, rendered in stainless and copper.",
+      "date": "2026-10-25",
+      "status": "client review",
+      "cover": "/images/projects/hexagon-metal-logo-sign-halo-lit/cover.webp",
+      "coverAlt": "Office reception render with concrete wall, wood ceiling, desk and plants; the halo-lit logo sign is blurred pending client approval",
+      "ogImage": "/images/projects/hexagon-metal-logo-sign-halo-lit/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/hexagon-metal-logo-sign-halo-lit/cover.webp",
+          "alt": "Wide reception render, logo blurred",
+          "caption": "Reception scene — board-formed concrete, wood ceiling, cold-white halo. Logo blurred."
+        },
+        {
+          "src": "/images/projects/hexagon-metal-logo-sign-halo-lit/stroke-detail-steel.webp",
+          "alt": "Close-up of a brushed stainless letter stroke with standoff pin and halo glow",
+          "caption": "Brushed stainless No.4 face and return, standoff pin and halo on concrete."
+        },
+        {
+          "src": "/images/projects/hexagon-metal-logo-sign-halo-lit/stroke-detail-copper.webp",
+          "alt": "Same close-up in a copper finish",
+          "caption": "Same geometry and light in the copper variant (PVD-coated stainless suggested)."
+        }
+      ],
+      "tags": [
+        "FreeCAD",
+        "Python",
+        "DXF",
+        "TechDraw",
+        "Blender 4.2 (headless)",
+        "Halo-lit",
+        "Material variants"
+      ],
+      "links": [],
+      "sections": {
+        "problem": "An industrial company wanted its hexagon logo built as a metal wall sign for the reception, about **1.2 m** wide, matching a reference render it had (brushed metal, cold-white halo, concrete wall). There was no vector logo — only that image — and the client asked for a copper option alongside stainless.",
+        "approach": "- Redrew the logo from the reference as a parametric model: three large block letters filling a pointed hexagon (80 mm deep channel letters) and a two-word tagline running along the lower edges (40 mm deep), all faces in one plane. Overall **1200 × 1338 × 118 mm** off the wall.\n- Halo-lit build: 3 mm brushed No.4 stainless faces, 1.2 mm stainless returns, 4.5 mm polycarbonate backs, 24 V halo LED modules (≈195 modules, ~140 W, 2 × 100 W PSUs).\n- **No raceway**: every piece mounts on its own standoffs — 37 pins, at least 2 per piece and 3 on the large letters. Delivered a cut DXF (faces, backs, drill points), a 1:1 mounting-template DXF, a dimensioned technical PDF with BOM (~32 kg), plus STEP files for the fabricator on request.\n- Rendered in a scripted Blender office scene: stainless × 3 views, copper × 2.",
+        "result": "A QA-passed v1 package (all 19 cut contours checked against the CAD perimeters, every piece with ≥2 pins) now in client review. Render checks drove real design changes: the tagline at 70 mm cap height was unreadable on a 1.3 m logo, so it went to a condensed font at 125 mm; flat-cut tagline letters blended into the wall, so they became 40 mm channel letters with their own small halo. Open items are listed rather than guessed: the client's vector logo, wall type (concrete vs. drywall backing), finish choice and halo colour temperature.\n\n> Client identity is withheld; the logo is blurred or cropped in these images while approval is pending."
+      }
+    },
+    {
+      "slug": "cafe-storefront-channel-letter-sign",
+      "title": "Café storefront sign — 3D channel letters on raceways, cut-ready DXF",
+      "category": "3d-sign-design",
+      "summary": "Two-line non-illuminated channel-letter sign for a café façade: parametric letters on two raceway profiles, layered cut DXF, dimensioned drawing and warm wall-wash renders.",
+      "date": "2026-10-25",
+      "status": "renders approved · quote pending",
+      "cover": "/images/projects/cafe-storefront-channel-letter-sign/cover.webp",
+      "coverAlt": "Café façade render at dusk: cream 3D letters on dark bronze raceways under a warm wall-wash light (brand name blurred)",
+      "ogImage": "/images/projects/cafe-storefront-channel-letter-sign/og.jpg",
+      "gallery": [
+        {
+          "src": "/images/projects/cafe-storefront-channel-letter-sign/cover.webp",
+          "alt": "Frontal render of the two-line café sign, upper line blurred",
+          "caption": "Frontal view — cream faces, dark bronze raceways, eave wall-wash light. Brand line blurred."
+        },
+        {
+          "src": "/images/projects/cafe-storefront-channel-letter-sign/lower-line-raceway.webp",
+          "alt": "Angled view of the lower line of letters mounted on a dark raceway",
+          "caption": "Lower line at an angle: 80 mm letter returns on a 30 mm raceway, shadows cast by the wall-wash."
+        },
+        {
+          "src": "/images/projects/cafe-storefront-channel-letter-sign/return-depth-macro.webp",
+          "alt": "Macro render of thick letter returns and a round dot casting shadows on the wall",
+          "caption": "Macro: return depth and the round dot of the dotted capital İ."
+        },
+        {
+          "src": "/images/projects/cafe-storefront-channel-letter-sign/dxf-layers.webp",
+          "alt": "Layered cut DXF of the lower line: red cut outlines, green inner counter, yellow raceway",
+          "caption": "Cut-ready DXF (lower line shown): CUT / ENGRAVE / RACEWAY layers, units in mm."
+        }
+      ],
+      "tags": [
+        "FreeCAD",
+        "Parametric CAD",
+        "DXF",
+        "ezdxf",
+        "Blender",
+        "Python",
+        "Channel letters"
+      ],
+      "links": [],
+      "sections": {
+        "problem": "A café wanted its two-line name built as dimensional letters on the façade — **non-illuminated** (no light inside the letters), lit from outside by a wall-wash, with no backing panel: the letters had to sit on raceway profiles standing off the wall. The name contains a Turkish dotted capital **İ**, which generic sign templates and fonts routinely get wrong.",
+        "approach": "- Generated the geometry parametrically in FreeCAD from the font outlines: 400 mm upper line, 200 mm lower line, **80 mm** letter depth, two aluminium raceways (128 / 90 mm high, 30 mm deep). Overall **1886 × 807 × 110 mm**.\n- Materials specified for fabrication: 3 mm opaque cream acrylic faces, 1.27 mm dark-bronze aluminium returns, 2 mm aluminium raceway box profile, stainless fixings.\n- Exported a **layered cut DXF** (CUT / ENGRAVE / RACEWAY, units in mm), one STEP/STL per letter, and a dimensioned technical PDF with a bill of materials (acrylic area, return-band length, estimated weight).\n- Rendered the sign in Blender with a warm eave wall-wash from five angles for approval.",
+        "result": "The client approved the renders; the fabrication files are ready and the package is waiting on a price quote. QA caught a real bug before anything left the studio: the first DXF had contour edges joined in the wrong order (zig-zag outlines, one perimeter measured 6305 mm instead of 2253 mm). The generator was fixed and v2 was verified by checking **contour area × 80 mm against the STL volume** for each letter, plus layer counts and drawing units.\n\n> Client identity is withheld; the brand line is blurred or cropped out of these images, and only the generic lower line of the DXF is shown."
+      }
+    },
+    {
       "slug": "signage-cad-fabrication-pipeline",
       "title": "Signage CAD → fabrication pipeline with QA gates",
       "category": "3d-sign-design",
